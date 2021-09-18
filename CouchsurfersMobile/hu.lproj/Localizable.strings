@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  CouchsurfersMobile
+
+  Created by Norbert Gál on 2021. 09. 11..
+  
+*/
+
+"authenticationView.fullNamePlaceholder" = "Írja be a teljes nevét";
+"authenticationView.emailAddressPlaceholder" = "Írja be az e-mail címét";
+"authenticationView.passwordPlaceholder" = "Írja be a jelszavát";
+"authenticationView.signUpButton" = "Regisztráció";
+"authenticationView.signInButton" = "Bejelentkezés";
+"authenticationView.alreadyMemberButton" = "Van már fiókja?";
+"authenticationView.notMemberButton" = "Nincsen fiókja?";
+"authenticationView.forgottenPasswordButton" = "Elfelejtette a jelszavát?";
