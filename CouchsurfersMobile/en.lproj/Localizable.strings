@@ -1,0 +1,32 @@
+/* 
+  Localizable.strings
+  CouchsurfersMobile
+
+  Created by Norbert Gál on 2021. 09. 11..
+  
+*/
+
+// AuthenticationView
+"authenticationView.fullNamePlaceholder" = "Enter your full name";
+"authenticationView.emailAddressPlaceholder" = "Enter your email address";
+"authenticationView.passwordPlaceholder" = "Enter your password";
+"authenticationView.signUpButton" = "Sign up";
+"authenticationView.signInButton" = "Sign in";
+"authenticationView.alreadyMemberButton" = "Already have an account?";
+"authenticationView.notMemberButton" = "Don't have an account?";
+"authenticationView.forgottenPasswordButton" = "Forgotten password?";
+"authenticationView.cancel" = "Cancel";
+"authenticationView.error" = "Error";
+"authenticationView.info" = "Information";
+
+// AuthenticationNetwork
+"authenticationNetwork.emptyFields" = "Please fill required fields";
+"authenticationNetwork.shortPassword" = "Your password must be at least 6 characters long";
+"authenticationNetwork.passwordsDoNotMatch" = "Passwords do not match!";
+"authenticationNetwork.userCreated" = "Your account has been created";
+
+// NetworkError
+"networkError.unknownError" = "Unknown error";
+"networkError.badCredentials" = "Invalid username/password supplied";
+"networkError.alreadyRegistered" = "Email address is already registered";
+
