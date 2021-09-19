@@ -22,15 +22,16 @@
 		AE0ECA3526ED41CB002AD67D /* LoginRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0ECA3426ED41CB002AD67D /* LoginRequestDTO.swift */; };
 		AE0ECA3726ED4EA4002AD67D /* ErrorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0ECA3626ED4EA4002AD67D /* ErrorDTO.swift */; };
 		AE13C74B26F158F90032C081 /* SignUpRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C74A26F158F90032C081 /* SignUpRequestDTO.swift */; };
-		AE13C74E26F3F8CB0032C081 /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C74D26F3F8CB0032C081 /* APIHandler.swift */; };
+		AE13C74E26F3F8CB0032C081 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C74D26F3F8CB0032C081 /* NetworkManager.swift */; };
 		AE13C75026F3FF910032C081 /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C74F26F3FF900032C081 /* NetworkStatus.swift */; };
 		AE13C75226F657CE0032C081 /* LoginResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C75126F657CE0032C081 /* LoginResponseDTO.swift */; };
 		AE13C75426F6814E0032C081 /* SignUpResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C75326F6814E0032C081 /* SignUpResponseDTO.swift */; };
 		AE13C75626F687470032C081 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C75526F687470032C081 /* HTTPMethod.swift */; };
-		AE13C75826F68E6E0032C081 /* LoginEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C75726F68E6E0032C081 /* LoginEndpoint.swift */; };
-		AE13C75B26F68E940032C081 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C75A26F68E940032C081 /* Endpoint.swift */; };
 		AE13C75F26F6A6220032C081 /* SignInDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C75E26F6A6220032C081 /* SignInDetails.swift */; };
 		AE13C76126F6A6300032C081 /* SignUpDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C76026F6A6300032C081 /* SignUpDetails.swift */; };
+		AE13C77026F7ABA70032C081 /* ResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C76F26F7ABA70032C081 /* ResponseHandler.swift */; };
+		AE13C77226F7ABD90032C081 /* LoginResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C77126F7ABD90032C081 /* LoginResponseHandler.swift */; };
+		AE13C77626F7AFD00032C081 /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C77526F7AFD00032C081 /* RequestHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,15 +53,16 @@
 		AE0ECA3426ED41CB002AD67D /* LoginRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestDTO.swift; sourceTree = "<group>"; };
 		AE0ECA3626ED4EA4002AD67D /* ErrorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDTO.swift; sourceTree = "<group>"; };
 		AE13C74A26F158F90032C081 /* SignUpRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequestDTO.swift; sourceTree = "<group>"; };
-		AE13C74D26F3F8CB0032C081 /* APIHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHandler.swift; sourceTree = "<group>"; };
+		AE13C74D26F3F8CB0032C081 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		AE13C74F26F3FF900032C081 /* NetworkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
 		AE13C75126F657CE0032C081 /* LoginResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponseDTO.swift; sourceTree = "<group>"; };
 		AE13C75326F6814E0032C081 /* SignUpResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponseDTO.swift; sourceTree = "<group>"; };
 		AE13C75526F687470032C081 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
-		AE13C75726F68E6E0032C081 /* LoginEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEndpoint.swift; sourceTree = "<group>"; };
-		AE13C75A26F68E940032C081 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		AE13C75E26F6A6220032C081 /* SignInDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInDetails.swift; sourceTree = "<group>"; };
 		AE13C76026F6A6300032C081 /* SignUpDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpDetails.swift; sourceTree = "<group>"; };
+		AE13C76F26F7ABA70032C081 /* ResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseHandler.swift; sourceTree = "<group>"; };
+		AE13C77126F7ABD90032C081 /* LoginResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponseHandler.swift; sourceTree = "<group>"; };
+		AE13C77526F7AFD00032C081 /* RequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,11 +151,12 @@
 		AE0ECA1E26EC225E002AD67D /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				AE13C77726F7BF1A0032C081 /* RequestHandler */,
+				AE13C76E26F7AB820032C081 /* ResponseHandler */,
 				AE13C75D26F6A3520032C081 /* Request */,
 				AE13C75C26F6A34A0032C081 /* Response */,
-				AE13C75926F68E740032C081 /* Endpoint */,
 				AE0ECA3626ED4EA4002AD67D /* ErrorDTO.swift */,
-				AE13C74D26F3F8CB0032C081 /* APIHandler.swift */,
+				AE13C74D26F3F8CB0032C081 /* NetworkManager.swift */,
 				AE13C74F26F3FF900032C081 /* NetworkStatus.swift */,
 				AE13C75526F687470032C081 /* HTTPMethod.swift */,
 			);
@@ -175,15 +178,6 @@
 			path = Interactor;
 			sourceTree = "<group>";
 		};
-		AE13C75926F68E740032C081 /* Endpoint */ = {
-			isa = PBXGroup;
-			children = (
-				AE13C75726F68E6E0032C081 /* LoginEndpoint.swift */,
-				AE13C75A26F68E940032C081 /* Endpoint.swift */,
-			);
-			path = Endpoint;
-			sourceTree = "<group>";
-		};
 		AE13C75C26F6A34A0032C081 /* Response */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,6 +194,23 @@
 				AE13C74A26F158F90032C081 /* SignUpRequestDTO.swift */,
 			);
 			path = Request;
+			sourceTree = "<group>";
+		};
+		AE13C76E26F7AB820032C081 /* ResponseHandler */ = {
+			isa = PBXGroup;
+			children = (
+				AE13C76F26F7ABA70032C081 /* ResponseHandler.swift */,
+				AE13C77126F7ABD90032C081 /* LoginResponseHandler.swift */,
+			);
+			path = ResponseHandler;
+			sourceTree = "<group>";
+		};
+		AE13C77726F7BF1A0032C081 /* RequestHandler */ = {
+			isa = PBXGroup;
+			children = (
+				AE13C77526F7AFD00032C081 /* RequestHandler.swift */,
+			);
+			path = RequestHandler;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,11 +285,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE13C77626F7AFD00032C081 /* RequestHandler.swift in Sources */,
 				AE0ECA0F26EC1C08002AD67D /* ContentView.swift in Sources */,
 				AE0ECA3126ECBEA9002AD67D /* SignInViewModel.swift in Sources */,
 				AE13C76126F6A6300032C081 /* SignUpDetails.swift in Sources */,
 				AE0ECA3326ECBF3D002AD67D /* SignUpViewModel.swift in Sources */,
-				AE13C74E26F3F8CB0032C081 /* APIHandler.swift in Sources */,
+				AE13C74E26F3F8CB0032C081 /* NetworkManager.swift in Sources */,
 				AE0ECA2626EC2466002AD67D /* InputFieldWithImage.swift in Sources */,
 				AE0ECA3726ED4EA4002AD67D /* ErrorDTO.swift in Sources */,
 				AE0ECA2426EC22AB002AD67D /* SignUpView.swift in Sources */,
@@ -286,12 +298,12 @@
 				AE13C74B26F158F90032C081 /* SignUpRequestDTO.swift in Sources */,
 				AE13C75026F3FF910032C081 /* NetworkStatus.swift in Sources */,
 				AE0ECA0D26EC1C08002AD67D /* CouchsurfersMobileApp.swift in Sources */,
-				AE13C75B26F68E940032C081 /* Endpoint.swift in Sources */,
+				AE13C77226F7ABD90032C081 /* LoginResponseHandler.swift in Sources */,
 				AE0ECA3526ED41CB002AD67D /* LoginRequestDTO.swift in Sources */,
 				AE0ECA2226EC22A2002AD67D /* SignInView.swift in Sources */,
 				AE13C75626F687470032C081 /* HTTPMethod.swift in Sources */,
-				AE13C75826F68E6E0032C081 /* LoginEndpoint.swift in Sources */,
 				AE13C75226F657CE0032C081 /* LoginResponseDTO.swift in Sources */,
+				AE13C77026F7ABA70032C081 /* ResponseHandler.swift in Sources */,
 				AE0ECA2026EC2284002AD67D /* AuthenticationView.swift in Sources */,
 				AE13C75426F6814E0032C081 /* SignUpResponseDTO.swift in Sources */,
 			);

@@ -31,9 +31,10 @@ class SignInViewModel: ObservableObject {
         }
         
         let loginRequest = LoginRequestDTO(email: signInDetails.emailAddress, password: signInDetails.password)
-        let loginEndpoint = LoginEndpoint(url: URL(string: baseUrl + loginUrl)!, method: .POST)
+        let networkManager = NetworkManager(responseHandler: LoginResponseHandler())
+        let urlRequest = networkManager.makeRequest(from: loginRequest, url: URL(string: baseUrl + loginUrl)!, method: .POST)
         
-        APIHandler(endpoint: loginEndpoint).loadData(with: loginRequest) { (networkStatus, data, error) in
+        networkManager.dataTask(with: urlRequest) { (networkStatus, data, error) in
             
             switch networkStatus {
             case .failure(let statusCode):
