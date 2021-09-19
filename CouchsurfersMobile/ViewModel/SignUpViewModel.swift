@@ -41,9 +41,10 @@ class SignUpViewModel: ObservableObject {
         }
         
         let signUpRequest = SignUpRequestDTO(email: signUpDetails.emailAddress, password: signUpDetails.password, fullName: signUpDetails.fullName)
-        let signUpEndpoint = Endpoint<SignUpRequestDTO, SignUpResponseDTO>(url: URL(string: baseUrl + registerUrl)!, method: .POST)
+        let networkManager = NetworkManager<SignUpResponseDTO>()
+        let urlRequest = networkManager.makeRequest(from: signUpRequest, url: URL(string: baseUrl + registerUrl)!, method: .POST)
         
-        APIHandler(endpoint: signUpEndpoint).loadData(with: signUpRequest) { (networkStatus, data, error) in
+        networkManager.dataTask(with: urlRequest) { (networkStatus, data, error) in
             
             switch networkStatus {
             case .failure(let statusCode):

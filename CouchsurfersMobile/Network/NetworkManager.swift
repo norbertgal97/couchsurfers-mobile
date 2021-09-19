@@ -7,21 +7,36 @@
 
 import Foundation
 
-struct APIHandler<T: Encodable, U: Decodable> {
-    private let endpoint: Endpoint<T, U>
+struct NetworkManager<Res: Decodable> {
     
-    init(endpoint: Endpoint<T, U>) {
-        self.endpoint = endpoint
+    private let responseHandler: ResponseHandler<Res>
+    private let requestHandler: RequestHandler
+    
+    init(requestHandler: RequestHandler = RequestHandler(), responseHandler: ResponseHandler<Res> = ResponseHandler()) {
+        self.responseHandler = responseHandler
+        self.requestHandler = requestHandler
     }
     
-    func loadData(with request: T, completionHandler: @escaping (NetworkStatus, U?, ErrorDTO?) -> Void) {
+    func makeRequest<T: Encodable>(from data: T, url: URL, method: HTTPMethod) -> URLRequest? {
+        requestHandler.makeRequest(from: data, url: url, method: method)
+    }
+    
+    func makeRequest(url: URL, method: HTTPMethod) -> URLRequest? {
+        requestHandler.makeRequest(url: url, method: method)
+    }
+    
+    private func decodeResponse(from data: Data, httpResponse: HTTPURLResponse) throws -> Res {
+        try responseHandler.decodeResponse(from: data, httpResponse: httpResponse)
+    }
+    
+    func dataTask(with URLRequest: URLRequest?, completionHandler: @escaping (NetworkStatus, Res?, ErrorDTO?) -> Void) {
         
-        guard let urlRequest = endpoint.makeRequest(from: request) else {
+        guard let unwrappedURLRequest = URLRequest else {
             completionHandler(.failure(statusCode: nil), nil, nil)
             return
         }
         
-        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+        URLSession.shared.dataTask(with: unwrappedURLRequest) { data, response, error in
             guard let httpResponse = response as? HTTPURLResponse else {
                 completionHandler(.failure(statusCode: nil), nil, nil)
                 return
@@ -43,7 +58,7 @@ struct APIHandler<T: Encodable, U: Decodable> {
                 //let outputStr  = String(data: data, encoding: String.Encoding.utf8) as String?
                 //print(outputStr)
                 
-                let decodedData = try endpoint.decodeResponse(from: data, httpResponse: httpResponse)
+                let decodedData: Res = try self.decodeResponse(from: data, httpResponse: httpResponse)
                 
                 completionHandler(.successful, decodedData, nil)
             } catch {

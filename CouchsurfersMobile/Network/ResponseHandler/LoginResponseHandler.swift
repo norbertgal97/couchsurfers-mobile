@@ -1,13 +1,13 @@
 //
-//  LoginEndpoint.swift
+//  LoginResponseHandler.swift
 //  CouchsurfersMobile
 //
-//  Created by Norbert Gál on 2021. 09. 18..
+//  Created by Norbert Gál on 2021. 09. 19..
 //
 
 import Foundation
 
-class LoginEndpoint: Endpoint<LoginRequestDTO, LoginResponseDTO> {
+class LoginResponseHandler: ResponseHandler<LoginResponseDTO> {
     
     override func decodeResponse(from data: Data, httpResponse: HTTPURLResponse) throws -> LoginResponseDTO {
         let decodedData = try JSONDecoder().decode(LoginResponseDTO.self, from: data)
@@ -43,5 +43,4 @@ class LoginEndpoint: Endpoint<LoginRequestDTO, LoginResponseDTO> {
         
         return sessionIdValue
     }
-    
 }
