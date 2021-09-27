@@ -30,8 +30,21 @@
 		AE13C75F26F6A6220032C081 /* SignInDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C75E26F6A6220032C081 /* SignInDetails.swift */; };
 		AE13C76126F6A6300032C081 /* SignUpDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C76026F6A6300032C081 /* SignUpDetails.swift */; };
 		AE13C77026F7ABA70032C081 /* ResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C76F26F7ABA70032C081 /* ResponseHandler.swift */; };
-		AE13C77226F7ABD90032C081 /* LoginResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C77126F7ABD90032C081 /* LoginResponseHandler.swift */; };
 		AE13C77626F7AFD00032C081 /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C77526F7AFD00032C081 /* RequestHandler.swift */; };
+		AE13C77926F7C8630032C081 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C77826F7C8630032C081 /* MainTabView.swift */; };
+		AE13C77B26F7C9180032C081 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C77A26F7C9180032C081 /* ProfileView.swift */; };
+		AE13C77D26F7C9760032C081 /* AutocompleteFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C77C26F7C9760032C081 /* AutocompleteFieldViewModel.swift */; };
+		AE13C77F26F7CF840032C081 /* AutocompleteFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C77E26F7CF840032C081 /* AutocompleteFieldView.swift */; };
+		AE13C78126F7D40A0032C081 /* PredictionsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C78026F7D40A0032C081 /* PredictionsDTO.swift */; };
+		AE13C78326F7E0CD0032C081 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C78226F7E0CD0032C081 /* Util.swift */; };
+		AE13C78526F7FAB90032C081 /* MyCouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C78426F7FAB90032C081 /* MyCouchView.swift */; };
+		AE13C78726F7FB100032C081 /* MyCouchDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C78626F7FB100032C081 /* MyCouchDetailsView.swift */; };
+		AE13C78926F93AC50032C081 /* Couch.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C78826F93AC50032C081 /* Couch.swift */; };
+		AE13C78B26F93D0F0032C081 /* MyCouchDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C78A26F93D0F0032C081 /* MyCouchDetailsViewModel.swift */; };
+		AE6C815D26FD3DD800F68E78 /* CouchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6C815C26FD3DD800F68E78 /* CouchDTO.swift */; };
+		AE6C815F26FD427A00F68E78 /* LocationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6C815E26FD427A00F68E78 /* LocationDTO.swift */; };
+		AE9F0A272701283300CC45C3 /* UserSessionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F0A262701283300CC45C3 /* UserSessionInteractor.swift */; };
+		AE9F0A2927014C7F00CC45C3 /* MyCouchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F0A2827014C7F00CC45C3 /* MyCouchInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,8 +74,21 @@
 		AE13C75E26F6A6220032C081 /* SignInDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInDetails.swift; sourceTree = "<group>"; };
 		AE13C76026F6A6300032C081 /* SignUpDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpDetails.swift; sourceTree = "<group>"; };
 		AE13C76F26F7ABA70032C081 /* ResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseHandler.swift; sourceTree = "<group>"; };
-		AE13C77126F7ABD90032C081 /* LoginResponseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponseHandler.swift; sourceTree = "<group>"; };
 		AE13C77526F7AFD00032C081 /* RequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHandler.swift; sourceTree = "<group>"; };
+		AE13C77826F7C8630032C081 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		AE13C77A26F7C9180032C081 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		AE13C77C26F7C9760032C081 /* AutocompleteFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteFieldViewModel.swift; sourceTree = "<group>"; };
+		AE13C77E26F7CF840032C081 /* AutocompleteFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteFieldView.swift; sourceTree = "<group>"; };
+		AE13C78026F7D40A0032C081 /* PredictionsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionsDTO.swift; sourceTree = "<group>"; };
+		AE13C78226F7E0CD0032C081 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		AE13C78426F7FAB90032C081 /* MyCouchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouchView.swift; sourceTree = "<group>"; };
+		AE13C78626F7FB100032C081 /* MyCouchDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouchDetailsView.swift; sourceTree = "<group>"; };
+		AE13C78826F93AC50032C081 /* Couch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Couch.swift; sourceTree = "<group>"; };
+		AE13C78A26F93D0F0032C081 /* MyCouchDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouchDetailsViewModel.swift; sourceTree = "<group>"; };
+		AE6C815C26FD3DD800F68E78 /* CouchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchDTO.swift; sourceTree = "<group>"; };
+		AE6C815E26FD427A00F68E78 /* LocationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDTO.swift; sourceTree = "<group>"; };
+		AE9F0A262701283300CC45C3 /* UserSessionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionInteractor.swift; sourceTree = "<group>"; };
+		AE9F0A2827014C7F00CC45C3 /* MyCouchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouchInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +132,7 @@
 				AE0ECA1026EC1C09002AD67D /* Assets.xcassets */,
 				AE0ECA1526EC1C09002AD67D /* Info.plist */,
 				AE0ECA1226EC1C09002AD67D /* Preview Content */,
+				AE13C78226F7E0CD0032C081 /* Util.swift */,
 			);
 			path = CouchsurfersMobile;
 			sourceTree = "<group>";
@@ -126,6 +153,11 @@
 				AE0ECA1F26EC2284002AD67D /* AuthenticationView.swift */,
 				AE0ECA2126EC22A2002AD67D /* SignInView.swift */,
 				AE0ECA2326EC22AB002AD67D /* SignUpView.swift */,
+				AE13C77826F7C8630032C081 /* MainTabView.swift */,
+				AE13C77A26F7C9180032C081 /* ProfileView.swift */,
+				AE13C77E26F7CF840032C081 /* AutocompleteFieldView.swift */,
+				AE13C78426F7FAB90032C081 /* MyCouchView.swift */,
+				AE13C78626F7FB100032C081 /* MyCouchDetailsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -135,6 +167,8 @@
 			children = (
 				AE0ECA3026ECBEA8002AD67D /* SignInViewModel.swift */,
 				AE0ECA3226ECBF3D002AD67D /* SignUpViewModel.swift */,
+				AE13C77C26F7C9760032C081 /* AutocompleteFieldViewModel.swift */,
+				AE13C78A26F93D0F0032C081 /* MyCouchDetailsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -144,6 +178,7 @@
 			children = (
 				AE13C75E26F6A6220032C081 /* SignInDetails.swift */,
 				AE13C76026F6A6300032C081 /* SignUpDetails.swift */,
+				AE13C78826F93AC50032C081 /* Couch.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -174,6 +209,8 @@
 		AE13C74C26F2A9690032C081 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				AE9F0A262701283300CC45C3 /* UserSessionInteractor.swift */,
+				AE9F0A2827014C7F00CC45C3 /* MyCouchInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -183,6 +220,9 @@
 			children = (
 				AE13C75126F657CE0032C081 /* LoginResponseDTO.swift */,
 				AE13C75326F6814E0032C081 /* SignUpResponseDTO.swift */,
+				AE13C78026F7D40A0032C081 /* PredictionsDTO.swift */,
+				AE6C815C26FD3DD800F68E78 /* CouchDTO.swift */,
+				AE6C815E26FD427A00F68E78 /* LocationDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -200,7 +240,6 @@
 			isa = PBXGroup;
 			children = (
 				AE13C76F26F7ABA70032C081 /* ResponseHandler.swift */,
-				AE13C77126F7ABD90032C081 /* LoginResponseHandler.swift */,
 			);
 			path = ResponseHandler;
 			sourceTree = "<group>";
@@ -285,22 +324,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE6C815F26FD427A00F68E78 /* LocationDTO.swift in Sources */,
 				AE13C77626F7AFD00032C081 /* RequestHandler.swift in Sources */,
 				AE0ECA0F26EC1C08002AD67D /* ContentView.swift in Sources */,
+				AE6C815D26FD3DD800F68E78 /* CouchDTO.swift in Sources */,
 				AE0ECA3126ECBEA9002AD67D /* SignInViewModel.swift in Sources */,
 				AE13C76126F6A6300032C081 /* SignUpDetails.swift in Sources */,
+				AE13C77F26F7CF840032C081 /* AutocompleteFieldView.swift in Sources */,
 				AE0ECA3326ECBF3D002AD67D /* SignUpViewModel.swift in Sources */,
+				AE13C77926F7C8630032C081 /* MainTabView.swift in Sources */,
 				AE13C74E26F3F8CB0032C081 /* NetworkManager.swift in Sources */,
 				AE0ECA2626EC2466002AD67D /* InputFieldWithImage.swift in Sources */,
 				AE0ECA3726ED4EA4002AD67D /* ErrorDTO.swift in Sources */,
+				AE13C78326F7E0CD0032C081 /* Util.swift in Sources */,
+				AE13C78B26F93D0F0032C081 /* MyCouchDetailsViewModel.swift in Sources */,
+				AE13C78526F7FAB90032C081 /* MyCouchView.swift in Sources */,
 				AE0ECA2426EC22AB002AD67D /* SignUpView.swift in Sources */,
 				AE13C75F26F6A6220032C081 /* SignInDetails.swift in Sources */,
+				AE9F0A2927014C7F00CC45C3 /* MyCouchInteractor.swift in Sources */,
 				AE13C74B26F158F90032C081 /* SignUpRequestDTO.swift in Sources */,
 				AE13C75026F3FF910032C081 /* NetworkStatus.swift in Sources */,
+				AE13C78926F93AC50032C081 /* Couch.swift in Sources */,
+				AE9F0A272701283300CC45C3 /* UserSessionInteractor.swift in Sources */,
+				AE13C78126F7D40A0032C081 /* PredictionsDTO.swift in Sources */,
 				AE0ECA0D26EC1C08002AD67D /* CouchsurfersMobileApp.swift in Sources */,
-				AE13C77226F7ABD90032C081 /* LoginResponseHandler.swift in Sources */,
 				AE0ECA3526ED41CB002AD67D /* LoginRequestDTO.swift in Sources */,
 				AE0ECA2226EC22A2002AD67D /* SignInView.swift in Sources */,
+				AE13C77B26F7C9180032C081 /* ProfileView.swift in Sources */,
+				AE13C77D26F7C9760032C081 /* AutocompleteFieldViewModel.swift in Sources */,
+				AE13C78726F7FB100032C081 /* MyCouchDetailsView.swift in Sources */,
 				AE13C75626F687470032C081 /* HTTPMethod.swift in Sources */,
 				AE13C75226F657CE0032C081 /* LoginResponseDTO.swift in Sources */,
 				AE13C77026F7ABA70032C081 /* ResponseHandler.swift in Sources */,

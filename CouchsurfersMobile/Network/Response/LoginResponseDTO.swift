@@ -9,14 +9,11 @@ import Foundation
 
 class LoginResponseDTO: Decodable {
     var userId: Int
-    var sessionId: String
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         userId = try container.decode(Int.self, forKey: .userId)
-        
-        sessionId = ""
     }
     
     enum CodingKeys: String, CodingKey {

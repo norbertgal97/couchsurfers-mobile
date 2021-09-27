@@ -12,10 +12,7 @@ struct ContentView: View {
     
     var body: some View {
         if globalEnv.userLoggedIn {
-            VStack {
-                Text("Logged in")
-                Text(globalEnv.sessionId ?? "")
-            }
+            MainTabView()
         } else {
             AuthenticationView()
         }

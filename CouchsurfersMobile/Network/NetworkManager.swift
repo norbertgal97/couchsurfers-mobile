@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NetworkManager<Res: Decodable> {
+class NetworkManager<Res: Decodable> {
     
     private let responseHandler: ResponseHandler<Res>
     private let requestHandler: RequestHandler
@@ -23,6 +23,10 @@ struct NetworkManager<Res: Decodable> {
     
     func makeRequest(url: URL, method: HTTPMethod) -> URLRequest? {
         requestHandler.makeRequest(url: url, method: method)
+    }
+    
+    func makeRequest(from dictionary: [String: Any?], url: URL, method: HTTPMethod) -> URLRequest? {
+        requestHandler.makeRequest(from: dictionary, url: url, method: method)
     }
     
     private func decodeResponse(from data: Data, httpResponse: HTTPURLResponse) throws -> Res {

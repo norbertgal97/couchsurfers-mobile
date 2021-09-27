@@ -14,3 +14,6 @@
 "authenticationView.alreadyMemberButton" = "Van már fiókja?";
 "authenticationView.notMemberButton" = "Nincsen fiókja?";
 "authenticationView.forgottenPasswordButton" = "Elfelejtette a jelszavát?";
+
+// Autocomplete
+"autocomplete.placesAPIlanguage" = "hu";

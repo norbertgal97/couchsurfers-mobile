@@ -23,8 +23,10 @@ struct InputFieldWithImage: View {
             
             if isSecret {
                 SecureField(textFieldPlaceholder, text: $text)
+                    .autocapitalization(.none)
             } else {
                 TextField(textFieldPlaceholder, text: $text)
+                    .autocapitalization(.none)
             }
         }
         .frame(width: 350, height: 50)

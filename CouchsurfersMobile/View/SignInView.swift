@@ -34,10 +34,9 @@ struct SignIn: View {
             .padding(.top, 10)
             
             Button(action: {
-                signInVM.signInUser() { loggedIn, sessionId in
+                signInVM.signInUser() { loggedIn in
                     if loggedIn {
                         DispatchQueue.main.async {
-                            self.globalEnv.sessionId = sessionId
                             self.globalEnv.userLoggedIn = loggedIn
                         }
                     }
@@ -70,9 +69,6 @@ struct SignIn: View {
             
         }
         .padding()
-        .onAppear {
-            globalEnv.sessionId = nil
-        }
         
     }
 }
