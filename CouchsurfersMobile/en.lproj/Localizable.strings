@@ -29,4 +29,23 @@
 "networkError.unknownError" = "Unknown error";
 "networkError.badCredentials" = "Invalid username/password supplied";
 "networkError.alreadyRegistered" = "Email address is already registered";
+"networkError.connectionError" = "Could not connect to the server";
+"networkError.forbidden" = "You can't access this resource";
+"networkError.couchNotFound" = "Couch is not found";
+"networkError.userNotFound" = "User is not found";
+"networkError.emptyFields" = "Name / NumberOfRooms / NumberOfGuests / City cant be null!";
+"networkError.couchAlreadyExists" = "Couch is already created";
+"networkError.emptyFile" = "Unprocessable image(s)";
 
+// Autocomplete
+"autocomplete.placesAPIlanguage" = "en-GB";
+
+// MyCouch
+
+"myCouch.navigationBarTitle" = "My Couch";
+
+// Profile
+"profileView.logOut" = "Log out";
+"profileView.pInformation" = "Personal information";
+"profileView.notifications" = "Notifications";
+"profileView.listYourCouch" = "List your couch";

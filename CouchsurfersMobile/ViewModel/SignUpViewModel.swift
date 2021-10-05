@@ -13,16 +13,7 @@ class SignUpViewModel: ObservableObject {
     @Published var alertTitle = NSLocalizedString("authenticationView.info", comment: "Information")
     @Published var alertDescription: String = NSLocalizedString("defaultAlertMessage", comment: "Default alert message")
     
-    private let baseUrl: String
-    private let registerUrl = "users/session/register"
-    
-    init() {
-        guard let url = Bundle.main.object(forInfoDictionaryKey: "BaseURL") as? String else {
-            fatalError()
-        }
-        
-        self.baseUrl = url
-    }
+    private let interactor = UserSessionInteractor()
     
     func createNewUser() {
         if signUpDetails.emailAddress.isEmpty || signUpDetails.password.isEmpty || signUpDetails.fullName.isEmpty {
@@ -40,45 +31,25 @@ class SignUpViewModel: ObservableObject {
             return
         }
         
-        let signUpRequest = SignUpRequestDTO(email: signUpDetails.emailAddress, password: signUpDetails.password, fullName: signUpDetails.fullName)
-        let networkManager = NetworkManager<SignUpResponseDTO>()
-        let urlRequest = networkManager.makeRequest(from: signUpRequest, url: URL(string: baseUrl + registerUrl)!, method: .POST)
-        
-        networkManager.dataTask(with: urlRequest) { (networkStatus, data, error) in
-            
-            switch networkStatus {
-            case .failure(let statusCode):
-                if let unwrappedStatusCode = statusCode {
-                    print("statusCode: \(unwrappedStatusCode)")
-                    self.handleStatusCode(statusCode: unwrappedStatusCode, with: error)
+        interactor.signUpUser(signUpDetails: signUpDetails) { userCreated, messsage in
+            if let unwrappedMesssage = messsage {
+                if userCreated {
+                    DispatchQueue.main.async {
+                        self.updateAlert(with: unwrappedMesssage, title: NSLocalizedString("authenticationView.info", comment: "Information"))
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.updateAlert(with: unwrappedMesssage, title: NSLocalizedString("authenticationView.error", comment: "Error"))
+                    }
                 }
-            case .successful:
-                print("User created with ID: \(data?.userId ?? -1)")
-                self.updateAlert(with: NSLocalizedString("authenticationNetwork.userCreated", comment: "User created"), title: NSLocalizedString("authenticationView.info", comment: "Information"))
             }
-            
         }
-    }
-    
-    private func handleStatusCode(statusCode: Int, with error: ErrorDTO?) {
-        switch statusCode {
-        case 409:
-            if let unwrappedError = error {
-                updateAlert(with: NSLocalizedString("networkError.alreadyRegistered", comment: "Already registered"), title: NSLocalizedString("authenticationView.error", comment: "Error"))
-                print("Error happened. Message: \(unwrappedError.errorMessage). Code: \(unwrappedError.errorCode)")
-            } else {
-                updateAlert(with: NSLocalizedString("networkError.unknownError", comment: "Unknown error"), title: NSLocalizedString("authenticationView.error", comment: "Error"))
-            }
-        default:
-            updateAlert(with: NSLocalizedString("networkError.unknownError", comment: "Unknown error"), title: NSLocalizedString("authenticationView.error", comment: "Error"))
-        }
+        
     }
     
     private func updateAlert(with message: String, title: String) {
-        DispatchQueue.main.async {
-            self.alertTitle = title
-            self.alertDescription = message
-            self.showingAlert = true
-        }
+        self.alertTitle = title
+        self.alertDescription = message
+        self.showingAlert = true
     }
 }

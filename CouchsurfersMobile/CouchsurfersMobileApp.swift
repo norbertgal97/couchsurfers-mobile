@@ -24,14 +24,7 @@ class GlobalEnvironment: ObservableObject {
         }
     }
     
-    @Published var sessionId : String? {
-        didSet {
-            UserDefaults.standard.set(sessionId, forKey: "sessionId")
-        }
-    }
-    
     init() {
         self.userLoggedIn = UserDefaults.standard.object(forKey: "userLoggedIn") as? Bool ?? false
-        self.sessionId = UserDefaults.standard.object(forKey: "sessionId") as? String ?? nil
     }
 }
