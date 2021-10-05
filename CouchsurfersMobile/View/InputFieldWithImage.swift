@@ -29,11 +29,12 @@ struct InputFieldWithImage: View {
                     .autocapitalization(.none)
             }
         }
-        .frame(width: 350, height: 50)
+        .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 8).stroke(Color.gray, lineWidth: 2)
                 .background(Color.white)
         )
+        .padding(.horizontal)
     }
 }
 

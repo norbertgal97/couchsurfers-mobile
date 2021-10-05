@@ -5,10 +5,10 @@
 //  Created by Norbert Gál on 2021. 09. 27..
 //
 
-import Foundation
 import os
+import UIKit
 
-class MyCouchInteracor {
+class MyCouchInteractor {
     
     private let baseUrl: String
     private let couchesUrl = "couches"
@@ -22,7 +22,7 @@ class MyCouchInteracor {
         self.baseUrl = url
     }
     
-    func loadCouch(with id: Int, completionHandler: @escaping (_ couch: Couch?, _ message: String?, _ loggedIn: Bool) -> Void) {
+    func loadCouch(with id: Int, completionHandler: @escaping (_ couch: Couch?, _ message: String?, _ loggedIn: Bool, _ downloadImage: Bool) -> Void) {
         let networkManager = NetworkManager<CouchDTO>()
         let urlRequest = networkManager.makeRequest(url: URL(string: baseUrl + couchesUrl + "/\(id)")!, method: .GET)
         
@@ -34,7 +34,7 @@ class MyCouchInteracor {
                 if let unwrappedStatusCode = statusCode {
                     if unwrappedStatusCode == 401 {
                         self.logger.debug("Session has expired!")
-                        completionHandler(nil, nil, false)
+                        completionHandler(nil, nil, false, false)
                         return
                     }
                 }
@@ -55,10 +55,10 @@ class MyCouchInteracor {
                     message = self.handleUnmanagedErrors(statusCode: statusCode)
                 }
                 
-                completionHandler(nil, message, true)
+                completionHandler(nil, message, true, false)
             case .successful:
                 self.logger.debug("Couch loaded with id: \(id)")
-                completionHandler(self.convertDTOToModel(dto: data!), message, true)
+                completionHandler(self.convertDTOToModel(dto: data!), message, true, true)
             }
             
         }
@@ -137,8 +137,6 @@ class MyCouchInteracor {
                 if let unwrappedError = error {
                     if let unwrappedStatusCode = statusCode {
                         switch unwrappedStatusCode {
-                        case 404:
-                            message = NSLocalizedString("networkError.userNotFound", comment: "User not found")
                         case 422:
                             message = NSLocalizedString("networkError.emptyFields", comment: "Empty fields")
                         case 409:
@@ -159,6 +157,189 @@ class MyCouchInteracor {
             }
             
         }
+    }
+    
+    func downloadImage(couchId: Int, imageId: Int, completionHandler: @escaping (_ image: CouchPhoto?, _ message: String?, _ loggedIn: Bool) -> Void) {
+        let networkManager = NetworkManager<FileDownloadDTO>()
+        let urlRequest = networkManager.makeRequest(url: URL(string: baseUrl + couchesUrl + "/\(couchId)/images/\(imageId)")!, method: .GET)
+        
+        networkManager.dataTask(with: urlRequest) { (networkStatus, data, error) in
+            var message: String?
+            
+            switch networkStatus {
+            case .failure(let statusCode):
+                if let unwrappedStatusCode = statusCode {
+                    if unwrappedStatusCode == 401 {
+                        self.logger.debug("Session has expired!")
+                        completionHandler(nil, nil, false)
+                        return
+                    }
+                }
+                
+                if let unwrappedError = error {
+                    if let unwrappedStatusCode = statusCode {
+                        switch unwrappedStatusCode {
+                        case 404:
+                            message = NSLocalizedString("networkError.userNotFound", comment: "CouchPhoto not found")
+                        default:
+                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                        }
+                        self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
+                    }
+                } else {
+                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                }
+                
+                completionHandler(nil, message, true)
+            case .successful:
+                self.logger.debug("CouchPhoto loadeded with id: \(data!.imageId)")
+                
+                let photo = CouchPhoto(id: data!.imageId, uiImage: UIImage(data: data!.content)!)
+                completionHandler(photo, message, true)
+            }
+            
+        }
+    }
+    
+    func deleteImages(couchId: Int, imageIds: [Int], completionHandler: @escaping (_ message: String?, _ loggedIn: Bool) -> Void) {
+        let networkManager = NetworkManager<MessageDTO>()
+        let filesToDeleteDTO = FilesToDeleteDTO(ids: imageIds)
+        let urlRequest = networkManager.makeRequest(from: filesToDeleteDTO, url: URL(string: baseUrl + couchesUrl + "/\(couchId)/images/")!, method: .DELETE)
+        
+        networkManager.dataTask(with: urlRequest) { (networkStatus, data, error) in
+            var message: String?
+            
+            switch networkStatus {
+            case .failure(let statusCode):
+                if let unwrappedStatusCode = statusCode {
+                    if unwrappedStatusCode == 401 {
+                        self.logger.debug("Session has expired!")
+                        completionHandler(nil, false)
+                        return
+                    }
+                }
+                
+                if let unwrappedError = error {
+                    if let unwrappedStatusCode = statusCode {
+                        switch unwrappedStatusCode {
+                        case 403:
+                            message = NSLocalizedString("networkError.forbidden", comment: "Forbidden")
+                        default:
+                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                        }
+                        self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
+                    }
+                } else {
+                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                }
+                
+                completionHandler(message, true)
+            case .successful:
+                self.logger.debug("Message from server: \(data!.message)")
+                completionHandler(message, true)
+            }
+            
+        }
+    }
+    
+    func uploadImages(couchId: Int, images: [CouchPhoto], completionHandler: @escaping (_ fileUploads: [FileUpload]?, _ message: String?, _ loggedIn: Bool) -> Void) {
+        let boundary = UUID().uuidString
+        let networkManager = NetworkManager<[FileUploadDTO]>(requestHandler: UploadRequestHandler(boundary: boundary))
+        let urlRequest = networkManager.makeRequest(url: URL(string: baseUrl + couchesUrl + "/\(couchId)/images/")!, method: .POST)
+        
+        var data = Data()
+        var numberOfBigImages = 0
+        
+        for image in images {
+            if let compressedImage = compressImage(image: image.uiImage) {
+                data.append("--\(boundary)\r\n".data(using: .utf8)!)
+                data.append("Content-Disposition: form-data; name=\"images\"; filename=\"\(image.fileName)\"\r\n".data(using: .utf8)!)
+                data.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+                data.append(compressedImage)
+                data.append("\r\n".data(using: .utf8)!)
+            } else {
+                numberOfBigImages += 1
+            }
+        }
+        
+        data.append("--\(boundary)--\r\n".data(using: .utf8)!)
+        
+        if numberOfBigImages == images.count {
+            completionHandler([FileUpload](), "Images are too big.", true)
+            return
+        }
+        
+        networkManager.uploadTask(data: data, boundary: boundary, with: urlRequest) { (networkStatus, data, error) in
+            var message: String?
+            
+            switch networkStatus {
+            case .failure(let statusCode):
+                if let unwrappedStatusCode = statusCode {
+                    if unwrappedStatusCode == 401 {
+                        self.logger.debug("Session has expired!")
+                        completionHandler(nil, nil, false)
+                        return
+                    }
+                }
+                
+                if let unwrappedError = error {
+                    if let unwrappedStatusCode = statusCode {
+                        switch unwrappedStatusCode {
+                        case 403:
+                            message = NSLocalizedString("networkError.forbidden", comment: "Forbidden")
+                        case 404:
+                            message = NSLocalizedString("networkError.couchNotFound", comment: "Couch not found")
+                        case 422:
+                            message = NSLocalizedString("networkError.wrongFile", comment: "Wrong file")
+                        default:
+                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                        }
+                        self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
+                    }
+                } else {
+                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                }
+                
+                completionHandler(nil, message, true)
+            case .successful:
+                self.logger.debug("CouchPhotos loaded. Count: \(data!.count)")
+                
+                var fileUploads = [FileUpload]()
+                for fileUpload in data! {
+                    fileUploads.append(FileUpload(fileName: fileUpload.name, couchPhotoId: fileUpload.id))
+                }
+                
+                if numberOfBigImages != 0 {
+                    message = "Some of the images are big."
+                }
+                
+                completionHandler(fileUploads, message, true)
+            }
+            
+        }
+    }
+    
+    func compressImage(image: UIImage) -> Data? {
+        var compressionQuality: CGFloat = 1.0
+        let maxSize: Double = 2.0
+        
+        var compressedImage: Data
+        var sizeInMB: Double
+        
+        repeat {
+            compressedImage = image.jpegData(compressionQuality: compressionQuality)!
+            let imageSize: Double = Double(compressedImage.count)
+            sizeInMB = Double(imageSize) / 1024 / 1024;
+            
+            if compressionQuality < 0.01 {
+                break
+            }
+            
+            compressionQuality -= 0.2
+            
+        } while sizeInMB > maxSize
+        
+        return sizeInMB > maxSize ? nil : compressedImage
     }
     
     private func convertModelToDTO(model: Couch) -> CouchDTO {
@@ -195,6 +376,7 @@ class MyCouchInteracor {
         couch.amenities = dto.amenities ?? ""
         couch.price = String(dto.price)
         couch.about = dto.about ?? ""
+        couch.couchPhotoIds = dto.couchPhotoIds
         
         return couch
     }

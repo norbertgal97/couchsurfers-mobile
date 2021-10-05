@@ -41,6 +41,19 @@
 		AE13C78726F7FB100032C081 /* MyCouchDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C78626F7FB100032C081 /* MyCouchDetailsView.swift */; };
 		AE13C78926F93AC50032C081 /* Couch.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C78826F93AC50032C081 /* Couch.swift */; };
 		AE13C78B26F93D0F0032C081 /* MyCouchDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C78A26F93D0F0032C081 /* MyCouchDetailsViewModel.swift */; };
+		AE5FF96E2708B51300A8B961 /* MyCouchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF96D2708B51300A8B961 /* MyCouchViewModel.swift */; };
+		AE5FF9702708BB9600A8B961 /* OwnHostedCouchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF96F2708BB9600A8B961 /* OwnHostedCouchDTO.swift */; };
+		AE5FF9722708C01100A8B961 /* HostedCouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF9712708C01100A8B961 /* HostedCouch.swift */; };
+		AE5FF9742708C14E00A8B961 /* HostInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF9732708C14E00A8B961 /* HostInteractor.swift */; };
+		AE5FF9762708EF6100A8B961 /* FileDownloadDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF9752708EF6100A8B961 /* FileDownloadDTO.swift */; };
+		AE5FF9782709203200A8B961 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF9772709203200A8B961 /* ImagePicker.swift */; };
+		AE5FF97A27093A5100A8B961 /* CouchPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF97927093A5100A8B961 /* CouchPhoto.swift */; };
+		AE5FF97C270A08DB00A8B961 /* FileUploadDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF97B270A08DB00A8B961 /* FileUploadDTO.swift */; };
+		AE5FF97E270A0A2800A8B961 /* UploadRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF97D270A0A2800A8B961 /* UploadRequestHandler.swift */; };
+		AE5FF980270A2F6500A8B961 /* FileUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF97F270A2F6500A8B961 /* FileUpload.swift */; };
+		AE5FF982270A801800A8B961 /* MessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF981270A801800A8B961 /* MessageDTO.swift */; };
+		AE5FF984270A80E100A8B961 /* FilesToDeleteDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF983270A80E100A8B961 /* FilesToDeleteDTO.swift */; };
+		AE5FF986270BBD0C00A8B961 /* HostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF985270BBD0C00A8B961 /* HostDTO.swift */; };
 		AE6C815D26FD3DD800F68E78 /* CouchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6C815C26FD3DD800F68E78 /* CouchDTO.swift */; };
 		AE6C815F26FD427A00F68E78 /* LocationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6C815E26FD427A00F68E78 /* LocationDTO.swift */; };
 		AE9F0A272701283300CC45C3 /* UserSessionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F0A262701283300CC45C3 /* UserSessionInteractor.swift */; };
@@ -85,6 +98,19 @@
 		AE13C78626F7FB100032C081 /* MyCouchDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouchDetailsView.swift; sourceTree = "<group>"; };
 		AE13C78826F93AC50032C081 /* Couch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Couch.swift; sourceTree = "<group>"; };
 		AE13C78A26F93D0F0032C081 /* MyCouchDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouchDetailsViewModel.swift; sourceTree = "<group>"; };
+		AE5FF96D2708B51300A8B961 /* MyCouchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouchViewModel.swift; sourceTree = "<group>"; };
+		AE5FF96F2708BB9600A8B961 /* OwnHostedCouchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnHostedCouchDTO.swift; sourceTree = "<group>"; };
+		AE5FF9712708C01100A8B961 /* HostedCouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostedCouch.swift; sourceTree = "<group>"; };
+		AE5FF9732708C14E00A8B961 /* HostInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostInteractor.swift; sourceTree = "<group>"; };
+		AE5FF9752708EF6100A8B961 /* FileDownloadDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloadDTO.swift; sourceTree = "<group>"; };
+		AE5FF9772709203200A8B961 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		AE5FF97927093A5100A8B961 /* CouchPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchPhoto.swift; sourceTree = "<group>"; };
+		AE5FF97B270A08DB00A8B961 /* FileUploadDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploadDTO.swift; sourceTree = "<group>"; };
+		AE5FF97D270A0A2800A8B961 /* UploadRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadRequestHandler.swift; sourceTree = "<group>"; };
+		AE5FF97F270A2F6500A8B961 /* FileUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUpload.swift; sourceTree = "<group>"; };
+		AE5FF981270A801800A8B961 /* MessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDTO.swift; sourceTree = "<group>"; };
+		AE5FF983270A80E100A8B961 /* FilesToDeleteDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesToDeleteDTO.swift; sourceTree = "<group>"; };
+		AE5FF985270BBD0C00A8B961 /* HostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostDTO.swift; sourceTree = "<group>"; };
 		AE6C815C26FD3DD800F68E78 /* CouchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchDTO.swift; sourceTree = "<group>"; };
 		AE6C815E26FD427A00F68E78 /* LocationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDTO.swift; sourceTree = "<group>"; };
 		AE9F0A262701283300CC45C3 /* UserSessionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionInteractor.swift; sourceTree = "<group>"; };
@@ -158,6 +184,7 @@
 				AE13C77E26F7CF840032C081 /* AutocompleteFieldView.swift */,
 				AE13C78426F7FAB90032C081 /* MyCouchView.swift */,
 				AE13C78626F7FB100032C081 /* MyCouchDetailsView.swift */,
+				AE5FF9772709203200A8B961 /* ImagePicker.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -169,6 +196,7 @@
 				AE0ECA3226ECBF3D002AD67D /* SignUpViewModel.swift */,
 				AE13C77C26F7C9760032C081 /* AutocompleteFieldViewModel.swift */,
 				AE13C78A26F93D0F0032C081 /* MyCouchDetailsViewModel.swift */,
+				AE5FF96D2708B51300A8B961 /* MyCouchViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -179,6 +207,9 @@
 				AE13C75E26F6A6220032C081 /* SignInDetails.swift */,
 				AE13C76026F6A6300032C081 /* SignUpDetails.swift */,
 				AE13C78826F93AC50032C081 /* Couch.swift */,
+				AE5FF9712708C01100A8B961 /* HostedCouch.swift */,
+				AE5FF97927093A5100A8B961 /* CouchPhoto.swift */,
+				AE5FF97F270A2F6500A8B961 /* FileUpload.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -194,6 +225,11 @@
 				AE13C74D26F3F8CB0032C081 /* NetworkManager.swift */,
 				AE13C74F26F3FF900032C081 /* NetworkStatus.swift */,
 				AE13C75526F687470032C081 /* HTTPMethod.swift */,
+				AE5FF9752708EF6100A8B961 /* FileDownloadDTO.swift */,
+				AE5FF97B270A08DB00A8B961 /* FileUploadDTO.swift */,
+				AE5FF981270A801800A8B961 /* MessageDTO.swift */,
+				AE5FF983270A80E100A8B961 /* FilesToDeleteDTO.swift */,
+				AE5FF985270BBD0C00A8B961 /* HostDTO.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -211,6 +247,7 @@
 			children = (
 				AE9F0A262701283300CC45C3 /* UserSessionInteractor.swift */,
 				AE9F0A2827014C7F00CC45C3 /* MyCouchInteractor.swift */,
+				AE5FF9732708C14E00A8B961 /* HostInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -223,6 +260,7 @@
 				AE13C78026F7D40A0032C081 /* PredictionsDTO.swift */,
 				AE6C815C26FD3DD800F68E78 /* CouchDTO.swift */,
 				AE6C815E26FD427A00F68E78 /* LocationDTO.swift */,
+				AE5FF96F2708BB9600A8B961 /* OwnHostedCouchDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -248,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				AE13C77526F7AFD00032C081 /* RequestHandler.swift */,
+				AE5FF97D270A0A2800A8B961 /* UploadRequestHandler.swift */,
 			);
 			path = RequestHandler;
 			sourceTree = "<group>";
@@ -327,8 +366,10 @@
 				AE6C815F26FD427A00F68E78 /* LocationDTO.swift in Sources */,
 				AE13C77626F7AFD00032C081 /* RequestHandler.swift in Sources */,
 				AE0ECA0F26EC1C08002AD67D /* ContentView.swift in Sources */,
+				AE5FF9762708EF6100A8B961 /* FileDownloadDTO.swift in Sources */,
 				AE6C815D26FD3DD800F68E78 /* CouchDTO.swift in Sources */,
 				AE0ECA3126ECBEA9002AD67D /* SignInViewModel.swift in Sources */,
+				AE5FF96E2708B51300A8B961 /* MyCouchViewModel.swift in Sources */,
 				AE13C76126F6A6300032C081 /* SignUpDetails.swift in Sources */,
 				AE13C77F26F7CF840032C081 /* AutocompleteFieldView.swift in Sources */,
 				AE0ECA3326ECBF3D002AD67D /* SignUpViewModel.swift in Sources */,
@@ -337,26 +378,37 @@
 				AE0ECA2626EC2466002AD67D /* InputFieldWithImage.swift in Sources */,
 				AE0ECA3726ED4EA4002AD67D /* ErrorDTO.swift in Sources */,
 				AE13C78326F7E0CD0032C081 /* Util.swift in Sources */,
+				AE5FF984270A80E100A8B961 /* FilesToDeleteDTO.swift in Sources */,
 				AE13C78B26F93D0F0032C081 /* MyCouchDetailsViewModel.swift in Sources */,
+				AE5FF980270A2F6500A8B961 /* FileUpload.swift in Sources */,
+				AE5FF97C270A08DB00A8B961 /* FileUploadDTO.swift in Sources */,
 				AE13C78526F7FAB90032C081 /* MyCouchView.swift in Sources */,
 				AE0ECA2426EC22AB002AD67D /* SignUpView.swift in Sources */,
+				AE5FF97E270A0A2800A8B961 /* UploadRequestHandler.swift in Sources */,
+				AE5FF982270A801800A8B961 /* MessageDTO.swift in Sources */,
 				AE13C75F26F6A6220032C081 /* SignInDetails.swift in Sources */,
+				AE5FF9722708C01100A8B961 /* HostedCouch.swift in Sources */,
 				AE9F0A2927014C7F00CC45C3 /* MyCouchInteractor.swift in Sources */,
 				AE13C74B26F158F90032C081 /* SignUpRequestDTO.swift in Sources */,
 				AE13C75026F3FF910032C081 /* NetworkStatus.swift in Sources */,
 				AE13C78926F93AC50032C081 /* Couch.swift in Sources */,
+				AE5FF986270BBD0C00A8B961 /* HostDTO.swift in Sources */,
 				AE9F0A272701283300CC45C3 /* UserSessionInteractor.swift in Sources */,
 				AE13C78126F7D40A0032C081 /* PredictionsDTO.swift in Sources */,
 				AE0ECA0D26EC1C08002AD67D /* CouchsurfersMobileApp.swift in Sources */,
+				AE5FF9742708C14E00A8B961 /* HostInteractor.swift in Sources */,
 				AE0ECA3526ED41CB002AD67D /* LoginRequestDTO.swift in Sources */,
 				AE0ECA2226EC22A2002AD67D /* SignInView.swift in Sources */,
 				AE13C77B26F7C9180032C081 /* ProfileView.swift in Sources */,
 				AE13C77D26F7C9760032C081 /* AutocompleteFieldViewModel.swift in Sources */,
 				AE13C78726F7FB100032C081 /* MyCouchDetailsView.swift in Sources */,
+				AE5FF9702708BB9600A8B961 /* OwnHostedCouchDTO.swift in Sources */,
 				AE13C75626F687470032C081 /* HTTPMethod.swift in Sources */,
 				AE13C75226F657CE0032C081 /* LoginResponseDTO.swift in Sources */,
 				AE13C77026F7ABA70032C081 /* ResponseHandler.swift in Sources */,
+				AE5FF9782709203200A8B961 /* ImagePicker.swift in Sources */,
 				AE0ECA2026EC2284002AD67D /* AuthenticationView.swift in Sources */,
+				AE5FF97A27093A5100A8B961 /* CouchPhoto.swift in Sources */,
 				AE13C75426F6814E0032C081 /* SignUpResponseDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

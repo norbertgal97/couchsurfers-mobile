@@ -5,7 +5,6 @@
 //  Created by Norbert Gál on 2021. 09. 19..
 //
 
-import Foundation
 import SwiftUI
 
 struct MainTabView: View {
@@ -30,15 +29,11 @@ struct MainTabView: View {
                     Text(NSLocalizedString("inboxTabItem", comment: "Inbox"))
                 }
             
-            NavigationView {
-                ProfileView()
-                    //.navigationTitle("")
-                    .navigationBarHidden(true)
-            }
-            .tabItem {
-                Image(systemName: "person")
-                Text(NSLocalizedString("profileTabItem", comment: "Profile"))
-            }
+            ProfileView()
+                .tabItem {
+                    Image(systemName: "person")
+                    Text(NSLocalizedString("profileTabItem", comment: "Profile"))
+                }
         }
         .accentColor(Color.red)
     }

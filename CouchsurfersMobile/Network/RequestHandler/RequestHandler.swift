@@ -21,7 +21,7 @@ class RequestHandler {
         return urlRequest
     }
     
-    func makeRequest(url: URL, method: HTTPMethod) -> URLRequest? {
+    func makeRequest(url: URL, method: HTTPMethod) -> URLRequest {
         var urlRequest = URLRequest(url: url)
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.httpMethod = method.rawValue

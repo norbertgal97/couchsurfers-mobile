@@ -35,6 +35,7 @@
 "networkError.userNotFound" = "User is not found";
 "networkError.emptyFields" = "Name / NumberOfRooms / NumberOfGuests / City cant be null!";
 "networkError.couchAlreadyExists" = "Couch is already created";
+"networkError.emptyFile" = "Unprocessable image(s)";
 
 // Autocomplete
 "autocomplete.placesAPIlanguage" = "en-GB";

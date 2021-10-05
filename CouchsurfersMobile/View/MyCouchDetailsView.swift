@@ -5,9 +5,7 @@
 //  Created by Norbert Gál on 2021. 09. 20..
 //
 
-import Foundation
 import SwiftUI
-import Combine
 
 struct MyCouchDetails: View {
     @EnvironmentObject var globalEnv: GlobalEnvironment
@@ -16,12 +14,9 @@ struct MyCouchDetails: View {
     @State private var cityNameText: String = ""
     @State private var cityId = ""
     
-    @State private var zipCode: String = ""
-    @State private var about: String = ""
+    let couchId: Int?
     
-    let couchId: Int
     @ObservedObject var myCouchDetailsVM: MyCouchDetailsViewModel
-    
     @ObservedObject var autocompleteFieldVM = AutocompleteFieldViewModel()
     
     var body: some View {
@@ -30,13 +25,36 @@ struct MyCouchDetails: View {
                 ScrollView(.horizontal) {
                     
                     HStack(spacing: 20) {
-                        ForEach(0..<6) {
-                            Text("Item \($0)")
-                                .foregroundColor(.white)
-                                .font(.largeTitle)
-                                .frame(width: 175, height: 125)
-                                .background(Color.gray)
+                        ForEach(myCouchDetailsVM.images, id: \.fileName) { image in
+                            Image(uiImage: image.uiImage)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 225, height: 150, alignment: .center)
                                 .clipShape(RoundedRectangle(cornerRadius: 5))
+                                .overlay(
+                                    Image(systemName: "trash")
+                                        .font(.title)
+                                        .padding(.all, 5)
+                                        .foregroundColor(Color.red)
+                                        .background(Color.black)
+                                        .clipShape(Circle())
+                                        .onLongPressGesture {
+                                            myCouchDetailsVM.images.removeAll{ $0.fileName == image.fileName }
+                                            
+                                            if image.id != nil {
+                                              myCouchDetailsVM.imagesToDelete.append(image.id!)
+                                            }
+                                            
+                                        }, alignment: .center)
+                        }
+                        
+                        if myCouchDetailsVM.images.count < 6 {
+                            Button(action: {
+                                self.myCouchDetailsVM.showingImagePicker = true
+                            } ) {
+                                Image(systemName: "plus.circle")
+                                    .font(.title)
+                            }
                         }
                     }
                     
@@ -116,24 +134,59 @@ struct MyCouchDetails: View {
         }
         .navigationBarTitle(Text(NSLocalizedString("couchDetails", comment: "Couch details")))
         .navigationBarItems(trailing: Button(NSLocalizedString("save", comment: "Save")) {
-            if myCouchDetailsVM.myCouch.id != nil {
-                myCouchDetailsVM.updateCouch(with: couchId) { loggedIn in
+            if couchId != nil {
+                
+                myCouchDetailsVM.deleteImages { loggedIn in
                     if !loggedIn {
                         self.globalEnv.userLoggedIn = false
                     }
+                    
+                    myCouchDetailsVM.updateCouch(with: couchId!) { loggedIn in
+                        if !loggedIn {
+                            self.globalEnv.userLoggedIn = false
+                        }
+                        
+                        myCouchDetailsVM.uploadImages { loggedIn in
+                            if !loggedIn {
+                                self.globalEnv.userLoggedIn = false
+                            }
+                        }
+                    }
+                    
                 }
+                
             } else {
                 myCouchDetailsVM.saveCouch { loggedIn in
                     if !loggedIn {
                         self.globalEnv.userLoggedIn = false
                     }
+                    
+                    myCouchDetailsVM.uploadImages { loggedIn in
+                        if !loggedIn {
+                            self.globalEnv.userLoggedIn = false
+                        }
+                    }
                 }
+                
             }
         })
         .onAppear {
-            myCouchDetailsVM.loadCouch(with: couchId) { loggedIn in
-                if !loggedIn {
-                    self.globalEnv.userLoggedIn = false
+            if couchId != nil {
+                myCouchDetailsVM.loadCouch(with: couchId!) { loggedIn, downloadImage in
+                    if !loggedIn {
+                        self.globalEnv.userLoggedIn = false
+                        return
+                    }
+                    
+                    if downloadImage {
+                        myCouchDetailsVM.myCouch.couchPhotoIds?.forEach { id in
+                            myCouchDetailsVM.downloadImage(photoId: id) { loggedIn in
+                                if !loggedIn {
+                                    self.globalEnv.userLoggedIn = false
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -142,5 +195,13 @@ struct MyCouchDetails: View {
                 print("Dismiss button pressed")
             })
         })
+        .sheet(isPresented: $myCouchDetailsVM.showingImagePicker, onDismiss: getImage) {
+            ImagePicker(image: self.$myCouchDetailsVM.pickedImage)
+        }
+    }
+    
+    func getImage() {
+        guard let image = myCouchDetailsVM.pickedImage else { return }
+        myCouchDetailsVM.addImage(image: image)
     }
 }

@@ -6,14 +6,24 @@
 //
 
 import Foundation
+import UIKit
 
 class MyCouchDetailsViewModel: ObservableObject {
     @Published var myCouch = Couch()
+    
     @Published var alertDescription: String = NSLocalizedString("defaultAlertMessage", comment: "Default alert message")
     @Published var showingAlert = false
     
+    @Published var showingImagePicker = false
+    @Published var pickedImage: UIImage?
+    
     private var savedCouch : Couch?
-    private var interactor = MyCouchInteracor()
+    private var interactor = MyCouchInteractor()
+    private var couchInteractor = MyCouchInteractor()
+    
+    
+    @Published var images = [CouchPhoto]()
+    var imagesToDelete = [Int]()
     
     func saveCouch(completionHandler: @escaping (_ loggedIn: Bool) -> Void) {
         validateCouchBeforeSave()
@@ -62,8 +72,8 @@ class MyCouchDetailsViewModel: ObservableObject {
         
     }
     
-    func loadCouch(with id: Int, completionHandler: @escaping (_ loggedIn: Bool) -> Void) {
-        interactor.loadCouch(with: id) { couch, message, loggedIn in
+    func loadCouch(with id: Int, completionHandler: @escaping (_ loggedIn: Bool, _ downloadImage: Bool) -> Void) {
+        interactor.loadCouch(with: id) { couch, message, loggedIn, downloadImage in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
                     self.updateAlert(with: unwrappedMessage)
@@ -78,10 +88,107 @@ class MyCouchDetailsViewModel: ObservableObject {
             }
             
             DispatchQueue.main.async {
-                completionHandler(loggedIn)
+                completionHandler(loggedIn, downloadImage)
             }
             
         }
+    }
+    
+    func downloadImage(photoId: Int, completionHandler: @escaping (_ loggedIn: Bool) -> Void) {
+        if self.myCouch.id == nil {
+            completionHandler(true)
+            return
+        }
+        
+        couchInteractor.downloadImage(couchId: self.myCouch.id!, imageId: photoId) { image, message, loggedIn in
+            if let unwrappedMessage = message {
+                DispatchQueue.main.async {
+                    self.updateAlert(with: unwrappedMessage)
+                }
+            }
+            
+            if let unwrappedImage = image {
+                DispatchQueue.main.async {
+                    self.images.append(unwrappedImage)
+                }
+            }
+            
+            DispatchQueue.main.async {
+                completionHandler(loggedIn)
+            }
+        }
+    }
+    
+    func uploadImages(completionHandler: @escaping (_ loggedIn: Bool) -> Void) {
+        if self.myCouch.id == nil {
+            completionHandler(true)
+            return
+        }
+        
+        let uploadableImages = images.filter { $0.id == nil }
+        
+        if uploadableImages.isEmpty {
+            completionHandler(true)
+            return
+        }
+        
+        couchInteractor.uploadImages(couchId: self.myCouch.id!, images: uploadableImages) { fileUploads, message, loggedIn in
+            if let unwrappedMessage = message {
+                DispatchQueue.main.async {
+                    self.updateAlert(with: unwrappedMessage)
+                }
+            }
+            
+            if let unwrappedfileUploads = fileUploads {
+                DispatchQueue.main.async {
+                    unwrappedfileUploads.forEach { fileUpload in
+                        for i in 0..<self.images.count {
+                            if self.images[i].fileName == fileUpload.fileName {
+                                self.images[i].id = fileUpload.couchPhotoId
+                            }
+                        }
+                    }
+                    
+                    self.images.removeAll { $0.id == nil }
+                    
+                    var fileUploadIds = unwrappedfileUploads.map { $0.couchPhotoId }
+                    
+                    if let unwrappedIds = self.myCouch.couchPhotoIds {
+                        fileUploadIds.append(contentsOf: unwrappedIds)
+                    }
+                    
+                    self.images.removeAll{ !fileUploadIds.contains($0.id!)}
+                    
+                }
+            }
+            
+            DispatchQueue.main.async {
+                completionHandler(loggedIn)
+            }
+        }
+    }
+    
+    func deleteImages(completionHandler: @escaping (_ loggedIn: Bool) -> Void) {
+        if self.myCouch.id == nil || self.imagesToDelete.isEmpty {
+            completionHandler(true)
+            return
+        }
+        
+        couchInteractor.deleteImages(couchId: self.myCouch.id!, imageIds: imagesToDelete) { message, loggedIn in
+            if let unwrappedMessage = message {
+                DispatchQueue.main.async {
+                    self.updateAlert(with: unwrappedMessage)
+                }
+            }
+            
+            DispatchQueue.main.async {
+                completionHandler(loggedIn)
+            }
+        }
+    }
+    
+    func addImage(image: UIImage) {
+        images.append(CouchPhoto(uiImage: image))
     }
     
     private func updateAlert(with message: String) {

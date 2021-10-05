@@ -15,6 +15,7 @@ class CouchDTO: Codable {
     var about: String?
     var amenities: String?
     var price: Double
+    var couchPhotoIds: [Int]?
     var location: LocationDTO
     
     // photos
@@ -38,6 +39,7 @@ class CouchDTO: Codable {
         amenities = try container.decodeIfPresent(String.self, forKey: .amenities)
         price = try container.decode(Double.self, forKey: .price)
         location = try container.decode(LocationDTO.self, forKey: .location)
+        couchPhotoIds = try container.decodeIfPresent([Int].self, forKey: .couchPhotoIds)
 
     }
     
@@ -63,5 +65,6 @@ class CouchDTO: Codable {
         case amenities
         case price
         case location
+        case couchPhotoIds = "couch_photo_ids"
     }
 }

@@ -7,8 +7,10 @@
 
 import Foundation
 import SwiftUI
+import UIKit
 
 struct ProfileView: View {
+    
     @State private var cityNameText: String = ""
     
     //@ObservedObject var profileVM = ProfileViewModel()
@@ -61,12 +63,8 @@ struct ProfileView: View {
                 }
             }
             .navigationBarTitle("Profile", displayMode: .large)
+            .navigationBarBackButtonHidden(true)
         }
     }
 }
 
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
-    }
-}
