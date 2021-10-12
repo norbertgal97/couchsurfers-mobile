@@ -61,31 +61,6 @@ class MyCouchViewModel: ObservableObject {
         
     }
     
-    func downloadImage(completionHandler: @escaping (_ loggedIn: Bool) -> Void) {
-        if self.hostedCouch.id == nil || self.hostedCouch.couchPhotoId == nil {
-            completionHandler(true)
-            return
-        }
-        
-        couchInteractor.downloadImage(couchId: self.hostedCouch.id!, imageId: self.hostedCouch.couchPhotoId!) { image, message, loggedIn in
-            if let unwrappedMessage = message {
-                DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
-                }
-            }
-            
-            if let unwrappedImage = image {
-                DispatchQueue.main.async {
-                    self.hostedCouch.image = unwrappedImage.uiImage
-                }
-            }
-            
-            DispatchQueue.main.async {
-                completionHandler(loggedIn)
-            }
-        }
-    }
-    
     private func updateAlert(with message: String) {
         self.alertDescription = message
         self.showingAlert = true

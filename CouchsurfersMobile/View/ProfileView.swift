@@ -10,9 +10,8 @@ import SwiftUI
 import UIKit
 
 struct ProfileView: View {
-    
-    @State private var cityNameText: String = ""
-    
+    @EnvironmentObject var globalEnv: GlobalEnvironment
+
     //@ObservedObject var profileVM = ProfileViewModel()
     
     var body: some View {
@@ -43,7 +42,7 @@ struct ProfileView: View {
                 }
                 
                 Section(header: Text("Hosting")) {
-                    NavigationLink(destination: MyCouchView()) {
+                    NavigationLink(destination: MyCouchView().environmentObject(globalEnv)) {
                         HStack {
                             Image(systemName: "list.dash")
                                 .padding(.trailing, 3)
@@ -63,7 +62,8 @@ struct ProfileView: View {
                 }
             }
             .navigationBarTitle("Profile", displayMode: .large)
-            .navigationBarBackButtonHidden(true)
+            .environmentObject(globalEnv)
+
         }
     }
 }

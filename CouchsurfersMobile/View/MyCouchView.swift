@@ -17,11 +17,12 @@ struct MyCouchView: View {
         Group {
             if myCouchVM.hostedCouch.id != nil {
                 ScrollView {
-                    if let uiImage = myCouchVM.hostedCouch.image {
-                        Image(uiImage: uiImage)
+                    if let photoUrl = myCouchVM.hostedCouch.couchPhotoId {
+                        KingFisherImage(url: photoUrl)
                             .resizable()
                             .scaledToFill()
                             .frame(height: 300)
+                            .frame(maxWidth: UIScreen.main.bounds.size.width)
                             .clipped()
                     } else {
                         Text("No content")
@@ -49,21 +50,20 @@ struct MyCouchView: View {
                             .padding(.horizontal)
                         
                         Button(action : {
-                            myCouchVM.hostCouch { loggedIn in 
+                            myCouchVM.hostCouch { loggedIn in
                                 if !loggedIn {
                                     self.globalEnv.userLoggedIn = false
                                 }
                             }
                         }) {
                             Text(myCouchVM.hostedCouch.hosted ? "Hide your couch" : "Host your couch")
+                                .foregroundColor(Color.white)
+                                .fontWeight(.bold)
                                 .frame(maxWidth: .infinity, alignment: .center)
                                 .frame(height: 50)
+                                .background(Color.red)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.gray, lineWidth: 2)
-                                .background(Color.white)
-                        )
                         .padding(.horizontal)
                         
                     }
@@ -73,7 +73,7 @@ struct MyCouchView: View {
             }
         }
         .navigationBarTitle(Text(NSLocalizedString("myCouch.navigationBarTitle", comment: "My Couch")), displayMode: .inline)
-        .navigationBarItems(trailing: NavigationLink(destination: MyCouchDetails(couchId: myCouchVM.hostedCouch.id, myCouchDetailsVM: MyCouchDetailsViewModel())) {
+        .navigationBarItems(trailing: NavigationLink(destination: MyCouchDetails(myCouchDetailsVM: MyCouchDetailsViewModel(), couchId: myCouchVM.hostedCouch.id)) {
             Image(systemName: "square.and.pencil")
                 .foregroundColor(Color.red)
         })
@@ -81,17 +81,7 @@ struct MyCouchView: View {
             myCouchVM.getOwnHostedCouch { loggedIn, downloadImage in
                 if !loggedIn {
                     self.globalEnv.userLoggedIn = false
-                    return
                 }
-                
-                if downloadImage {
-                    myCouchVM.downloadImage() {loggedIn in
-                        if !loggedIn {
-                            self.globalEnv.userLoggedIn = false
-                        }
-                    }
-                }
-                
             }
         }
         .alert(isPresented: $myCouchVM.showingAlert, content: {

@@ -10,11 +10,7 @@ import SwiftUI
 struct SignIn: View {
     @EnvironmentObject var globalEnv: GlobalEnvironment
     
-    @ObservedObject var signInVM: SignInViewModel
-    
-    init(viewModel: SignInViewModel) {
-        self.signInVM = viewModel
-    }
+    @ObservedObject private var signInVM = SignInViewModel()
         
     var body: some View {
         VStack {
@@ -76,7 +72,7 @@ struct SignIn_Previews: PreviewProvider {
     static var previews: some View {
         let globalEnvironment = GlobalEnvironment()
         
-        SignIn(viewModel: SignInViewModel())
+        SignIn()
             .environmentObject(globalEnvironment)
     }
 }

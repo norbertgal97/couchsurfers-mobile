@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MyCouchDetailsViewModel: ObservableObject {
+class MyCouchDetailsViewModel: GooglePlacesViewModel {
     @Published var myCouch = Couch()
     
     @Published var alertDescription: String = NSLocalizedString("defaultAlertMessage", comment: "Default alert message")
@@ -21,7 +21,7 @@ class MyCouchDetailsViewModel: ObservableObject {
     private var interactor = MyCouchInteractor()
     private var couchInteractor = MyCouchInteractor()
     
-    
+    @Published var imagesToUpload = [CouchPhoto]()
     @Published var images = [CouchPhoto]()
     var imagesToDelete = [Int]()
     
@@ -39,6 +39,10 @@ class MyCouchDetailsViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.myCouch = unwrappedCouch
                     self.savedCouch = unwrappedCouch
+                    
+                    self.reverseCity(cityId: self.myCouch.city) { reversedCity in
+                        self.selectedCity = reversedCity
+                    }
                 }
             }
             
@@ -62,6 +66,10 @@ class MyCouchDetailsViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.myCouch = unwrappedCouch
                     self.savedCouch = unwrappedCouch
+                    
+                    self.reverseCity(cityId: self.myCouch.city) { reversedCity in
+                        self.selectedCity = reversedCity
+                    }
                 }
             }
             
@@ -72,7 +80,7 @@ class MyCouchDetailsViewModel: ObservableObject {
         
     }
     
-    func loadCouch(with id: Int, completionHandler: @escaping (_ loggedIn: Bool, _ downloadImage: Bool) -> Void) {
+    func loadCouch(with id: Int, completionHandler: @escaping (_ loggedIn: Bool) -> Void) {
         interactor.loadCouch(with: id) { couch, message, loggedIn, downloadImage in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
@@ -84,38 +92,22 @@ class MyCouchDetailsViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.myCouch = unwrappedCouch
                     self.savedCouch = unwrappedCouch
-                }
-            }
-            
-            DispatchQueue.main.async {
-                completionHandler(loggedIn, downloadImage)
-            }
-            
-        }
-    }
-    
-    func downloadImage(photoId: Int, completionHandler: @escaping (_ loggedIn: Bool) -> Void) {
-        if self.myCouch.id == nil {
-            completionHandler(true)
-            return
-        }
-        
-        couchInteractor.downloadImage(couchId: self.myCouch.id!, imageId: photoId) { image, message, loggedIn in
-            if let unwrappedMessage = message {
-                DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
-                }
-            }
-            
-            if let unwrappedImage = image {
-                DispatchQueue.main.async {
-                    self.images.append(unwrappedImage)
+                    
+                    self.reverseCity(cityId: self.myCouch.city) { reversedCity in
+                        self.selectedCity = reversedCity
+                    }
+                    
+                    if !unwrappedCouch.couchPhotos.isEmpty {
+                        self.images = unwrappedCouch.couchPhotos
+                    }
+
                 }
             }
             
             DispatchQueue.main.async {
                 completionHandler(loggedIn)
             }
+            
         }
     }
     
@@ -125,40 +117,25 @@ class MyCouchDetailsViewModel: ObservableObject {
             return
         }
         
-        let uploadableImages = images.filter { $0.id == nil }
-        
-        if uploadableImages.isEmpty {
+        if imagesToUpload.isEmpty {
             completionHandler(true)
             return
         }
         
-        couchInteractor.uploadImages(couchId: self.myCouch.id!, images: uploadableImages) { fileUploads, message, loggedIn in
+        couchInteractor.uploadImages(couchId: self.myCouch.id!, images: imagesToUpload) { imageUploads, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
                     self.updateAlert(with: unwrappedMessage)
                 }
             }
             
-            if let unwrappedfileUploads = fileUploads {
+            if let unwrappedImageUploads = imageUploads {
                 DispatchQueue.main.async {
-                    unwrappedfileUploads.forEach { fileUpload in
-                        for i in 0..<self.images.count {
-                            if self.images[i].fileName == fileUpload.fileName {
-                                self.images[i].id = fileUpload.couchPhotoId
-                            }
-                        }
+                    unwrappedImageUploads.forEach { imageUpload in
+                        self.imagesToUpload.removeAll { $0.fileName == imageUpload.fileName }
+                        self.images.append(CouchPhoto(id: imageUpload.id, fileName: imageUpload.fileName, url: imageUpload.url, uiImage: nil))
                     }
-                    
-                    self.images.removeAll { $0.id == nil }
-                    
-                    var fileUploadIds = unwrappedfileUploads.map { $0.couchPhotoId }
-                    
-                    if let unwrappedIds = self.myCouch.couchPhotoIds {
-                        fileUploadIds.append(contentsOf: unwrappedIds)
-                    }
-                    
-                    self.images.removeAll{ !fileUploadIds.contains($0.id!)}
-                    
+
                 }
             }
             
@@ -188,7 +165,12 @@ class MyCouchDetailsViewModel: ObservableObject {
     }
     
     func addImage(image: UIImage) {
-        images.append(CouchPhoto(uiImage: image))
+        imagesToUpload.append(CouchPhoto(uiImage: image))
+    }
+    
+    func getImage() {
+        guard let image = pickedImage else { return }
+        addImage(image: image)
     }
     
     private func updateAlert(with message: String) {

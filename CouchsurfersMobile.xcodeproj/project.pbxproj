@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -33,8 +33,6 @@
 		AE13C77626F7AFD00032C081 /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C77526F7AFD00032C081 /* RequestHandler.swift */; };
 		AE13C77926F7C8630032C081 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C77826F7C8630032C081 /* MainTabView.swift */; };
 		AE13C77B26F7C9180032C081 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C77A26F7C9180032C081 /* ProfileView.swift */; };
-		AE13C77D26F7C9760032C081 /* AutocompleteFieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C77C26F7C9760032C081 /* AutocompleteFieldViewModel.swift */; };
-		AE13C77F26F7CF840032C081 /* AutocompleteFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C77E26F7CF840032C081 /* AutocompleteFieldView.swift */; };
 		AE13C78126F7D40A0032C081 /* PredictionsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C78026F7D40A0032C081 /* PredictionsDTO.swift */; };
 		AE13C78326F7E0CD0032C081 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C78226F7E0CD0032C081 /* Util.swift */; };
 		AE13C78526F7FAB90032C081 /* MyCouchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C78426F7FAB90032C081 /* MyCouchView.swift */; };
@@ -45,7 +43,7 @@
 		AE5FF9702708BB9600A8B961 /* OwnHostedCouchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF96F2708BB9600A8B961 /* OwnHostedCouchDTO.swift */; };
 		AE5FF9722708C01100A8B961 /* HostedCouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF9712708C01100A8B961 /* HostedCouch.swift */; };
 		AE5FF9742708C14E00A8B961 /* HostInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF9732708C14E00A8B961 /* HostInteractor.swift */; };
-		AE5FF9762708EF6100A8B961 /* FileDownloadDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF9752708EF6100A8B961 /* FileDownloadDTO.swift */; };
+		AE5FF9762708EF6100A8B961 /* CouchPhotoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF9752708EF6100A8B961 /* CouchPhotoDTO.swift */; };
 		AE5FF9782709203200A8B961 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF9772709203200A8B961 /* ImagePicker.swift */; };
 		AE5FF97A27093A5100A8B961 /* CouchPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF97927093A5100A8B961 /* CouchPhoto.swift */; };
 		AE5FF97C270A08DB00A8B961 /* FileUploadDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF97B270A08DB00A8B961 /* FileUploadDTO.swift */; };
@@ -54,10 +52,26 @@
 		AE5FF982270A801800A8B961 /* MessageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF981270A801800A8B961 /* MessageDTO.swift */; };
 		AE5FF984270A80E100A8B961 /* FilesToDeleteDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF983270A80E100A8B961 /* FilesToDeleteDTO.swift */; };
 		AE5FF986270BBD0C00A8B961 /* HostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF985270BBD0C00A8B961 /* HostDTO.swift */; };
+		AE5FF988270D0A7400A8B961 /* ExplorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF987270D0A7400A8B961 /* ExplorationView.swift */; };
+		AE5FF98A270D24C700A8B961 /* CouchPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF989270D24C700A8B961 /* CouchPreviewView.swift */; };
+		AE5FF98C270E438E00A8B961 /* ExplorationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF98B270E438E00A8B961 /* ExplorationViewModel.swift */; };
+		AE5FF98E270E4CA200A8B961 /* CouchPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF98D270E4CA200A8B961 /* CouchPreview.swift */; };
+		AE5FF990270E4D0400A8B961 /* CouchPreviewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF98F270E4D0400A8B961 /* CouchPreviewDTO.swift */; };
 		AE6C815D26FD3DD800F68E78 /* CouchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6C815C26FD3DD800F68E78 /* CouchDTO.swift */; };
 		AE6C815F26FD427A00F68E78 /* LocationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6C815E26FD427A00F68E78 /* LocationDTO.swift */; };
 		AE9F0A272701283300CC45C3 /* UserSessionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F0A262701283300CC45C3 /* UserSessionInteractor.swift */; };
 		AE9F0A2927014C7F00CC45C3 /* MyCouchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F0A2827014C7F00CC45C3 /* MyCouchInteractor.swift */; };
+		AEB6DDCE270E7B3600EECDE0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AEB6DDCD270E7B3600EECDE0 /* Kingfisher */; };
+		AEB6DDD0270F80FC00EECDE0 /* KingFisherImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB6DDCF270F80FC00EECDE0 /* KingFisherImage.swift */; };
+		AEB6DDD22711DF7000EECDE0 /* GooglePlacesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB6DDD12711DF7000EECDE0 /* GooglePlacesInteractor.swift */; };
+		AEB6DDD42711E18D00EECDE0 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB6DDD32711E18D00EECDE0 /* Place.swift */; };
+		AEB6DDD62711FA4A00EECDE0 /* AutocompleteFieldWithResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB6DDD52711FA4A00EECDE0 /* AutocompleteFieldWithResultsView.swift */; };
+		AEF6C99727123EBE00453191 /* GooglePlacesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF6C99627123EBE00453191 /* GooglePlacesViewModel.swift */; };
+		AEF6C99B2712518A00453191 /* ReversePlaceId.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF6C99A2712518A00453191 /* ReversePlaceId.swift */; };
+		AEF6C99D2712641200453191 /* ExplorationFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF6C99C2712641200453191 /* ExplorationFormView.swift */; };
+		AEF6C99F27126CE100453191 /* ExplorationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF6C99E27126CE100453191 /* ExplorationListView.swift */; };
+		AEF6C9A12713159700453191 /* CouchFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF6C9A02713159700453191 /* CouchFilter.swift */; };
+		AEF6C9A327131EB800453191 /* ExplorationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF6C9A227131EB800453191 /* ExplorationListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,8 +104,6 @@
 		AE13C77526F7AFD00032C081 /* RequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHandler.swift; sourceTree = "<group>"; };
 		AE13C77826F7C8630032C081 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		AE13C77A26F7C9180032C081 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		AE13C77C26F7C9760032C081 /* AutocompleteFieldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteFieldViewModel.swift; sourceTree = "<group>"; };
-		AE13C77E26F7CF840032C081 /* AutocompleteFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteFieldView.swift; sourceTree = "<group>"; };
 		AE13C78026F7D40A0032C081 /* PredictionsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionsDTO.swift; sourceTree = "<group>"; };
 		AE13C78226F7E0CD0032C081 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		AE13C78426F7FAB90032C081 /* MyCouchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouchView.swift; sourceTree = "<group>"; };
@@ -102,7 +114,7 @@
 		AE5FF96F2708BB9600A8B961 /* OwnHostedCouchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnHostedCouchDTO.swift; sourceTree = "<group>"; };
 		AE5FF9712708C01100A8B961 /* HostedCouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostedCouch.swift; sourceTree = "<group>"; };
 		AE5FF9732708C14E00A8B961 /* HostInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostInteractor.swift; sourceTree = "<group>"; };
-		AE5FF9752708EF6100A8B961 /* FileDownloadDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloadDTO.swift; sourceTree = "<group>"; };
+		AE5FF9752708EF6100A8B961 /* CouchPhotoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchPhotoDTO.swift; sourceTree = "<group>"; };
 		AE5FF9772709203200A8B961 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		AE5FF97927093A5100A8B961 /* CouchPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchPhoto.swift; sourceTree = "<group>"; };
 		AE5FF97B270A08DB00A8B961 /* FileUploadDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploadDTO.swift; sourceTree = "<group>"; };
@@ -111,10 +123,25 @@
 		AE5FF981270A801800A8B961 /* MessageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDTO.swift; sourceTree = "<group>"; };
 		AE5FF983270A80E100A8B961 /* FilesToDeleteDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesToDeleteDTO.swift; sourceTree = "<group>"; };
 		AE5FF985270BBD0C00A8B961 /* HostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostDTO.swift; sourceTree = "<group>"; };
+		AE5FF987270D0A7400A8B961 /* ExplorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorationView.swift; sourceTree = "<group>"; };
+		AE5FF989270D24C700A8B961 /* CouchPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchPreviewView.swift; sourceTree = "<group>"; };
+		AE5FF98B270E438E00A8B961 /* ExplorationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorationViewModel.swift; sourceTree = "<group>"; };
+		AE5FF98D270E4CA200A8B961 /* CouchPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchPreview.swift; sourceTree = "<group>"; };
+		AE5FF98F270E4D0400A8B961 /* CouchPreviewDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchPreviewDTO.swift; sourceTree = "<group>"; };
 		AE6C815C26FD3DD800F68E78 /* CouchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchDTO.swift; sourceTree = "<group>"; };
 		AE6C815E26FD427A00F68E78 /* LocationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDTO.swift; sourceTree = "<group>"; };
 		AE9F0A262701283300CC45C3 /* UserSessionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionInteractor.swift; sourceTree = "<group>"; };
 		AE9F0A2827014C7F00CC45C3 /* MyCouchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouchInteractor.swift; sourceTree = "<group>"; };
+		AEB6DDCF270F80FC00EECDE0 /* KingFisherImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingFisherImage.swift; sourceTree = "<group>"; };
+		AEB6DDD12711DF7000EECDE0 /* GooglePlacesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesInteractor.swift; sourceTree = "<group>"; };
+		AEB6DDD32711E18D00EECDE0 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		AEB6DDD52711FA4A00EECDE0 /* AutocompleteFieldWithResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteFieldWithResultsView.swift; sourceTree = "<group>"; };
+		AEF6C99627123EBE00453191 /* GooglePlacesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesViewModel.swift; sourceTree = "<group>"; };
+		AEF6C99A2712518A00453191 /* ReversePlaceId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversePlaceId.swift; sourceTree = "<group>"; };
+		AEF6C99C2712641200453191 /* ExplorationFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorationFormView.swift; sourceTree = "<group>"; };
+		AEF6C99E27126CE100453191 /* ExplorationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorationListView.swift; sourceTree = "<group>"; };
+		AEF6C9A02713159700453191 /* CouchFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchFilter.swift; sourceTree = "<group>"; };
+		AEF6C9A227131EB800453191 /* ExplorationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorationListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEB6DDCE270E7B3600EECDE0 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,10 +209,15 @@
 				AE0ECA2326EC22AB002AD67D /* SignUpView.swift */,
 				AE13C77826F7C8630032C081 /* MainTabView.swift */,
 				AE13C77A26F7C9180032C081 /* ProfileView.swift */,
-				AE13C77E26F7CF840032C081 /* AutocompleteFieldView.swift */,
 				AE13C78426F7FAB90032C081 /* MyCouchView.swift */,
 				AE13C78626F7FB100032C081 /* MyCouchDetailsView.swift */,
 				AE5FF9772709203200A8B961 /* ImagePicker.swift */,
+				AE5FF987270D0A7400A8B961 /* ExplorationView.swift */,
+				AE5FF989270D24C700A8B961 /* CouchPreviewView.swift */,
+				AEB6DDCF270F80FC00EECDE0 /* KingFisherImage.swift */,
+				AEB6DDD52711FA4A00EECDE0 /* AutocompleteFieldWithResultsView.swift */,
+				AEF6C99C2712641200453191 /* ExplorationFormView.swift */,
+				AEF6C99E27126CE100453191 /* ExplorationListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -194,9 +227,11 @@
 			children = (
 				AE0ECA3026ECBEA8002AD67D /* SignInViewModel.swift */,
 				AE0ECA3226ECBF3D002AD67D /* SignUpViewModel.swift */,
-				AE13C77C26F7C9760032C081 /* AutocompleteFieldViewModel.swift */,
 				AE13C78A26F93D0F0032C081 /* MyCouchDetailsViewModel.swift */,
 				AE5FF96D2708B51300A8B961 /* MyCouchViewModel.swift */,
+				AE5FF98B270E438E00A8B961 /* ExplorationViewModel.swift */,
+				AEF6C99627123EBE00453191 /* GooglePlacesViewModel.swift */,
+				AEF6C9A227131EB800453191 /* ExplorationListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -210,6 +245,9 @@
 				AE5FF9712708C01100A8B961 /* HostedCouch.swift */,
 				AE5FF97927093A5100A8B961 /* CouchPhoto.swift */,
 				AE5FF97F270A2F6500A8B961 /* FileUpload.swift */,
+				AE5FF98D270E4CA200A8B961 /* CouchPreview.swift */,
+				AEB6DDD32711E18D00EECDE0 /* Place.swift */,
+				AEF6C9A02713159700453191 /* CouchFilter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -225,11 +263,13 @@
 				AE13C74D26F3F8CB0032C081 /* NetworkManager.swift */,
 				AE13C74F26F3FF900032C081 /* NetworkStatus.swift */,
 				AE13C75526F687470032C081 /* HTTPMethod.swift */,
-				AE5FF9752708EF6100A8B961 /* FileDownloadDTO.swift */,
+				AE5FF9752708EF6100A8B961 /* CouchPhotoDTO.swift */,
 				AE5FF97B270A08DB00A8B961 /* FileUploadDTO.swift */,
 				AE5FF981270A801800A8B961 /* MessageDTO.swift */,
 				AE5FF983270A80E100A8B961 /* FilesToDeleteDTO.swift */,
 				AE5FF985270BBD0C00A8B961 /* HostDTO.swift */,
+				AE5FF98F270E4D0400A8B961 /* CouchPreviewDTO.swift */,
+				AEF6C99A2712518A00453191 /* ReversePlaceId.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -248,6 +288,7 @@
 				AE9F0A262701283300CC45C3 /* UserSessionInteractor.swift */,
 				AE9F0A2827014C7F00CC45C3 /* MyCouchInteractor.swift */,
 				AE5FF9732708C14E00A8B961 /* HostInteractor.swift */,
+				AEB6DDD12711DF7000EECDE0 /* GooglePlacesInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -307,6 +348,9 @@
 			dependencies = (
 			);
 			name = CouchsurfersMobile;
+			packageProductDependencies = (
+				AEB6DDCD270E7B3600EECDE0 /* Kingfisher */,
+			);
 			productName = CouchsurfersMobile;
 			productReference = AE0ECA0926EC1C08002AD67D /* CouchsurfersMobile.app */;
 			productType = "com.apple.product-type.application";
@@ -335,6 +379,9 @@
 				hu,
 			);
 			mainGroup = AE0ECA0026EC1C08002AD67D;
+			packageReferences = (
+				AEB6DDCC270E7B3600EECDE0 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = AE0ECA0A26EC1C08002AD67D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -363,25 +410,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE5FF988270D0A7400A8B961 /* ExplorationView.swift in Sources */,
 				AE6C815F26FD427A00F68E78 /* LocationDTO.swift in Sources */,
 				AE13C77626F7AFD00032C081 /* RequestHandler.swift in Sources */,
 				AE0ECA0F26EC1C08002AD67D /* ContentView.swift in Sources */,
-				AE5FF9762708EF6100A8B961 /* FileDownloadDTO.swift in Sources */,
+				AEB6DDD0270F80FC00EECDE0 /* KingFisherImage.swift in Sources */,
+				AE5FF9762708EF6100A8B961 /* CouchPhotoDTO.swift in Sources */,
 				AE6C815D26FD3DD800F68E78 /* CouchDTO.swift in Sources */,
 				AE0ECA3126ECBEA9002AD67D /* SignInViewModel.swift in Sources */,
 				AE5FF96E2708B51300A8B961 /* MyCouchViewModel.swift in Sources */,
+				AEB6DDD42711E18D00EECDE0 /* Place.swift in Sources */,
 				AE13C76126F6A6300032C081 /* SignUpDetails.swift in Sources */,
-				AE13C77F26F7CF840032C081 /* AutocompleteFieldView.swift in Sources */,
 				AE0ECA3326ECBF3D002AD67D /* SignUpViewModel.swift in Sources */,
+				AEF6C99D2712641200453191 /* ExplorationFormView.swift in Sources */,
 				AE13C77926F7C8630032C081 /* MainTabView.swift in Sources */,
 				AE13C74E26F3F8CB0032C081 /* NetworkManager.swift in Sources */,
 				AE0ECA2626EC2466002AD67D /* InputFieldWithImage.swift in Sources */,
+				AEF6C99727123EBE00453191 /* GooglePlacesViewModel.swift in Sources */,
+				AEB6DDD62711FA4A00EECDE0 /* AutocompleteFieldWithResultsView.swift in Sources */,
 				AE0ECA3726ED4EA4002AD67D /* ErrorDTO.swift in Sources */,
+				AE5FF990270E4D0400A8B961 /* CouchPreviewDTO.swift in Sources */,
 				AE13C78326F7E0CD0032C081 /* Util.swift in Sources */,
 				AE5FF984270A80E100A8B961 /* FilesToDeleteDTO.swift in Sources */,
 				AE13C78B26F93D0F0032C081 /* MyCouchDetailsViewModel.swift in Sources */,
 				AE5FF980270A2F6500A8B961 /* FileUpload.swift in Sources */,
 				AE5FF97C270A08DB00A8B961 /* FileUploadDTO.swift in Sources */,
+				AEF6C99B2712518A00453191 /* ReversePlaceId.swift in Sources */,
+				AE5FF98C270E438E00A8B961 /* ExplorationViewModel.swift in Sources */,
+				AE5FF98A270D24C700A8B961 /* CouchPreviewView.swift in Sources */,
 				AE13C78526F7FAB90032C081 /* MyCouchView.swift in Sources */,
 				AE0ECA2426EC22AB002AD67D /* SignUpView.swift in Sources */,
 				AE5FF97E270A0A2800A8B961 /* UploadRequestHandler.swift in Sources */,
@@ -390,6 +446,8 @@
 				AE5FF9722708C01100A8B961 /* HostedCouch.swift in Sources */,
 				AE9F0A2927014C7F00CC45C3 /* MyCouchInteractor.swift in Sources */,
 				AE13C74B26F158F90032C081 /* SignUpRequestDTO.swift in Sources */,
+				AEF6C9A12713159700453191 /* CouchFilter.swift in Sources */,
+				AEF6C99F27126CE100453191 /* ExplorationListView.swift in Sources */,
 				AE13C75026F3FF910032C081 /* NetworkStatus.swift in Sources */,
 				AE13C78926F93AC50032C081 /* Couch.swift in Sources */,
 				AE5FF986270BBD0C00A8B961 /* HostDTO.swift in Sources */,
@@ -398,16 +456,18 @@
 				AE0ECA0D26EC1C08002AD67D /* CouchsurfersMobileApp.swift in Sources */,
 				AE5FF9742708C14E00A8B961 /* HostInteractor.swift in Sources */,
 				AE0ECA3526ED41CB002AD67D /* LoginRequestDTO.swift in Sources */,
+				AE5FF98E270E4CA200A8B961 /* CouchPreview.swift in Sources */,
 				AE0ECA2226EC22A2002AD67D /* SignInView.swift in Sources */,
 				AE13C77B26F7C9180032C081 /* ProfileView.swift in Sources */,
-				AE13C77D26F7C9760032C081 /* AutocompleteFieldViewModel.swift in Sources */,
 				AE13C78726F7FB100032C081 /* MyCouchDetailsView.swift in Sources */,
+				AEF6C9A327131EB800453191 /* ExplorationListViewModel.swift in Sources */,
 				AE5FF9702708BB9600A8B961 /* OwnHostedCouchDTO.swift in Sources */,
 				AE13C75626F687470032C081 /* HTTPMethod.swift in Sources */,
 				AE13C75226F657CE0032C081 /* LoginResponseDTO.swift in Sources */,
 				AE13C77026F7ABA70032C081 /* ResponseHandler.swift in Sources */,
 				AE5FF9782709203200A8B961 /* ImagePicker.swift in Sources */,
 				AE0ECA2026EC2284002AD67D /* AuthenticationView.swift in Sources */,
+				AEB6DDD22711DF7000EECDE0 /* GooglePlacesInteractor.swift in Sources */,
 				AE5FF97A27093A5100A8B961 /* CouchPhoto.swift in Sources */,
 				AE13C75426F6814E0032C081 /* SignUpResponseDTO.swift in Sources */,
 			);
@@ -554,7 +614,7 @@
 				DEVELOPMENT_TEAM = HFG2KVG887;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = CouchsurfersMobile/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -562,7 +622,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.norbertgal.CouchsurfersMobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -576,7 +636,7 @@
 				DEVELOPMENT_TEAM = HFG2KVG887;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = CouchsurfersMobile/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -584,7 +644,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.norbertgal.CouchsurfersMobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -610,6 +670,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AEB6DDCC270E7B3600EECDE0 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AEB6DDCD270E7B3600EECDE0 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AEB6DDCC270E7B3600EECDE0 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AE0ECA0126EC1C08002AD67D /* Project object */;
 }

@@ -19,5 +19,5 @@ struct Couch {
     var amenities = ""
     var about = ""
     var price = ""
-    var couchPhotoIds: [Int]?
+    var couchPhotos = [CouchPhoto]()
 }

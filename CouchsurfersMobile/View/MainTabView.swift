@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct MainTabView: View {
+
     var body: some View {
         TabView {
-            Text("Tab 1")
+            ExplorationView()
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                     Text(NSLocalizedString("exploreTabItem", comment: "Explore"))

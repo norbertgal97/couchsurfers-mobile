@@ -11,7 +11,7 @@ import UIKit
 class MyCouchInteractor {
     
     private let baseUrl: String
-    private let couchesUrl = "couches"
+    private let couchesUrl = "/api/v1/couches"
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "Network")
     
     init() {
@@ -58,7 +58,7 @@ class MyCouchInteractor {
                 completionHandler(nil, message, true, false)
             case .successful:
                 self.logger.debug("Couch loaded with id: \(id)")
-                completionHandler(self.convertDTOToModel(dto: data!), message, true, true)
+                completionHandler(self.convertCouchDTOToModel(dto: data!), message, true, true)
             }
             
         }
@@ -109,7 +109,7 @@ class MyCouchInteractor {
                 completionHandler(nil, message, true)
             case .successful:
                 self.logger.debug("Couch updated with id: \(id)")
-                completionHandler(self.convertDTOToModel(dto: data!), message, true)
+                completionHandler(self.convertCouchDTOToModel(dto: data!), message, true)
             }
             
         }
@@ -118,7 +118,6 @@ class MyCouchInteractor {
     func saveCouch(myCouch: Couch, completionHandler: @escaping (_ couch: Couch?, _ message: String?, _ loggedIn: Bool) -> Void) {
         let networkManager = NetworkManager<CouchDTO>()
         let saveCouchDTO = convertModelToDTO(model: myCouch)
-        saveCouchDTO.location.city = "ad"
         let urlRequest = networkManager.makeRequest(from: saveCouchDTO, url: URL(string: baseUrl + couchesUrl + "/")!, method: .POST)
         
         networkManager.dataTask(with: urlRequest) { (networkStatus, data, error) in
@@ -153,15 +152,15 @@ class MyCouchInteractor {
                 completionHandler(nil, message, true)
             case .successful:
                 self.logger.debug("Couch saved with id: \(data!.id!)")
-                completionHandler(self.convertDTOToModel(dto: data!), message, true)
+                completionHandler(self.convertCouchDTOToModel(dto: data!), message, true)
             }
             
         }
     }
     
-    func downloadImage(couchId: Int, imageId: Int, completionHandler: @escaping (_ image: CouchPhoto?, _ message: String?, _ loggedIn: Bool) -> Void) {
-        let networkManager = NetworkManager<FileDownloadDTO>()
-        let urlRequest = networkManager.makeRequest(url: URL(string: baseUrl + couchesUrl + "/\(couchId)/images/\(imageId)")!, method: .GET)
+    func loadNewestCouch(completionHandler: @escaping (_ couch: CouchPreview?, _ message: String?, _ loggedIn: Bool) -> Void) {
+        let networkManager = NetworkManager<CouchPreviewDTO>()
+        let urlRequest = networkManager.makeRequest(url: URL(string: baseUrl + couchesUrl + "/newest/")!, method: .GET)
         
         networkManager.dataTask(with: urlRequest) { (networkStatus, data, error) in
             var message: String?
@@ -180,7 +179,7 @@ class MyCouchInteractor {
                     if let unwrappedStatusCode = statusCode {
                         switch unwrappedStatusCode {
                         case 404:
-                            message = NSLocalizedString("networkError.userNotFound", comment: "CouchPhoto not found")
+                            message = NSLocalizedString("networkError.couchNotFound", comment: "Couch not found")
                         default:
                             message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
                         }
@@ -192,10 +191,8 @@ class MyCouchInteractor {
                 
                 completionHandler(nil, message, true)
             case .successful:
-                self.logger.debug("CouchPhoto loadeded with id: \(data!.imageId)")
-                
-                let photo = CouchPhoto(id: data!.imageId, uiImage: UIImage(data: data!.content)!)
-                completionHandler(photo, message, true)
+                self.logger.debug("Couch loaded with id: \(data!.id)")
+                completionHandler(self.convertCouchPreviewDTOToModel(dto: data!), message, true)
             }
             
         }
@@ -242,16 +239,16 @@ class MyCouchInteractor {
         }
     }
     
-    func uploadImages(couchId: Int, images: [CouchPhoto], completionHandler: @escaping (_ fileUploads: [FileUpload]?, _ message: String?, _ loggedIn: Bool) -> Void) {
+    func uploadImages(couchId: Int, images: [CouchPhoto], completionHandler: @escaping (_ imageUploads: [CouchPhoto]?, _ message: String?, _ loggedIn: Bool) -> Void) {
         let boundary = UUID().uuidString
-        let networkManager = NetworkManager<[FileUploadDTO]>(requestHandler: UploadRequestHandler(boundary: boundary))
+        let networkManager = NetworkManager<[CouchPhotoDTO]>(requestHandler: UploadRequestHandler(boundary: boundary))
         let urlRequest = networkManager.makeRequest(url: URL(string: baseUrl + couchesUrl + "/\(couchId)/images/")!, method: .POST)
         
         var data = Data()
         var numberOfBigImages = 0
         
         for image in images {
-            if let compressedImage = compressImage(image: image.uiImage) {
+            if let unwrappeduiImage = image.uiImage, let compressedImage = compressImage(image: unwrappeduiImage) {
                 data.append("--\(boundary)\r\n".data(using: .utf8)!)
                 data.append("Content-Disposition: form-data; name=\"images\"; filename=\"\(image.fileName)\"\r\n".data(using: .utf8)!)
                 data.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
@@ -265,7 +262,7 @@ class MyCouchInteractor {
         data.append("--\(boundary)--\r\n".data(using: .utf8)!)
         
         if numberOfBigImages == images.count {
-            completionHandler([FileUpload](), "Images are too big.", true)
+            completionHandler([CouchPhoto](), "Images are too big.", true)
             return
         }
         
@@ -304,16 +301,16 @@ class MyCouchInteractor {
             case .successful:
                 self.logger.debug("CouchPhotos loaded. Count: \(data!.count)")
                 
-                var fileUploads = [FileUpload]()
-                for fileUpload in data! {
-                    fileUploads.append(FileUpload(fileName: fileUpload.name, couchPhotoId: fileUpload.id))
+                var couchPhotosList = [CouchPhoto]()
+                for couchPhoto in data! {
+                    couchPhotosList.append(CouchPhoto(id: couchPhoto.id , fileName: couchPhoto.fileName, url: couchPhoto.url, uiImage: nil))
                 }
                 
                 if numberOfBigImages != 0 {
                     message = "Some of the images are big."
                 }
                 
-                completionHandler(fileUploads, message, true)
+                completionHandler(couchPhotosList, message, true)
             }
             
         }
@@ -362,7 +359,7 @@ class MyCouchInteractor {
         return couchDTO
     }
     
-    private func convertDTOToModel(dto: CouchDTO) -> Couch {
+    private func convertCouchDTOToModel(dto: CouchDTO) -> Couch {
         var couch = Couch()
         
         couch.id = dto.id
@@ -376,9 +373,37 @@ class MyCouchInteractor {
         couch.amenities = dto.amenities ?? ""
         couch.price = String(dto.price)
         couch.about = dto.about ?? ""
-        couch.couchPhotoIds = dto.couchPhotoIds
+        
+        if let unwrappedPhotos = dto.couchPhotos {
+            for couchPhoto in unwrappedPhotos  {
+                let newElement = convertCouchPhotoDTOToModel(dto: couchPhoto)
+                couch.couchPhotos.append(newElement)
+            }
+        }
         
         return couch
+    }
+    
+    private func convertCouchPhotoDTOToModel(dto: CouchPhotoDTO) -> CouchPhoto {
+        var couchPhoto = CouchPhoto()
+        
+        couchPhoto.id = dto.id
+        couchPhoto.fileName = dto.fileName
+        couchPhoto.url = dto.url
+        
+        return couchPhoto
+    }
+    
+    private func convertCouchPreviewDTOToModel(dto: CouchPreviewDTO) -> CouchPreview {
+        var couchPreview = CouchPreview()
+        
+        couchPreview.id = dto.id
+        couchPreview.city = dto.city
+        couchPreview.name = dto.name
+        couchPreview.price = String(dto.price)
+        couchPreview.couchPhotoId = dto.couchPhotoId
+        
+        return couchPreview
     }
     
     private func convertModelToDictionary(model: Couch, savedModel: Couch?) -> [String: Any?] {
@@ -394,12 +419,12 @@ class MyCouchInteractor {
         }
         
         if model.numberOfGuests != unwrappedSavedModel.numberOfGuests {
-            let numberOfGuests = model.numberOfGuests.isEmpty ? nil : model.numberOfGuests
+            let numberOfGuests = model.numberOfGuests.isEmpty ? nil : Int(model.numberOfGuests)
             couchDictionary.updateValue(numberOfGuests, forKey: CouchDTO.CodingKeys.numberOfGuests.rawValue)
         }
         
         if model.numberOfRooms != unwrappedSavedModel.numberOfRooms {
-            let numberOfRooms = model.numberOfRooms.isEmpty ? nil : model.numberOfRooms
+            let numberOfRooms = model.numberOfRooms.isEmpty ? nil : Int(model.numberOfRooms)
             couchDictionary.updateValue(numberOfRooms, forKey: CouchDTO.CodingKeys.numberOfRooms.rawValue)
         }
         
@@ -412,7 +437,7 @@ class MyCouchInteractor {
         }
         
         if model.price != unwrappedSavedModel.price {
-            let price = model.price.isEmpty ? nil : model.price
+            let price = model.price.isEmpty ? nil : Double(model.price)
             couchDictionary.updateValue(price, forKey: CouchDTO.CodingKeys.price.rawValue)
         }
         

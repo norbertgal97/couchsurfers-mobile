@@ -10,14 +10,9 @@ import SwiftUI
 struct MyCouchDetails: View {
     @EnvironmentObject var globalEnv: GlobalEnvironment
     
-    @State private var selectedCity: String = ""
-    @State private var cityNameText: String = ""
-    @State private var cityId = ""
+    @ObservedObject var myCouchDetailsVM: MyCouchDetailsViewModel
     
     let couchId: Int?
-    
-    @ObservedObject var myCouchDetailsVM: MyCouchDetailsViewModel
-    @ObservedObject var autocompleteFieldVM = AutocompleteFieldViewModel()
     
     var body: some View {
         Form {
@@ -26,29 +21,52 @@ struct MyCouchDetails: View {
                     
                     HStack(spacing: 20) {
                         ForEach(myCouchDetailsVM.images, id: \.fileName) { image in
-                            Image(uiImage: image.uiImage)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 225, height: 150, alignment: .center)
-                                .clipShape(RoundedRectangle(cornerRadius: 5))
-                                .overlay(
-                                    Image(systemName: "trash")
-                                        .font(.title)
-                                        .padding(.all, 5)
-                                        .foregroundColor(Color.red)
-                                        .background(Color.black)
-                                        .clipShape(Circle())
-                                        .onLongPressGesture {
-                                            myCouchDetailsVM.images.removeAll{ $0.fileName == image.fileName }
-                                            
-                                            if image.id != nil {
-                                              myCouchDetailsVM.imagesToDelete.append(image.id!)
-                                            }
-                                            
-                                        }, alignment: .center)
+                            if image.url != nil {
+                                KingFisherImage(url: image.url!)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 225, height: 150, alignment: .center)
+                                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                                    .overlay(
+                                        Image(systemName: "trash")
+                                            .font(.title)
+                                            .padding(.all, 5)
+                                            .foregroundColor(Color.red)
+                                            .background(Color.black)
+                                            .clipShape(Circle())
+                                            .onLongPressGesture {
+                                                myCouchDetailsVM.images.removeAll{ $0.fileName == image.fileName }
+                                                
+                                                if image.id != nil {
+                                                    myCouchDetailsVM.imagesToDelete.append(image.id!)
+                                                }
+                                                
+                                            }, alignment: .center)
+                            }
                         }
                         
-                        if myCouchDetailsVM.images.count < 6 {
+                        ForEach(myCouchDetailsVM.imagesToUpload, id: \.fileName) { image in
+                            if image.uiImage != nil {
+                                Image(uiImage: image.uiImage!)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 225, height: 150, alignment: .center)
+                                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                                    .overlay(
+                                        Image(systemName: "trash")
+                                            .font(.title)
+                                            .padding(.all, 5)
+                                            .foregroundColor(Color.red)
+                                            .background(Color.black)
+                                            .clipShape(Circle())
+                                            .onLongPressGesture {
+                                                myCouchDetailsVM.imagesToUpload.removeAll{ $0.fileName == image.fileName }
+                                                
+                                            }, alignment: .center)
+                            }
+                        }
+                        
+                        if myCouchDetailsVM.images.count + myCouchDetailsVM.imagesToUpload.count < 6 {
                             Button(action: {
                                 self.myCouchDetailsVM.showingImagePicker = true
                             } ) {
@@ -62,57 +80,21 @@ struct MyCouchDetails: View {
             }
             
             Section(header: Text("Address")) {
-                if selectedCity != "" {
-                    TextField("City name", text: $selectedCity)
-                        .disabled(true)
-                        .overlay(
-                            HStack {
-                                Spacer()
-                                if self.selectedCity != "" {
-                                    Image(systemName: "xmark.circle.fill")
-                                        .onTapGesture {
-                                            self.selectedCity = ""
-                                        }
-                                }
-                            }
-                                .padding(), alignment: .center)
-                } else {
-                    AutocompleteField(cityNameText: $cityNameText, autocompleteFieldVM: autocompleteFieldVM)
-                        .overlay(
-                            HStack {
-                                Spacer()
-                                if cityNameText != "" {
-                                    Image(systemName: "xmark.circle.fill")
-                                        .onTapGesture {
-                                            self.cityNameText = ""
-                                        }
-                                }
-                            }
-                                .padding(), alignment: .center)
-                }
+                AutocompleteFieldWithResultsView(cityNameText: $myCouchDetailsVM.cityNameText,
+                                                 cityId: $myCouchDetailsVM.myCouch.city,
+                                                 places: $myCouchDetailsVM.places,
+                                                 selectedCity: $myCouchDetailsVM.selectedCity,
+                                                 generateSessionToken: { myCouchDetailsVM.generateSessionToken() },
+                                                 autocomplete: { myCouchDetailsVM.autocomplete(cityname: $0) })
                 
-                if cityNameText != "" {
-                    List {
-                        ForEach(autocompleteFieldVM.places, id: \.id) { result in
-                            Text(result.description)
-                                .onTapGesture {
-                                    cityNameText = ""
-                                    selectedCity = result.description
-                                    cityId = result.id
-                                }
-                        }
-                    }
+                Group {
+                    TextField("Zip code", text: $myCouchDetailsVM.myCouch.zipCode)
+                    TextField("Street", text: $myCouchDetailsVM.myCouch.street)
+                    TextField("Building number", text: $myCouchDetailsVM.myCouch.buildingNumber)
                 }
+                .disabled(myCouchDetailsVM.cityNameText != "")
+                .listRowBackground(myCouchDetailsVM.cityNameText != "" ? Color(UIColor.systemGroupedBackground) : Color.white)
                 
-                TextField("Zip code", text: $myCouchDetailsVM.myCouch.zipCode)
-                    .disabled(cityNameText != "")
-                    .listRowBackground(cityNameText != "" ? Color(UIColor.systemGroupedBackground) : Color.white)
-                TextField("Street", text: $myCouchDetailsVM.myCouch.street)
-                    .disabled(cityNameText != "")
-                    .listRowBackground(cityNameText != "" ? Color(UIColor.systemGroupedBackground) : Color.white)
-                TextField("Building number", text: $myCouchDetailsVM.myCouch.buildingNumber)
-                    .disabled(cityNameText != "")
-                    .listRowBackground(cityNameText != "" ? Color(UIColor.systemGroupedBackground) : Color.white)
             }
             
             Section(header: Text("Details")) {
@@ -128,7 +110,7 @@ struct MyCouchDetails: View {
             
             Section(header: Text("About")) {
                 TextEditor(text: $myCouchDetailsVM.myCouch.about)
-                    .frame(width: 350, height: 200, alignment: .center)
+                    .frame(height: 200)
             }
             
         }
@@ -172,20 +154,9 @@ struct MyCouchDetails: View {
         })
         .onAppear {
             if couchId != nil {
-                myCouchDetailsVM.loadCouch(with: couchId!) { loggedIn, downloadImage in
+                myCouchDetailsVM.loadCouch(with: couchId!) { loggedIn in
                     if !loggedIn {
                         self.globalEnv.userLoggedIn = false
-                        return
-                    }
-                    
-                    if downloadImage {
-                        myCouchDetailsVM.myCouch.couchPhotoIds?.forEach { id in
-                            myCouchDetailsVM.downloadImage(photoId: id) { loggedIn in
-                                if !loggedIn {
-                                    self.globalEnv.userLoggedIn = false
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -195,13 +166,9 @@ struct MyCouchDetails: View {
                 print("Dismiss button pressed")
             })
         })
-        .sheet(isPresented: $myCouchDetailsVM.showingImagePicker, onDismiss: getImage) {
+        .sheet(isPresented: $myCouchDetailsVM.showingImagePicker, onDismiss: myCouchDetailsVM.getImage) {
             ImagePicker(image: self.$myCouchDetailsVM.pickedImage)
         }
     }
     
-    func getImage() {
-        guard let image = myCouchDetailsVM.pickedImage else { return }
-        myCouchDetailsVM.addImage(image: image)
-    }
 }

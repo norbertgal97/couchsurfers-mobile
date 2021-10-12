@@ -8,11 +8,7 @@
 import SwiftUI
 
 struct SignUp: View {
-    @ObservedObject var signUpVM: SignUpViewModel
-    
-    init(viewModel: SignUpViewModel) {
-        self.signUpVM = viewModel
-    }
+    @ObservedObject private var signUpVM = SignUpViewModel()
     
     var body: some View {
         VStack {
@@ -59,6 +55,6 @@ struct SignUp: View {
 
 struct SignUp_Previews: PreviewProvider {
     static var previews: some View {
-        SignUp(viewModel: SignUpViewModel())
+        SignUp()
     }
 }
