@@ -5,7 +5,6 @@
 //  Created by Norbert Gál on 2021. 09. 20..
 //
 
-import Foundation
 import SwiftUI
 
 struct MyCouchView: View {

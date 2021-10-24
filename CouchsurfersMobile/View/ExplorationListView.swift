@@ -15,20 +15,23 @@ struct ExplorationListView: View {
     let couchFilter: CouchFilter
     
     var body: some View {
-        List(explorationListVM.filteredCouches, id: \.id) { couchPreview in
-            ZStack {
-                
-                
-                CouchPreviewView(city: couchPreview.city,
-                                 name: UUID().uuidString,
-                                 price: couchPreview.price,
-                                 photoUrl: couchPreview.couchPhotoId)
-                    .padding(.vertical)
-                NavigationLink(destination: Text("hello")) {
-                   EmptyView()
-                }.buttonStyle(PlainButtonStyle())
+        Group {
+            if explorationListVM.filteredCouches.isEmpty {
+                Text("There are no couches.")
+            } else {
+                List(explorationListVM.filteredCouches, id: \.id) { couchPreview in
+                    ZStack {
+                        CouchPreviewView(city: couchPreview.city,
+                                         name: couchPreview.name,
+                                         price: couchPreview.price,
+                                         photoUrl: couchPreview.couchPhotoId)
+                            .padding(.vertical)
+                        NavigationLink(destination: CouchDetailsView(couchId: couchPreview.id, couchFilter: couchFilter)) {
+                            EmptyView()
+                        }.buttonStyle(PlainButtonStyle())
+                    }
+                }
             }
-            
             
         }
         .listStyle(GroupedListStyle())

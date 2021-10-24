@@ -14,11 +14,14 @@ struct ExplorationFormView: View {
     @Binding var selectedCity: String
     @Binding var cityNameText: String
     @Binding var cityId: String
-    @Binding var isShowingListView: Bool
     @Binding var couchFilter: CouchFilter
+    
+    @Binding var showingAlert: Bool
+    @Binding var alertDescription: String
     
     var generateSessionToken: () -> Void
     var autocomplete: (_ cityName: String) -> Void
+    var validateFilter: (_ filter: CouchFilter) -> Bool
     
     var body: some View {
         Form {
@@ -46,9 +49,11 @@ struct ExplorationFormView: View {
             
             Section {
                 Button(action: {
-                    couchFilter.city = selectedCity
-                    isShowingListView = true
-                    presentationMode.wrappedValue.dismiss()
+                    couchFilter.city = cityId
+                    
+                    if validateFilter(couchFilter) {
+                        presentationMode.wrappedValue.dismiss()
+                    }
                 }) {
                     Text("Search")
                 }
@@ -58,6 +63,11 @@ struct ExplorationFormView: View {
 
                     
         }
+        .alert(isPresented: $showingAlert, content: {
+            Alert(title: Text(NSLocalizedString("authenticationView.error", comment: "Error")), message: Text(alertDescription), dismissButton: .default(Text(NSLocalizedString("authenticationView.cancel", comment: "Cancel"))) {
+                print("Dismiss button pressed")
+            })
+        })
     
     }
     

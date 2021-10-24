@@ -24,7 +24,7 @@ class ExplorationListViewModel: ReversePlaceIdProtocol {
             
             if let unwrappedCouchPreviews = couchPreviews {
                 DispatchQueue.main.async {
-                    self.updatePreviewsWithReversedCity(previews: unwrappedCouchPreviews, cityId: "ChIJyc_U0TTDQUcRYBEeDCnEAAQ") { couches in
+                    self.updatePreviewsWithReversedCity(previews: unwrappedCouchPreviews, cityId: couchFilter.city) { couches in
                         self.filteredCouches = couches
                     }
                 }

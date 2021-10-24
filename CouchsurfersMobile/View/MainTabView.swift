@@ -18,7 +18,7 @@ struct MainTabView: View {
                 }
             
             
-            Text("Tab 2")
+            ReservationView()
                 .tabItem {
                     Image(systemName: "bed.double")
                     Text(NSLocalizedString("couchesTabItem", comment: "Couches"))

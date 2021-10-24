@@ -43,6 +43,16 @@ class ExplorationViewModel: GooglePlacesViewModel {
         }
     }
     
+    func validateFilter(filter: CouchFilter) -> Bool {
+        if filter.city.isEmpty || filter.numberOfGuests.isEmpty {
+            updateAlert(with: "Fields can not be empty")
+            return false
+        }
+        
+        isShowingListView = true
+        return true
+    }
+    
     private func updatePreviewWithReversedID(preview: CouchPreview, reversedCity: String) {
         self.couchPreview.city = reversedCity
         self.couchPreview.id = preview.id

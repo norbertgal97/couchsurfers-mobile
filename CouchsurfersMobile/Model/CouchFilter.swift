@@ -10,6 +10,6 @@ import Foundation
 struct CouchFilter {
     var city = ""
     var numberOfGuests = ""
-    var toDate = Date()
+    var toDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
     var fromDate = Date()
 }

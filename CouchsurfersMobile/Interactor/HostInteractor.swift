@@ -107,29 +107,61 @@ class HostInteractor {
     }
     
     func filterHostedCouches(couchFilter: CouchFilter, completionHandler: @escaping (_ couchPreviews: [CouchPreview]?, _ message: String?, _ loggedIn: Bool) -> Void) {
-        //TODO
+        let networkManager = NetworkManager<[CouchPreviewDTO]>()
         
-        var list = [CouchPreview]()
-        list.append(CouchPreview(id: 1, name: "Ház 1", city: "ChIJyc_U0TTDQUcRYBEeDCnEAAQ", price: "3", couchPhotoId: "/api/v1/couches/1/images/54"))
-        list.append(CouchPreview(id: 2, name: "Ház 2", city: "ChIJyc_U0TTDQUcRYBEeDCnEAAQ", price: "4", couchPhotoId: "/api/v1/couches/1/images/54"))
-        list.append(CouchPreview(id: 3, name: "Ház 1", city: "ChIJyc_U0TTDQUcRYBEeDCnEAAQ", price: "3", couchPhotoId: "/api/v1/couches/1/images/54"))
-        list.append(CouchPreview(id: 4, name: "Ház 2", city: "ChIJyc_U0TTDQUcRYBEeDCnEAAQ", price: "4", couchPhotoId: "/api/v1/couches/1/images/54"))
-        list.append(CouchPreview(id: 5, name: "Ház 1", city: "ChIJyc_U0TTDQUcRYBEeDCnEAAQ", price: "3", couchPhotoId: "/api/v1/couches/1/images/54"))
-        list.append(CouchPreview(id: 6, name: "Ház 2", city: "ChIJyc_U0TTDQUcRYBEeDCnEAAQ", price: "4", couchPhotoId: "/api/v1/couches/1/images/54"))
-        list.append(CouchPreview(id: 7, name: "Ház 1", city: "ChIJyc_U0TTDQUcRYBEeDCnEAAQ", price: "3", couchPhotoId: "/api/v1/couches/1/images/54"))
-        list.append(CouchPreview(id: 8, name: "Ház 2", city: "ChIJyc_U0TTDQUcRYBEeDCnEAAQ", price: "4", couchPhotoId: "/api/v1/couches/1/images/54"))
-        list.append(CouchPreview(id: 9, name: "Ház 1", city: "ChIJyc_U0TTDQUcRYBEeDCnEAAQ", price: "3", couchPhotoId: "/api/v1/couches/1/images/54"))
-        list.append(CouchPreview(id: 10, name: "Ház 2", city: "ChIJyc_U0TTDQUcRYBEeDCnEAAQ", price: "4", couchPhotoId: "/api/v1/couches/1/images/54"))
-        list.append(CouchPreview(id: 11, name: "Ház 1", city: "ChIJyc_U0TTDQUcRYBEeDCnEAAQ", price: "3", couchPhotoId: "/api/v1/couches/1/images/54"))
-        list.append(CouchPreview(id: 12, name: "Ház 2", city: "ChIJyc_U0TTDQUcRYBEeDCnEAAQ", price: "4", couchPhotoId: "/api/v1/couches/1/images/54"))
-        list.append(CouchPreview(id: 13, name: "Ház 1", city: "ChIJyc_U0TTDQUcRYBEeDCnEAAQ", price: "3", couchPhotoId: "/api/v1/couches/1/images/54"))
-        list.append(CouchPreview(id: 14, name: "Ház 2", city: "ChIJyc_U0TTDQUcRYBEeDCnEAAQ", price: "4", couchPhotoId: "/api/v1/couches/1/images/54"))
-        list.append(CouchPreview(id: 15, name: "Ház 1", city: "ChIJyc_U0TTDQUcRYBEeDCnEAAQ", price: "3", couchPhotoId: "/api/v1/couches/1/images/54"))
-        list.append(CouchPreview(id: 16, name: "Ház 2", city: "ChIJyc_U0TTDQUcRYBEeDCnEAAQ", price: "4", couchPhotoId: "/api/v1/couches/1/images/54"))
-        list.append(CouchPreview(id: 17, name: "Ház 1", city: "ChIJyc_U0TTDQUcRYBEeDCnEAAQ", price: "3", couchPhotoId: "/api/v1/couches/1/images/54"))
-        list.append(CouchPreview(id: 18, name: "Ház 2", city: "ChIJyc_U0TTDQUcRYBEeDCnEAAQ", price: "4", couchPhotoId: "/api/v1/couches/1/images/54"))
+        let dateformat = DateFormatter()
+        dateformat.dateFormat = "yyyy-MM-dd"
+        let formattedFromDate = dateformat.string(from: couchFilter.fromDate)
+        let formattedToDate = dateformat.string(from: couchFilter.toDate)
         
-        completionHandler(list, nil, true)
+        let url = URL(string: baseUrl +
+                            hostsUrl +
+                            "/query?city=\(couchFilter.city)&guests=\(couchFilter.numberOfGuests)&checkin=\(formattedFromDate)&checkout=\(formattedToDate)")!
+        let urlRequest = networkManager.makeRequest(url: url, method: .GET)
+        networkManager.dataTask(with: urlRequest) { (networkStatus, data, error) in
+            var message: String?
+            
+            switch networkStatus {
+            case .failure(let statusCode):
+                if let unwrappedStatusCode = statusCode {
+                    if unwrappedStatusCode == 401 {
+                        self.logger.debug("Session has expired!")
+                        completionHandler(nil, nil, false)
+                        return
+                    }
+                }
+                
+                if let unwrappedError = error {
+                    if let unwrappedStatusCode = statusCode {
+                        switch unwrappedStatusCode {
+                        case 422:
+                            message = NSLocalizedString("networkError.emptyFields", comment: "Empty fields")
+                        default:
+                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                        }
+                        self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
+                    }
+                } else {
+                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                }
+                
+                completionHandler(nil, message, true)
+            case .successful:
+                self.logger.debug("Couch previews loaded. Count: \(data!.count)")
+                completionHandler(self.convertPreviewDTOToPreviewModel(dto: data!), message, true)
+            }
+            
+        }
+    }
+    
+    private func convertPreviewDTOToPreviewModel(dto: [CouchPreviewDTO]) -> [CouchPreview] {
+        var previews = [CouchPreview]()
+        
+        for preview in dto {
+            previews.append(CouchPreview(id: preview.id, name: preview.name, city: preview.city, price: String(preview.price), couchPhotoId: preview.couchPhotoId))
+        }
+        
+        return previews
     }
     
     private func convertDTOToModel(dto: OwnHostedCouchDTO) -> HostedCouch {

@@ -39,6 +39,16 @@
 		AE13C78726F7FB100032C081 /* MyCouchDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C78626F7FB100032C081 /* MyCouchDetailsView.swift */; };
 		AE13C78926F93AC50032C081 /* Couch.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C78826F93AC50032C081 /* Couch.swift */; };
 		AE13C78B26F93D0F0032C081 /* MyCouchDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE13C78A26F93D0F0032C081 /* MyCouchDetailsViewModel.swift */; };
+		AE3EE83A272212F9008258FC /* ReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3EE839272212F9008258FC /* ReservationViewModel.swift */; };
+		AE3EE83C2722194D008258FC /* ReservationPreviewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3EE83B2722194D008258FC /* ReservationPreviewDTO.swift */; };
+		AE3EE83E272224E3008258FC /* ReservationPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3EE83D272224E3008258FC /* ReservationPreview.swift */; };
+		AE3EE840272362B8008258FC /* ReservationPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3EE83F272362B8008258FC /* ReservationPreviewView.swift */; };
+		AE3EE842272372AD008258FC /* ReservationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3EE841272372AD008258FC /* ReservationDetailsView.swift */; };
+		AE3EE844272374D3008258FC /* ReservationDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3EE843272374D3008258FC /* ReservationDetailsViewModel.swift */; };
+		AE3EE8462724CD6A008258FC /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3EE8452724CD6A008258FC /* Reservation.swift */; };
+		AE3EE8482724D073008258FC /* ReservationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3EE8472724D073008258FC /* ReservationDTO.swift */; };
+		AE5BA2CA2717A82D00E3C523 /* CouchDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BA2C92717A82D00E3C523 /* CouchDetailsView.swift */; };
+		AE5BA2CC2717A86F00E3C523 /* CouchDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BA2CB2717A86F00E3C523 /* CouchDetailsViewModel.swift */; };
 		AE5FF96E2708B51300A8B961 /* MyCouchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF96D2708B51300A8B961 /* MyCouchViewModel.swift */; };
 		AE5FF9702708BB9600A8B961 /* OwnHostedCouchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF96F2708BB9600A8B961 /* OwnHostedCouchDTO.swift */; };
 		AE5FF9722708C01100A8B961 /* HostedCouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF9712708C01100A8B961 /* HostedCouch.swift */; };
@@ -72,6 +82,10 @@
 		AEF6C99F27126CE100453191 /* ExplorationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF6C99E27126CE100453191 /* ExplorationListView.swift */; };
 		AEF6C9A12713159700453191 /* CouchFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF6C9A02713159700453191 /* CouchFilter.swift */; };
 		AEF6C9A327131EB800453191 /* ExplorationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF6C9A227131EB800453191 /* ExplorationListViewModel.swift */; };
+		AEFE81E4271F7B49002FDDA4 /* ReserveCouchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFE81E3271F7B49002FDDA4 /* ReserveCouchDTO.swift */; };
+		AEFE81E6271F882E002FDDA4 /* ReservationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFE81E5271F882E002FDDA4 /* ReservationInteractor.swift */; };
+		AEFE81E8271F8F34002FDDA4 /* ReserveDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFE81E7271F8F34002FDDA4 /* ReserveDTO.swift */; };
+		AEFE81EA2720BECD002FDDA4 /* ReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFE81E92720BECD002FDDA4 /* ReservationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +124,16 @@
 		AE13C78626F7FB100032C081 /* MyCouchDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouchDetailsView.swift; sourceTree = "<group>"; };
 		AE13C78826F93AC50032C081 /* Couch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Couch.swift; sourceTree = "<group>"; };
 		AE13C78A26F93D0F0032C081 /* MyCouchDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouchDetailsViewModel.swift; sourceTree = "<group>"; };
+		AE3EE839272212F9008258FC /* ReservationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationViewModel.swift; sourceTree = "<group>"; };
+		AE3EE83B2722194D008258FC /* ReservationPreviewDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationPreviewDTO.swift; sourceTree = "<group>"; };
+		AE3EE83D272224E3008258FC /* ReservationPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationPreview.swift; sourceTree = "<group>"; };
+		AE3EE83F272362B8008258FC /* ReservationPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationPreviewView.swift; sourceTree = "<group>"; };
+		AE3EE841272372AD008258FC /* ReservationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationDetailsView.swift; sourceTree = "<group>"; };
+		AE3EE843272374D3008258FC /* ReservationDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationDetailsViewModel.swift; sourceTree = "<group>"; };
+		AE3EE8452724CD6A008258FC /* Reservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
+		AE3EE8472724D073008258FC /* ReservationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationDTO.swift; sourceTree = "<group>"; };
+		AE5BA2C92717A82D00E3C523 /* CouchDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchDetailsView.swift; sourceTree = "<group>"; };
+		AE5BA2CB2717A86F00E3C523 /* CouchDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchDetailsViewModel.swift; sourceTree = "<group>"; };
 		AE5FF96D2708B51300A8B961 /* MyCouchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouchViewModel.swift; sourceTree = "<group>"; };
 		AE5FF96F2708BB9600A8B961 /* OwnHostedCouchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnHostedCouchDTO.swift; sourceTree = "<group>"; };
 		AE5FF9712708C01100A8B961 /* HostedCouch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostedCouch.swift; sourceTree = "<group>"; };
@@ -142,6 +166,10 @@
 		AEF6C99E27126CE100453191 /* ExplorationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorationListView.swift; sourceTree = "<group>"; };
 		AEF6C9A02713159700453191 /* CouchFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchFilter.swift; sourceTree = "<group>"; };
 		AEF6C9A227131EB800453191 /* ExplorationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorationListViewModel.swift; sourceTree = "<group>"; };
+		AEFE81E3271F7B49002FDDA4 /* ReserveCouchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveCouchDTO.swift; sourceTree = "<group>"; };
+		AEFE81E5271F882E002FDDA4 /* ReservationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationInteractor.swift; sourceTree = "<group>"; };
+		AEFE81E7271F8F34002FDDA4 /* ReserveDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveDTO.swift; sourceTree = "<group>"; };
+		AEFE81E92720BECD002FDDA4 /* ReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +246,10 @@
 				AEB6DDD52711FA4A00EECDE0 /* AutocompleteFieldWithResultsView.swift */,
 				AEF6C99C2712641200453191 /* ExplorationFormView.swift */,
 				AEF6C99E27126CE100453191 /* ExplorationListView.swift */,
+				AE5BA2C92717A82D00E3C523 /* CouchDetailsView.swift */,
+				AEFE81E92720BECD002FDDA4 /* ReservationView.swift */,
+				AE3EE83F272362B8008258FC /* ReservationPreviewView.swift */,
+				AE3EE841272372AD008258FC /* ReservationDetailsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -232,6 +264,9 @@
 				AE5FF98B270E438E00A8B961 /* ExplorationViewModel.swift */,
 				AEF6C99627123EBE00453191 /* GooglePlacesViewModel.swift */,
 				AEF6C9A227131EB800453191 /* ExplorationListViewModel.swift */,
+				AE5BA2CB2717A86F00E3C523 /* CouchDetailsViewModel.swift */,
+				AE3EE839272212F9008258FC /* ReservationViewModel.swift */,
+				AE3EE843272374D3008258FC /* ReservationDetailsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -248,6 +283,8 @@
 				AE5FF98D270E4CA200A8B961 /* CouchPreview.swift */,
 				AEB6DDD32711E18D00EECDE0 /* Place.swift */,
 				AEF6C9A02713159700453191 /* CouchFilter.swift */,
+				AE3EE83D272224E3008258FC /* ReservationPreview.swift */,
+				AE3EE8452724CD6A008258FC /* Reservation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -270,6 +307,10 @@
 				AE5FF985270BBD0C00A8B961 /* HostDTO.swift */,
 				AE5FF98F270E4D0400A8B961 /* CouchPreviewDTO.swift */,
 				AEF6C99A2712518A00453191 /* ReversePlaceId.swift */,
+				AEFE81E3271F7B49002FDDA4 /* ReserveCouchDTO.swift */,
+				AEFE81E7271F8F34002FDDA4 /* ReserveDTO.swift */,
+				AE3EE83B2722194D008258FC /* ReservationPreviewDTO.swift */,
+				AE3EE8472724D073008258FC /* ReservationDTO.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -289,6 +330,7 @@
 				AE9F0A2827014C7F00CC45C3 /* MyCouchInteractor.swift */,
 				AE5FF9732708C14E00A8B961 /* HostInteractor.swift */,
 				AEB6DDD12711DF7000EECDE0 /* GooglePlacesInteractor.swift */,
+				AEFE81E5271F882E002FDDA4 /* ReservationInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -416,8 +458,11 @@
 				AE0ECA0F26EC1C08002AD67D /* ContentView.swift in Sources */,
 				AEB6DDD0270F80FC00EECDE0 /* KingFisherImage.swift in Sources */,
 				AE5FF9762708EF6100A8B961 /* CouchPhotoDTO.swift in Sources */,
+				AEFE81E8271F8F34002FDDA4 /* ReserveDTO.swift in Sources */,
 				AE6C815D26FD3DD800F68E78 /* CouchDTO.swift in Sources */,
 				AE0ECA3126ECBEA9002AD67D /* SignInViewModel.swift in Sources */,
+				AE5BA2CC2717A86F00E3C523 /* CouchDetailsViewModel.swift in Sources */,
+				AEFE81E4271F7B49002FDDA4 /* ReserveCouchDTO.swift in Sources */,
 				AE5FF96E2708B51300A8B961 /* MyCouchViewModel.swift in Sources */,
 				AEB6DDD42711E18D00EECDE0 /* Place.swift in Sources */,
 				AE13C76126F6A6300032C081 /* SignUpDetails.swift in Sources */,
@@ -430,8 +475,10 @@
 				AEB6DDD62711FA4A00EECDE0 /* AutocompleteFieldWithResultsView.swift in Sources */,
 				AE0ECA3726ED4EA4002AD67D /* ErrorDTO.swift in Sources */,
 				AE5FF990270E4D0400A8B961 /* CouchPreviewDTO.swift in Sources */,
+				AE3EE8462724CD6A008258FC /* Reservation.swift in Sources */,
 				AE13C78326F7E0CD0032C081 /* Util.swift in Sources */,
 				AE5FF984270A80E100A8B961 /* FilesToDeleteDTO.swift in Sources */,
+				AEFE81EA2720BECD002FDDA4 /* ReservationView.swift in Sources */,
 				AE13C78B26F93D0F0032C081 /* MyCouchDetailsViewModel.swift in Sources */,
 				AE5FF980270A2F6500A8B961 /* FileUpload.swift in Sources */,
 				AE5FF97C270A08DB00A8B961 /* FileUploadDTO.swift in Sources */,
@@ -443,33 +490,42 @@
 				AE5FF97E270A0A2800A8B961 /* UploadRequestHandler.swift in Sources */,
 				AE5FF982270A801800A8B961 /* MessageDTO.swift in Sources */,
 				AE13C75F26F6A6220032C081 /* SignInDetails.swift in Sources */,
+				AEFE81E6271F882E002FDDA4 /* ReservationInteractor.swift in Sources */,
 				AE5FF9722708C01100A8B961 /* HostedCouch.swift in Sources */,
 				AE9F0A2927014C7F00CC45C3 /* MyCouchInteractor.swift in Sources */,
+				AE3EE844272374D3008258FC /* ReservationDetailsViewModel.swift in Sources */,
 				AE13C74B26F158F90032C081 /* SignUpRequestDTO.swift in Sources */,
 				AEF6C9A12713159700453191 /* CouchFilter.swift in Sources */,
 				AEF6C99F27126CE100453191 /* ExplorationListView.swift in Sources */,
 				AE13C75026F3FF910032C081 /* NetworkStatus.swift in Sources */,
 				AE13C78926F93AC50032C081 /* Couch.swift in Sources */,
 				AE5FF986270BBD0C00A8B961 /* HostDTO.swift in Sources */,
+				AE3EE842272372AD008258FC /* ReservationDetailsView.swift in Sources */,
 				AE9F0A272701283300CC45C3 /* UserSessionInteractor.swift in Sources */,
 				AE13C78126F7D40A0032C081 /* PredictionsDTO.swift in Sources */,
 				AE0ECA0D26EC1C08002AD67D /* CouchsurfersMobileApp.swift in Sources */,
 				AE5FF9742708C14E00A8B961 /* HostInteractor.swift in Sources */,
 				AE0ECA3526ED41CB002AD67D /* LoginRequestDTO.swift in Sources */,
 				AE5FF98E270E4CA200A8B961 /* CouchPreview.swift in Sources */,
+				AE3EE83C2722194D008258FC /* ReservationPreviewDTO.swift in Sources */,
 				AE0ECA2226EC22A2002AD67D /* SignInView.swift in Sources */,
+				AE3EE840272362B8008258FC /* ReservationPreviewView.swift in Sources */,
 				AE13C77B26F7C9180032C081 /* ProfileView.swift in Sources */,
 				AE13C78726F7FB100032C081 /* MyCouchDetailsView.swift in Sources */,
+				AE5BA2CA2717A82D00E3C523 /* CouchDetailsView.swift in Sources */,
 				AEF6C9A327131EB800453191 /* ExplorationListViewModel.swift in Sources */,
 				AE5FF9702708BB9600A8B961 /* OwnHostedCouchDTO.swift in Sources */,
 				AE13C75626F687470032C081 /* HTTPMethod.swift in Sources */,
+				AE3EE8482724D073008258FC /* ReservationDTO.swift in Sources */,
 				AE13C75226F657CE0032C081 /* LoginResponseDTO.swift in Sources */,
+				AE3EE83A272212F9008258FC /* ReservationViewModel.swift in Sources */,
 				AE13C77026F7ABA70032C081 /* ResponseHandler.swift in Sources */,
 				AE5FF9782709203200A8B961 /* ImagePicker.swift in Sources */,
 				AE0ECA2026EC2284002AD67D /* AuthenticationView.swift in Sources */,
 				AEB6DDD22711DF7000EECDE0 /* GooglePlacesInteractor.swift in Sources */,
 				AE5FF97A27093A5100A8B961 /* CouchPhoto.swift in Sources */,
 				AE13C75426F6814E0032C081 /* SignUpResponseDTO.swift in Sources */,
+				AE3EE83E272224E3008258FC /* ReservationPreview.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

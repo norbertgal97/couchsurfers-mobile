@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Kingfisher
 
 struct ExplorationView: View {
     @EnvironmentObject var globalEnv: GlobalEnvironment
@@ -46,7 +45,7 @@ struct ExplorationView: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: ExplorationListView(couchFilter: CouchFilter()), isActive: $explorationVM.isShowingListView) { EmptyView() }
+                NavigationLink(destination: ExplorationListView(couchFilter: couchFilter), isActive: $explorationVM.isShowingListView) { EmptyView() }
                 
             }
             .navigationBarTitle("Explore", displayMode: .large)
@@ -57,11 +56,19 @@ struct ExplorationView: View {
                                 selectedCity: $explorationVM.selectedCity,
                                 cityNameText: $explorationVM.cityNameText,
                                 cityId: $explorationVM.cityId,
-                                isShowingListView: $explorationVM.isShowingListView,
                                 couchFilter: $couchFilter,
+                                showingAlert: $explorationVM.showingAlert,
+                                alertDescription: $explorationVM.alertDescription,
                                 generateSessionToken: { explorationVM.generateSessionToken() },
-                                autocomplete: { explorationVM.autocomplete(cityname: $0) } )
+                                autocomplete: { explorationVM.autocomplete(cityname: $0) },
+                                validateFilter: { explorationVM.validateFilter(filter: $0) } )
         }
+        .alert(isPresented: $explorationVM.showingAlert, content: {
+            Alert(title: Text(NSLocalizedString("authenticationView.error", comment: "Error")), message: Text(explorationVM.alertDescription), dismissButton: .default(Text(NSLocalizedString("authenticationView.cancel", comment: "Cancel"))) {
+                print("Dismiss button pressed")
+            })
+        })
+        
         
     }
     

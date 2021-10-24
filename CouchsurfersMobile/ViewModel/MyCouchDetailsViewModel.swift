@@ -19,7 +19,6 @@ class MyCouchDetailsViewModel: GooglePlacesViewModel {
     
     private var savedCouch : Couch?
     private var interactor = MyCouchInteractor()
-    private var couchInteractor = MyCouchInteractor()
     
     @Published var imagesToUpload = [CouchPhoto]()
     @Published var images = [CouchPhoto]()
@@ -122,7 +121,7 @@ class MyCouchDetailsViewModel: GooglePlacesViewModel {
             return
         }
         
-        couchInteractor.uploadImages(couchId: self.myCouch.id!, images: imagesToUpload) { imageUploads, message, loggedIn in
+        interactor.uploadImages(couchId: self.myCouch.id!, images: imagesToUpload) { imageUploads, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
                     self.updateAlert(with: unwrappedMessage)
@@ -151,7 +150,7 @@ class MyCouchDetailsViewModel: GooglePlacesViewModel {
             return
         }
         
-        couchInteractor.deleteImages(couchId: self.myCouch.id!, imageIds: imagesToDelete) { message, loggedIn in
+        interactor.deleteImages(couchId: self.myCouch.id!, imageIds: imagesToDelete) { message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
                     self.updateAlert(with: unwrappedMessage)
