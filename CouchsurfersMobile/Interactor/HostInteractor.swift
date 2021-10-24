@@ -10,7 +10,7 @@ import os
 
 class HostInteractor {
     private let baseUrl: String
-    private let hostsUrl = "hosts"
+    private let hostsUrl = "/api/v1/hosts"
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "Network")
     
     init() {
@@ -104,6 +104,64 @@ class HostInteractor {
             }
             
         }
+    }
+    
+    func filterHostedCouches(couchFilter: CouchFilter, completionHandler: @escaping (_ couchPreviews: [CouchPreview]?, _ message: String?, _ loggedIn: Bool) -> Void) {
+        let networkManager = NetworkManager<[CouchPreviewDTO]>()
+        
+        let dateformat = DateFormatter()
+        dateformat.dateFormat = "yyyy-MM-dd"
+        let formattedFromDate = dateformat.string(from: couchFilter.fromDate)
+        let formattedToDate = dateformat.string(from: couchFilter.toDate)
+        
+        let url = URL(string: baseUrl +
+                            hostsUrl +
+                            "/query?city=\(couchFilter.city)&guests=\(couchFilter.numberOfGuests)&checkin=\(formattedFromDate)&checkout=\(formattedToDate)")!
+        let urlRequest = networkManager.makeRequest(url: url, method: .GET)
+        networkManager.dataTask(with: urlRequest) { (networkStatus, data, error) in
+            var message: String?
+            
+            switch networkStatus {
+            case .failure(let statusCode):
+                if let unwrappedStatusCode = statusCode {
+                    if unwrappedStatusCode == 401 {
+                        self.logger.debug("Session has expired!")
+                        completionHandler(nil, nil, false)
+                        return
+                    }
+                }
+                
+                if let unwrappedError = error {
+                    if let unwrappedStatusCode = statusCode {
+                        switch unwrappedStatusCode {
+                        case 422:
+                            message = NSLocalizedString("networkError.emptyFields", comment: "Empty fields")
+                        default:
+                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                        }
+                        self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
+                    }
+                } else {
+                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                }
+                
+                completionHandler(nil, message, true)
+            case .successful:
+                self.logger.debug("Couch previews loaded. Count: \(data!.count)")
+                completionHandler(self.convertPreviewDTOToPreviewModel(dto: data!), message, true)
+            }
+            
+        }
+    }
+    
+    private func convertPreviewDTOToPreviewModel(dto: [CouchPreviewDTO]) -> [CouchPreview] {
+        var previews = [CouchPreview]()
+        
+        for preview in dto {
+            previews.append(CouchPreview(id: preview.id, name: preview.name, city: preview.city, price: String(preview.price), couchPhotoId: preview.couchPhotoId))
+        }
+        
+        return previews
     }
     
     private func convertDTOToModel(dto: OwnHostedCouchDTO) -> HostedCouch {

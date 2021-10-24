@@ -11,7 +11,6 @@ struct HostedCouch {
     var id: Int?
     var name = ""
     var about = ""
-    var couchPhotoId: Int?
-    var image: UIImage?
+    var couchPhotoId: String?
     var hosted: Bool = false
 }

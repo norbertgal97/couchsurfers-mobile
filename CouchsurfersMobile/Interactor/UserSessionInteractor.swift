@@ -11,9 +11,9 @@ import os
 class UserSessionInteractor {
     
     private let baseUrl: String
-    private let loginUrl = "users/session/login"
-    private let registerUrl = "users/session/register"
-    private let logoutUrl = "users/session/logout"
+    private let loginUrl = "/api/v1/users/session/login"
+    private let registerUrl = "/api/v1/users/session/register"
+    private let logoutUrl = "/api/v1/users/session/logout"
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "Network")
     
     init() {

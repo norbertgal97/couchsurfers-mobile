@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct MainTabView: View {
+
     var body: some View {
         TabView {
-            Text("Tab 1")
+            ExplorationView()
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                     Text(NSLocalizedString("exploreTabItem", comment: "Explore"))
                 }
             
             
-            Text("Tab 2")
+            ReservationView()
                 .tabItem {
                     Image(systemName: "bed.double")
                     Text(NSLocalizedString("couchesTabItem", comment: "Couches"))

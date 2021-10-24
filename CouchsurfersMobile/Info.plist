@@ -39,9 +39,9 @@
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>BaseURL</key>
-	<string>http://localhost:8080/api/v1/</string>
+	<string>http://localhost:8080</string>
 	<key>GoogleApiKey</key>
-	<string>AIzaSyBhqdS4GvTBsJmfI5Sf1RiIqFzKVxIiank</string>
+	<string>AIzaSyDSx5z49X9QUH9ZDmSdRuKLbM-6XVZaKzA</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

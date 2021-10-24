@@ -19,10 +19,10 @@ struct AuthenticationView: View {
                 .padding(.vertical)
             ZStack {
                 if showSignUp {
-                    SignUp(viewModel: SignUpViewModel())
+                    SignUp()
                         .transition(.move(edge: .trailing))
                 } else {
-                    SignIn(viewModel: SignInViewModel())
+                    SignIn()
                         .transition(.move(edge: .trailing))
                 }
             }

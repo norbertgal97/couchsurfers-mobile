@@ -10,6 +10,7 @@ import UIKit
 
 struct CouchPhoto {
     var id: Int?
-    let fileName = UUID().uuidString
-    var uiImage: UIImage
+    var fileName = UUID().uuidString
+    var url: String?
+    var uiImage: UIImage?
 }
