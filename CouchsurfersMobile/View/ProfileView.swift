@@ -11,18 +11,32 @@ import UIKit
 
 struct ProfileView: View {
     @EnvironmentObject var globalEnv: GlobalEnvironment
-
-    //@ObservedObject var profileVM = ProfileViewModel()
+    
+    @ObservedObject var profileVM = ProfileViewModel()
     
     var body: some View {
         NavigationView {
             Form {
-                Section {
-                    Text("")
+                
+                if let url = profileVM.profileData.userPhoto?.url {
+                    VStack {
+                        KingFisherImage(url: url)
+                            .resizable()
+                            .scaledToFill()
+                            .clipShape(Circle())
+                            .frame(maxWidth: 150, maxHeight: 150, alignment: .center)
+                        
+                        Text(profileVM.profileData.fullName)
+                            .fontWeight(.bold)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .listRowBackground(Color.clear)
+                    
                 }
                 
+                
                 Section(header: Text("Account settings")) {
-                    NavigationLink(destination: Text("")) {
+                    NavigationLink(destination: PersonalInformationView()) {
                         HStack {
                             Image(systemName: "person")
                                 .padding(.trailing, 3)
@@ -62,8 +76,15 @@ struct ProfileView: View {
                 }
             }
             .navigationBarTitle("Profile", displayMode: .large)
+            .onAppear {
+                profileVM.loadProfileData { loggedIn in
+                    if !loggedIn {
+                        self.globalEnv.userLoggedIn = false
+                    }
+                }
+            }
             .environmentObject(globalEnv)
-
+            
         }
     }
 }

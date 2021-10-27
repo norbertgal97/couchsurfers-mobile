@@ -1,13 +1,13 @@
 //
-//  CouchPhotoDTO.swift
+//  UserPhotoDTO.swift
 //  CouchsurfersMobile
 //
-//  Created by Norbert Gál on 2021. 10. 02..
+//  Created by Norbert Gál on 2021. 10. 25..
 //
 
 import Foundation
 
-class CouchPhotoDTO: Decodable {
+class UserPhotoDTO: Decodable {
     var id: Int
     let fileName: String
     let url: String

@@ -41,7 +41,7 @@
 	<key>BaseURL</key>
 	<string>http://localhost:8080</string>
 	<key>GoogleApiKey</key>
-	<string>AIzaSyDSx5z49X9QUH9ZDmSdRuKLbM-6XVZaKzA</string>
+	<string>AIzaSyBDCBivPRUI-9auHo8rqsqoDgWxeunCJsw</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
