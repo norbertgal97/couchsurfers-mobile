@@ -11,9 +11,12 @@ class MyCouchViewModel: ObservableObject {
     @Published var hostedCouch = HostedCouch()
     @Published var alertDescription: String = NSLocalizedString("defaultAlertMessage", comment: "Default alert message")
     @Published var showingAlert = false
+    @Published var isShowingUserReservationsListView = false
+    @Published var isShowingReviewsListView = false
     
     private var hostInteractor = HostInteractor()
     private var couchInteractor = MyCouchInteractor()
+
 
     func getOwnHostedCouch(completionHandler: @escaping (_ loggedIn: Bool, _ downloadImage: Bool) -> Void) {
         hostInteractor.getOwnHostedCouch { couch, message, loggedIn, downloadImage in

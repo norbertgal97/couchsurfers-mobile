@@ -173,6 +173,23 @@ class HostInteractor {
         hostedCouch.about = dto.about ?? ""
         hostedCouch.hosted = dto.hosted
         
+        var reservations = [UserReservation]()
+        if let unwrappedReservations = dto.reservations {
+            for reservation in unwrappedReservations {
+                var newReservation = UserReservation(id: reservation.id)
+                newReservation.name = reservation.name
+                newReservation.email = reservation.email
+                newReservation.startDate = reservation.startDate
+                newReservation.endDate = reservation.endDate
+                newReservation.numberOfGuests = String(reservation.numberOfGuests)
+                newReservation.userPhotoUrl = reservation.userPhoto?.url
+                
+                reservations.append(newReservation)
+            }
+        }
+        
+        hostedCouch.reservations.append(contentsOf: reservations)
+        
         return hostedCouch
     }
     

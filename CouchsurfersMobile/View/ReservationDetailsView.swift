@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct ReservationDetailsView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     @EnvironmentObject var globalEnv: GlobalEnvironment
     @ObservedObject var reservationDetailsVM = ReservationDetailsViewModel()
     
     let reservationId: Int
+    let couchId: Int
     let active: Bool
     
     var body: some View {
@@ -88,36 +91,90 @@ struct ReservationDetailsView: View {
                         Text(unwrappedReservation.about)
                             .multilineTextAlignment(.leading)
                         
-                        Divider()
                     }
                     .padding(.horizontal)
                     
                 }
                 
                 
+                if active {
+                    Button(action : {
+                        reservationDetailsVM.cancelReservation(with: reservationId) { loggedIn in
+                            if !loggedIn {
+                                self.globalEnv.userLoggedIn = false
+                            }
+                        }
+                    }) {
+                        Text("Cancel reservation")
+                            .foregroundColor(Color.white)
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .frame(height: 50)
+                            .background(Color.red)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                    }
+                    .padding(.horizontal)
+                    
+                    Divider()
+                }
                 
-                /* if !couchDetailsVM.reserved {
-                 Button(action : {
-                 couchDetailsVM.reserveCouch(with: couchId!, couchFilter) { loggedIn in
-                 if !loggedIn {
-                 self.globalEnv.userLoggedIn = false
-                 }
-                 }
-                 }) {
-                 Text("Reserve")
-                 .foregroundColor(Color.white)
-                 .fontWeight(.bold)
-                 .frame(maxWidth: .infinity, alignment: .center)
-                 .frame(height: 50)
-                 .background(Color.red)
-                 .clipShape(RoundedRectangle(cornerRadius: 10))
-                 }
-                 .padding(.horizontal)
-                 }*/
+                Group {
+                    Text("Reviews")
+                        .fontWeight(.bold)
+                        .font(.title)
+                        .padding(.horizontal)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Button(action : {
+                        reservationDetailsVM.isShowingReviewsListView = true
+                    }) {
+                        Text("Show all reviews")
+                            .foregroundColor(Color.black)
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .frame(height: 50)
+                    }
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray, lineWidth: 2)
+                            .background(Color.white)
+                    )
+                    .padding(.horizontal)
+                    
+                    NavigationLink(destination: ReviewListView(couchId: couchId), isActive: $reservationDetailsVM.isShowingReviewsListView) { EmptyView() }
+                }
                 
+                if !active {
+                    Group {
+                        TextEditor(text: $reservationDetailsVM.description)
+                            .frame(height: 100)
+                            .background(
+                                Rectangle()
+                                    .stroke(Color.gray, lineWidth: 2)
+                                    .background(Color.white)
+                            )
+                            .padding()
+                        
+                        Button(action : {
+                            reservationDetailsVM.createReview(with: couchId, description: reservationDetailsVM.description) { loggedIn in
+                                if !loggedIn {
+                                    self.globalEnv.userLoggedIn = false
+                                }
+                            }
+                        }) {
+                            Text("Send review")
+                                .foregroundColor(Color.white)
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .frame(height: 50)
+                                .background(Color.red)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                        }
+                        .padding(.horizontal)
+                        
+                    }
+                }
             }
-            
-            
         }
         .onAppear {
             reservationDetailsVM.loadReservationDetails(with: reservationId) { loggedIn in
@@ -127,6 +184,11 @@ struct ReservationDetailsView: View {
             }
         }
         .navigationBarTitle(Text("Details"), displayMode: .inline)
+        .alert(isPresented: $reservationDetailsVM.showingAlert, content: {
+            Alert(title: Text(NSLocalizedString("authenticationView.error", comment: "Error")), message: Text(reservationDetailsVM.alertDescription), dismissButton: .default(Text(NSLocalizedString("authenticationView.cancel", comment: "Cancel"))) {
+                print("Dismiss button pressed")
+            })
+        })
         
     }
     

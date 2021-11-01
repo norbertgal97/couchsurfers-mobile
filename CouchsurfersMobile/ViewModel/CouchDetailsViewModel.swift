@@ -14,6 +14,7 @@ class CouchDetailsViewModel: ReversePlaceIdProtocol {
     @Published var showingAlert = false
     
     @Published var reserved = false
+    @Published var isShowingReviewsListView = false
     
     private var couchInteractor = MyCouchInteractor()
     private var reservationInteractor = ReservationInteractor()

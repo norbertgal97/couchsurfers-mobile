@@ -89,7 +89,6 @@ struct CouchDetailsView: View {
                     Text(couchDetailsVM.couch.about)
                         .multilineTextAlignment(.leading)
                     
-                    Divider()
                 }
                 .padding(.horizontal)
                 
@@ -112,9 +111,33 @@ struct CouchDetailsView: View {
                     .padding(.horizontal)
                 }
                 
+                Divider()
+                
+                Group {
+                    Text("Reviews")
+                        .fontWeight(.bold)
+                        .font(.title)
+                        .padding(.horizontal)
+                    
+                    Button(action : {
+                        couchDetailsVM.isShowingReviewsListView = true
+                    }) {
+                        Text("Show all reviews")
+                            .foregroundColor(Color.black)
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .frame(height: 50)
+                    }
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray, lineWidth: 2)
+                            .background(Color.white)
+                    )
+                    .padding(.horizontal)
+                    
+                    NavigationLink(destination: ReviewListView(couchId: couchId!), isActive: $couchDetailsVM.isShowingReviewsListView) { EmptyView() }
+                }
             }
-            
-            
         }
         .onAppear {
             if couchId != nil {

@@ -63,9 +63,9 @@ class UserInteractor {
         }
     }
     
-    func updatePersonalInformation(with id: Int, _ personalInformation: PersonalInformation, completionHandler: @escaping (_ personalInformation: PersonalInformation?, _
-                                                                                                                           message: String?, _ loggedIn: Bool) -> Void) {
-        
+    func updatePersonalInformation(with id: Int,
+                                   _ personalInformation: PersonalInformation,
+                                   completionHandler: @escaping (_ personalInformation: PersonalInformation?, _ message: String?, _ loggedIn: Bool) -> Void) {
         let networkManager = NetworkManager<PersonalInformationDTO>()
         
         let personalInformationDTO = PersonalInformationDTO(id: id, fullName: personalInformation.fullName, phoneNumber: personalInformation.phoneNumber, email: personalInformation.email)
