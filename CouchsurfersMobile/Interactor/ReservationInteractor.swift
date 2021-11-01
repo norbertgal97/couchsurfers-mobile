@@ -149,6 +149,50 @@ class ReservationInteractor {
         }
     }
     
+    func cancelReservation(with id: Int, completionHandler: @escaping (_ message: String?, _ loggedIn: Bool) -> Void) {
+        let networkManager = NetworkManager<MessageDTO>()
+        let urlRequest = networkManager.makeRequest(url: URL(string: baseUrl + reservationsUrl + "/\(id)")!, method: .DELETE)
+        
+        networkManager.dataTask(with: urlRequest) { (networkStatus, data, error) in
+            var message: String?
+            
+            switch networkStatus {
+            case .failure(let statusCode):
+                if let unwrappedStatusCode = statusCode {
+                    if unwrappedStatusCode == 401 {
+                        self.logger.debug("Session has expired!")
+                        completionHandler(nil, false)
+                        return
+                    }
+                }
+                
+                if let unwrappedError = error {
+                    if let unwrappedStatusCode = statusCode {
+                        switch unwrappedStatusCode {
+                        case 404:
+                            message = "Reservation not found"
+                        case 403:
+                            message = NSLocalizedString("networkError.forbidden", comment: "Forbidden")
+                        case 409:
+                            message = "Too late to cancel."
+                        default:
+                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                        }
+                        self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
+                    }
+                } else {
+                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                }
+                
+                completionHandler(message, true)
+            case .successful:
+                self.logger.debug("Reservation is cancelled with id: \(id)")
+                completionHandler(message, true)
+            }
+            
+        }
+    }
+    
     private func convertReservationDTOToReservatioModel(dto: ReservationDTO) -> Reservation {
         var reservation = Reservation(id: dto.id)
         

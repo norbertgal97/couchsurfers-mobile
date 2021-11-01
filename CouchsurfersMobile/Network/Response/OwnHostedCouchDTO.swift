@@ -13,6 +13,7 @@ class OwnHostedCouchDTO: Decodable {
     var name: String
     var about: String?
     var hosted: Bool
+    var reservations: [UserReservationDTO]?
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -22,6 +23,7 @@ class OwnHostedCouchDTO: Decodable {
         name = try container.decode(String.self, forKey: .name)
         about = try container.decodeIfPresent(String.self, forKey: .about)
         hosted = try container.decode(Bool.self, forKey: .hosted)
+        reservations = try container.decodeIfPresent([UserReservationDTO].self, forKey: .reservations)
     }
     
     enum CodingKeys: String, CodingKey {
@@ -30,5 +32,6 @@ class OwnHostedCouchDTO: Decodable {
         case name
         case about
         case hosted
+        case reservations
     }
 }

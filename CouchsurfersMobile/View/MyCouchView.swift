@@ -31,7 +31,8 @@ struct MyCouchView: View {
                     
                     VStack(alignment: .leading, spacing: 15) {
                         Text("\(myCouchVM.hostedCouch.name)")
-                            .font(.custom("Pacifico-Regular", size: 25))
+                            .fontWeight(.bold)
+                            .font(.title)
                             .padding(.horizontal)
                         
                         Divider()
@@ -44,9 +45,6 @@ struct MyCouchView: View {
                             Text("Description")
                                 .padding(.horizontal)
                         }
-                        
-                        Divider()
-                            .padding(.horizontal)
                         
                         Button(action : {
                             myCouchVM.hostCouch { loggedIn in
@@ -65,7 +63,62 @@ struct MyCouchView: View {
                         }
                         .padding(.horizontal)
                         
+                        Divider()
+                        
+                        Group {
+                            Text("Reservations")
+                                .fontWeight(.bold)
+                                .font(.title)
+                                .padding(.horizontal)
+                            
+                            Button(action : {
+                                myCouchVM.isShowingUserReservationsListView = true
+                            }) {
+                                Text("Show all reservations")
+                                    .foregroundColor(Color.black)
+                                    .fontWeight(.bold)
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .frame(height: 50)
+                            }
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.gray, lineWidth: 2)
+                                    .background(Color.white)
+                            )
+                            .padding(.horizontal)
+                            
+                            NavigationLink(destination: UserReservationListView(userReservations: myCouchVM.hostedCouch.reservations), isActive: $myCouchVM.isShowingUserReservationsListView) { EmptyView() }
+                        }
+                        
+                        Divider()
+                        
+                        Group {
+                            Text("Reviews")
+                                .fontWeight(.bold)
+                                .font(.title)
+                                .padding(.horizontal)
+                            
+                            Button(action : {
+                                myCouchVM.isShowingReviewsListView = true
+                            }) {
+                                Text("Show all reviews")
+                                    .foregroundColor(Color.black)
+                                    .fontWeight(.bold)
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .frame(height: 50)
+                            }
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.gray, lineWidth: 2)
+                                    .background(Color.white)
+                            )
+                            .padding(.horizontal)
+                            
+                            NavigationLink(destination: ReviewListView(couchId: myCouchVM.hostedCouch.id!), isActive: $myCouchVM.isShowingReviewsListView) { EmptyView() }
+                        }
+
                     }
+                    
                 }
             } else {
                 Text("Nincs elmentve szállás.")

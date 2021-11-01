@@ -13,4 +13,5 @@ struct HostedCouch {
     var about = ""
     var couchPhotoId: String?
     var hosted: Bool = false
+    var reservations = [UserReservation]()
 }

@@ -38,7 +38,9 @@ struct ReservationView: View {
                                                        numberOfGuests: reservationPreview.numberOfGuests)
                                     .padding(.vertical)
                                 
-                                NavigationLink(destination: ReservationDetailsView(reservationId: reservationPreview.id, active: reservationPreview.active!)) {
+                                NavigationLink(destination: ReservationDetailsView(reservationId: reservationPreview.id,
+                                                                                   couchId: reservationPreview.couchId,
+                                                                                   active: reservationPreview.active!)) {
                                    EmptyView()
                                 }.buttonStyle(PlainButtonStyle())
                             }
@@ -49,7 +51,6 @@ struct ReservationView: View {
                 }
                 
                 Spacer()
-                
             }
             .navigationBarTitle("Reservations", displayMode: .large)
             .onAppear {
