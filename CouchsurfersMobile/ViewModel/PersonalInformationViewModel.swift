@@ -12,7 +12,7 @@ class PersonalInformationViewModel: ObservableObject {
     @Published var personalInformation = PersonalInformation()
     @Published var image = UserPhoto()
     
-    @Published var alertDescription: String = NSLocalizedString("defaultAlertMessage", comment: "Default alert message")
+    @Published var alertDescription: String = NSLocalizedString("CommonView.UnknownError", comment: "Default alert message")
     @Published var showingAlert = false
     
     @Published var showingImagePicker = false
@@ -29,7 +29,8 @@ class PersonalInformationViewModel: ObservableObject {
         interactor.loadPersonalInformation { personalInformation, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
@@ -47,7 +48,6 @@ class PersonalInformationViewModel: ObservableObject {
             DispatchQueue.main.async {
                 completionHandler(loggedIn)
             }
-            
         }
     }
     
@@ -59,7 +59,8 @@ class PersonalInformationViewModel: ObservableObject {
         interactor.updatePersonalInformation(with: id, personalInformation) { personalInformation, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
@@ -85,7 +86,8 @@ class PersonalInformationViewModel: ObservableObject {
         interactor.uploadImage(image: imageToUpload!) { imageUpload, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
@@ -109,15 +111,16 @@ class PersonalInformationViewModel: ObservableObject {
     }
     
     func deleteImage(completionHandler: @escaping (_ loggedIn: Bool) -> Void) {
-        if self.imageToDelete == nil {
+        guard let unwrappedImageToDelete = imageToDelete else {
             completionHandler(true)
             return
         }
         
-        interactor.deleteImage(imageId: imageToDelete!) { message, loggedIn in
+        interactor.deleteImage(imageId: unwrappedImageToDelete) { message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
@@ -125,11 +128,6 @@ class PersonalInformationViewModel: ObservableObject {
                 completionHandler(loggedIn)
             }
         }
-    }
-    
-    private func updateAlert(with message: String) {
-        self.alertDescription = message
-        self.showingAlert = true
     }
     
     func getImage() {

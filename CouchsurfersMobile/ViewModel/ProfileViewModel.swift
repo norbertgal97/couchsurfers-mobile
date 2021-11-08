@@ -13,13 +13,15 @@ class ProfileViewModel: ObservableObject {
     @Published var alertDescription: String = NSLocalizedString("defaultAlertMessage", comment: "Default alert message")
     @Published var showingAlert = false
     
-    private var interactor = UserInteractor()
+    private var userInteractor = UserInteractor()
+    private var sessionInteractor = UserSessionInteractor()
     
     func loadProfileData(completionHandler: @escaping (_ loggedIn: Bool) -> Void) {
-        interactor.loadProfileData { profileData, message, loggedIn in
+        userInteractor.loadProfileData { profileData, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
@@ -32,14 +34,25 @@ class ProfileViewModel: ObservableObject {
             DispatchQueue.main.async {
                 completionHandler(loggedIn)
             }
-            
         }
-        
     }
     
-    private func updateAlert(with message: String) {
-        self.alertDescription = message
-        self.showingAlert = true
+    func logout(completionHandler: @escaping (_ loggedIn: Bool) -> Void) {
+        sessionInteractor.logout { message in
+            if let unwrappedMessage = message {
+                DispatchQueue.main.async {
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
+                }
+                
+                completionHandler(true)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                completionHandler(false)
+            }
+        }
     }
     
 }

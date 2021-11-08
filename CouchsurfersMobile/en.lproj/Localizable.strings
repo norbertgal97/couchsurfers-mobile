@@ -6,10 +6,89 @@
   
 */
 
+// NetworkError
+"NetworkError.BadCredentials" = "Invalid username/password supplied";
+"NetworkError.UnknownError" = "Unknown error";
+"NetworkError.ConnectionError" = "Could not connect to the server";
+"NetworkError.AlreadyRegistered" = "Email address is already registered";
+"NetworkError.PersonalInformation" = "Personal information is not found";
+"NetworkError.Forbidden" = "You can't access this resource";
+"NetworkError.EmptyFields" = "Name, number of rooms, number of guests and city cant be empty";
+"NetworkError.WrongFile" = "No file has been chosen or the chosen file has no content";
+"NetworkError.BigImage" = "Image is too big";
+
+
+// NetworkStatus
+"NetworkStatus.UserCreated" = "Your account has been created";
+
+
+
+// CommonView
+"CommonView.UnknownError" = "Something went wrong";
+
+// SignInViewModel
+"SignInViewModel.EmptyFields" = "Please fill required fields";
+
 // AuthenticationView
-"authenticationView.fullNamePlaceholder" = "Enter your full name";
-"authenticationView.emailAddressPlaceholder" = "Enter your email address";
-"authenticationView.passwordPlaceholder" = "Enter your password";
+"AuthenticationView.AlreadyMemberButton" = "Already have an account?";
+"AuthenticationView.NotMemberButton" = "Don't have an account?";
+"AuthenticationView.SignUpButton" = "Sign up";
+"AuthenticationView.SignInButton" = "Sign in";
+
+// SignInView
+"SignInView.EmailAddressPlaceholder" = "Enter your email address";
+"SignInView.PasswordPlaceholder" = "Enter your password";
+"SignInView.ForgottenPasswordButton" = "Forgotten password?";
+"SignInView.SignInButton" = "Sign in";
+"SignInView.Error" = "Error";
+"SignInView.Cancel" = "Cancel";
+
+// SignUpView
+"SignUpView.FullNamePlaceholder" = "Enter your full name";
+"SignUpView.EmailAddressPlaceholder" = "Enter your email address";
+"SignUpView.PasswordPlaceholder" = "Enter your password";
+"SignUpView.ConfirmPasswordPlaceholder" = "Confirm your password";
+"SignUpView.SignUpButton" = "Sign up";
+"SignUpView.Cancel" = "Cancel";
+
+// MainTabView
+"MainTabView.ExploreTabItem" = "Explore";
+"MainTabView.ReservationsTabItem" = "Reservations";
+"MainTabView.InboxTabItem" = "Inbox";
+"MainTabView.ProfileTabItem" = "Profile";
+
+// ProfileView
+"ProfileView.AccountSettings" = "Account settings";
+"ProfileView.PersonalInformation" = "Personal Information";
+"ProfileView.Notifications" = "Notifications";
+"ProfileView.Hosting" = "Hosting";
+"ProfileView.ListYourCouch" = "List your couch";
+"ProfileView.Profile" = "Profile";
+"ProfileView.LogOut" = "Log out";
+
+// PersonalInformationView
+"PersonalInformationView.Image" = "Image";
+"PersonalInformationView.Name" = "Name";
+"PersonalInformationView.FullName" = "Full name";
+"PersonalInformationView.Contact" = "Contact";
+"PersonalInformationView.PhoneNumber" = "Phone number";
+"PersonalInformationView.Save" = "Save";
+"PersonalInformationView.PersonalInformation" = "Personal Information";
+
+
+/*
+"networkError.connectionError" = "Could not connect to the server";
+"networkError.forbidden" = "You can't access this resource";
+"networkError.couchNotFound" = "Couch is not found";
+"networkError.userNotFound" = "User is not found";
+"networkError.emptyFields" = "Name / NumberOfRooms / NumberOfGuests / City cant be null!";
+"networkError.couchAlreadyExists" = "Couch is already created";
+"networkError.emptyFile" = "Unprocessable image(s)";
+
+// AuthenticationView
+
+
+
 "authenticationView.signUpButton" = "Sign up";
 "authenticationView.signInButton" = "Sign in";
 "authenticationView.alreadyMemberButton" = "Already have an account?";
@@ -25,17 +104,7 @@
 "authenticationNetwork.passwordsDoNotMatch" = "Passwords do not match!";
 "authenticationNetwork.userCreated" = "Your account has been created";
 
-// NetworkError
-"networkError.unknownError" = "Unknown error";
-"networkError.badCredentials" = "Invalid username/password supplied";
-"networkError.alreadyRegistered" = "Email address is already registered";
-"networkError.connectionError" = "Could not connect to the server";
-"networkError.forbidden" = "You can't access this resource";
-"networkError.couchNotFound" = "Couch is not found";
-"networkError.userNotFound" = "User is not found";
-"networkError.emptyFields" = "Name / NumberOfRooms / NumberOfGuests / City cant be null!";
-"networkError.couchAlreadyExists" = "Couch is already created";
-"networkError.emptyFile" = "Unprocessable image(s)";
+
 
 // Autocomplete
 "autocomplete.placesAPIlanguage" = "en-GB";
@@ -48,4 +117,4 @@
 "profileView.logOut" = "Log out";
 "profileView.pInformation" = "Personal information";
 "profileView.notifications" = "Notifications";
-"profileView.listYourCouch" = "List your couch";
+"profileView.listYourCouch" = "List your couch";*/

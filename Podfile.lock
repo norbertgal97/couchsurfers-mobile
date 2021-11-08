@@ -1,0 +1,24 @@
+PODS:
+  - Kingfisher (7.1.1)
+  - SocketRocket (0.6.0)
+  - StompClientLib (1.4.1):
+    - SocketRocket
+
+DEPENDENCIES:
+  - Kingfisher (~> 7.0)
+  - StompClientLib
+
+SPEC REPOS:
+  trunk:
+    - Kingfisher
+    - SocketRocket
+    - StompClientLib
+
+SPEC CHECKSUMS:
+  Kingfisher: f738f9c4a3415823b8e2985d10aa2d6a9f37bc4d
+  SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
+  StompClientLib: ac40390e9660c574675f1c933bec81c8e2811a4f
+
+PODFILE CHECKSUM: 9cab8df68ff0ed736855a2cc07399a9e1630a6a1
+
+COCOAPODS: 1.9.3

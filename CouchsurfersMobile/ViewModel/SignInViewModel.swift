@@ -9,14 +9,16 @@ import Foundation
 
 class SignInViewModel: ObservableObject {
     @Published var signInDetails = SignInDetails()
-    @Published var alertDescription: String = NSLocalizedString("defaultAlertMessage", comment: "Default alert message")
+    @Published var alertDescription: String = NSLocalizedString("CommonView.UnknownError", comment: "Default alert message")
     @Published var showingAlert = false
     
     private let interactor = UserSessionInteractor()
     
     func signInUser(completionHandler: @escaping (_ loggedIn: Bool) -> Void) {
         if signInDetails.emailAddress.isEmpty || signInDetails.password.isEmpty {
-            updateAlert(with: NSLocalizedString("authenticationNetwork.emptyFields", comment: "Empty fields"))
+            self.alertDescription = NSLocalizedString("SignInViewModel.EmptyFields", comment: "Empty fields")
+            self.showingAlert = true
+            
             completionHandler(false)
             return
         }
@@ -24,17 +26,12 @@ class SignInViewModel: ObservableObject {
         interactor.signInUser(signInDetails: signInDetails) { loggedIn, messsage in
             if let unwrappedMessage = messsage {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
             completionHandler(loggedIn)
         }
     }
-    
-    private func updateAlert(with message: String) {
-        self.alertDescription = message
-        self.showingAlert = true
-    }
-    
 }

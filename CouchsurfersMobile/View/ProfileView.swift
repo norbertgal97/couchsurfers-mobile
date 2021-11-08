@@ -5,7 +5,6 @@
 //  Created by Norbert Gál on 2021. 09. 19..
 //
 
-import Foundation
 import SwiftUI
 import UIKit
 
@@ -17,7 +16,6 @@ struct ProfileView: View {
     var body: some View {
         NavigationView {
             Form {
-                
                 if let url = profileVM.profileData.userPhoto?.url {
                     VStack {
                         KingFisherImage(url: url)
@@ -31,16 +29,14 @@ struct ProfileView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .center)
                     .listRowBackground(Color.clear)
-                    
                 }
                 
-                
-                Section(header: Text("Account settings")) {
+                Section(header: Text(NSLocalizedString("ProfileView.AccountSettings", comment: "Account Settings"))) {
                     NavigationLink(destination: PersonalInformationView()) {
                         HStack {
                             Image(systemName: "person")
                                 .padding(.trailing, 3)
-                            Text(NSLocalizedString("profileView.pInformation", comment: "Personal information"))
+                            Text(NSLocalizedString("ProfileView.PersonalInformation", comment: "Personal information"))
                         }
                         .foregroundColor(Color.black)
                     }
@@ -49,18 +45,18 @@ struct ProfileView: View {
                         HStack {
                             Image(systemName: "bell")
                                 .padding(.trailing, 3)
-                            Text(NSLocalizedString("profileView.notifications", comment: "Notifications"))
+                            Text(NSLocalizedString("ProfileView.Notifications", comment: "Notifications"))
                         }
                         .foregroundColor(Color.black)
                     }
                 }
                 
-                Section(header: Text("Hosting")) {
+                Section(header: Text(NSLocalizedString("ProfileView.Hosting", comment: "Hosting"))) {
                     NavigationLink(destination: MyCouchView().environmentObject(globalEnv)) {
                         HStack {
                             Image(systemName: "list.dash")
                                 .padding(.trailing, 3)
-                            Text(NSLocalizedString("profileView.listYourCouch", comment: "List your couch"))
+                            Text(NSLocalizedString("ProfileView.ListYourCouch", comment: "List your couch"))
                         }
                         .foregroundColor(Color.black)
                     }
@@ -68,14 +64,18 @@ struct ProfileView: View {
                 
                 Section {
                     Button(action: {
-                        //
+                        profileVM.logout { loggedIn in
+                            if !loggedIn {
+                                self.globalEnv.userLoggedIn = false
+                            }
+                        }
                     }) {
-                        Text(NSLocalizedString("profileView.logOut", comment: "Log out"))
+                        Text(NSLocalizedString("ProfileView.LogOut", comment: "Log out"))
                     }
                     .frame(maxWidth: .infinity, alignment: .center)
                 }
             }
-            .navigationBarTitle("Profile", displayMode: .large)
+            .navigationBarTitle(NSLocalizedString("ProfileView.Profile", comment: "Profile"), displayMode: .large)
             .onAppear {
                 profileVM.loadProfileData { loggedIn in
                     if !loggedIn {
@@ -84,7 +84,6 @@ struct ProfileView: View {
                 }
             }
             .environmentObject(globalEnv)
-            
         }
     }
 }
