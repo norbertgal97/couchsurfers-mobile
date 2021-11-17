@@ -9,20 +9,19 @@ import Foundation
 
 class MyCouchViewModel: ObservableObject {
     @Published var hostedCouch = HostedCouch()
-    @Published var alertDescription: String = NSLocalizedString("defaultAlertMessage", comment: "Default alert message")
+    @Published var alertDescription: String = NSLocalizedString("CommonView.UnknownError", comment: "Default alert message")
     @Published var showingAlert = false
     @Published var isShowingUserReservationsListView = false
     @Published var isShowingReviewsListView = false
     
     private var hostInteractor = HostInteractor()
-    private var couchInteractor = MyCouchInteractor()
-
-
-    func getOwnHostedCouch(completionHandler: @escaping (_ loggedIn: Bool, _ downloadImage: Bool) -> Void) {
-        hostInteractor.getOwnHostedCouch { couch, message, loggedIn, downloadImage in
+    
+    func getOwnHostedCouch(completionHandler: @escaping (_ loggedIn: Bool) -> Void) {
+        hostInteractor.getOwnHostedCouch { couch, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
@@ -33,7 +32,7 @@ class MyCouchViewModel: ObservableObject {
             }
             
             DispatchQueue.main.async {
-                completionHandler(loggedIn, downloadImage)
+                completionHandler(loggedIn)
             }
         }
     }
@@ -47,13 +46,14 @@ class MyCouchViewModel: ObservableObject {
         hostInteractor.hostCouch(couchId: id, hosted: !hostedCouch.hosted) { hosted, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
             if let unwrappedHosted = hosted {
                 DispatchQueue.main.async {
-                    self.hostedCouch.hosted  = unwrappedHosted
+                    self.hostedCouch.hosted = unwrappedHosted
                 }
             }
             
@@ -61,12 +61,5 @@ class MyCouchViewModel: ObservableObject {
                 completionHandler(loggedIn)
             }
         }
-        
     }
-    
-    private func updateAlert(with message: String) {
-        self.alertDescription = message
-        self.showingAlert = true
-    }
-    
 }

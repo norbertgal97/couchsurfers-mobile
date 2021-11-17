@@ -5,7 +5,6 @@
 //  Created by Norbert Gál on 2021. 10. 22..
 //
 
-import Foundation
 import SwiftUI
 import Kingfisher
 
@@ -25,7 +24,6 @@ struct ReservationPreviewView: View {
                 .shadow(radius: 5)
             
             VStack {
-                
                 if photoUrl != nil {
                     KingFisherImage(url: photoUrl!)
                         .resizable()
@@ -44,10 +42,10 @@ struct ReservationPreviewView: View {
                     Text(name)
                         .fontWeight(.bold)
                     Text(city)
-                    Text("\(numberOfGuests) guest(s)")
+                    Text("\(numberOfGuests) " + NSLocalizedString("ReservationPreviewView.Guest", comment: "Guests"))
                     HStack {
                         Text("$\(price)")
-                        Text("/ night / guest")
+                        Text(NSLocalizedString("ReservationPreviewView.NightGuest", comment: "Night / guests"))
                     }
                     Text("\(startDate) - \(endDate)")
                 }
@@ -56,7 +54,6 @@ struct ReservationPreviewView: View {
                 
                 Spacer()
             }
-            
         }
         .frame(width: 350, height: 325)
     }

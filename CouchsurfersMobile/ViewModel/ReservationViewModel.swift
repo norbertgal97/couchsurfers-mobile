@@ -10,8 +10,10 @@ import Foundation
 class ReservationViewModel: ReversePlaceIdProtocol {
     @Published var reservationPreviews = [ReservationPreview]()
     @Published var reservationState = 0
-    @Published var alertDescription: String = NSLocalizedString("defaultAlertMessage", comment: "Default alert message")
+    @Published var alertDescription: String = NSLocalizedString("CommonView.UnknownError", comment: "Default alert message")
     @Published var showingAlert = false
+    
+    private var reservationInteractor = ReservationInteractor()
     
     var filteredReservationPreviews : [ReservationPreview] {
         return reservationPreviews.filter {
@@ -26,13 +28,12 @@ class ReservationViewModel: ReversePlaceIdProtocol {
         }
     }
     
-    private var reservationInteractor = ReservationInteractor()
-    
     func loadReservations(completionHandler: @escaping (_ loggedIn: Bool) -> Void) {
         reservationInteractor.loadReservations { reservationPreviews, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
@@ -49,13 +50,7 @@ class ReservationViewModel: ReversePlaceIdProtocol {
             DispatchQueue.main.async {
                 completionHandler(loggedIn)
             }
-            
         }
-    }
-    
-    private func updateAlert(with message: String) {
-        self.alertDescription = message
-        self.showingAlert = true
     }
     
     private func updatePreviewsWithReversedCity(previews: [ReservationPreview], completionHandler: @escaping (_ reservationPreviews: [ReservationPreview]) -> Void) {
@@ -70,7 +65,5 @@ class ReservationViewModel: ReversePlaceIdProtocol {
                 }
             }
         }
-        
     }
-    
 }

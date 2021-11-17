@@ -12,9 +12,16 @@ class WebsocketManager {
     
     var delegate: StompClientLibDelegate?
     let socketClient: StompClientLib
+    let baseUrl: String
     
     init() {
         self.socketClient = StompClientLib()
+        
+        guard let url = Bundle.main.object(forInfoDictionaryKey: "SocketBaseURL") as? String else {
+            fatalError()
+        }
+        
+        self.baseUrl = url
     }
     
     func registerSocket() {
@@ -22,7 +29,7 @@ class WebsocketManager {
             cookie.name == "JSESSIONID"
         }).first
         
-        let url = NSURL(string: "ws://localhost:8080/socket")!
+        let url = NSURL(string: baseUrl)!
         let urlRequest = NSMutableURLRequest(url: url as URL)
         urlRequest.allHTTPHeaderFields = [String : String]()
         
@@ -57,5 +64,4 @@ class WebsocketManager {
             socketClient.sendMessage(message: json, toDestination: "/api/v1/chat/send/\(chatRoomId)", withHeaders: headersToSend, withReceipt: nil)
         }
     }
-    
 }

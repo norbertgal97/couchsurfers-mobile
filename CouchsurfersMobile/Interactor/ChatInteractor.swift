@@ -9,7 +9,7 @@ import Foundation
 import StompClientLib
 import os
 
-class ChatInteractor {
+class ChatInteractor: UnmanagedErrorHandler {
     
     let socketManager = WebsocketManager()
     let chatRoomId: Int
@@ -54,14 +54,14 @@ class ChatInteractor {
                     if let unwrappedStatusCode = statusCode {
                         switch unwrappedStatusCode {
                         case 404:
-                            message = "Chat room is not found"
+                            message = NSLocalizedString("NetworkError.ChatRoomNotFound", comment: "Chat Room Not Found")
                         default:
-                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                            message = NSLocalizedString("NetworkError.UnknownError", comment: "Unknown error")
                         }
                         self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
                     }
                 } else {
-                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                    message = self.handleUnmanagedErrors(statusCode: statusCode, logger: self.logger)
                 }
                 
                 completionHandler(nil, message, true)
@@ -86,20 +86,6 @@ class ChatInteractor {
         return messagesList
     }
     
-    private func handleUnmanagedErrors(statusCode: Int?) -> String {
-        if let unwrappedStatusCode = statusCode {
-            self.logger.debug("Unknown error with status code: \(unwrappedStatusCode)")
-            return NSLocalizedString("networkError.unknownError", comment: "Unknown error")
-        } else {
-            self.logger.debug("Could not connect to the server!")
-            return NSLocalizedString("networkError.connectionError", comment: "Connection error")
-        }
-    }
-    
-    
-    
-    
-    
     func registerSocket() {
         socketManager.registerSocket()
     }
@@ -120,10 +106,6 @@ class ChatInteractor {
 
 extension ChatInteractor: StompClientLibDelegate {
     func stompClient(client: StompClientLib!, didReceiveMessageWithJSONBody jsonBody: AnyObject?, akaStringBody stringBody: String?, withHeader header: [String : String]?, withDestination destination: String) {
-        print("Destination : \(destination)")
-        print("JSON Body : \(String(describing: jsonBody))")
-        print("String Body : \(stringBody ?? "nil")")
-        
         if let jsonString = stringBody {
             let data = Data(jsonString.utf8)
             if let jsonData = try? JSONDecoder().decode(ChatMessageDTO.self, from: data) {
@@ -133,23 +115,23 @@ extension ChatInteractor: StompClientLibDelegate {
     }
     
     func stompClientDidDisconnect(client: StompClientLib!) {
-        print("Socket is Disconnected")
+        logger.debug("Socket is disconnected")
     }
     
     func stompClientDidConnect(client: StompClientLib!) {
-        print("Socket is connected")
+        logger.debug("Socket is connected")
         socketManager.stompClientDidConnect(client: client, chatRoomId: chatRoomId)
     }
     
     func serverDidSendReceipt(client: StompClientLib!, withReceiptId receiptId: String) {
-        print("Receipt : \(receiptId)")
+        logger.error("Receipt : \(receiptId)")
     }
     
     func serverDidSendError(client: StompClientLib!, withErrorMessage description: String, detailedErrorMessage message: String?) {
-        print("Error Send : \(String(describing: message))")
+        logger.error("Error Send : \(String(describing: message))")
     }
     
     func serverDidSendPing() {
-        print("Server ping")
+        logger.debug("Server ping")
     }
 }

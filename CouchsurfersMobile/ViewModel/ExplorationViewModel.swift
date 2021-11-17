@@ -9,14 +9,15 @@ import Foundation
 
 class ExplorationViewModel: GooglePlacesViewModel {
     
+    @Published var couchFilter = CouchFilter()
     @Published var couchPreview = CouchPreview()
-    @Published var alertDescription: String = NSLocalizedString("defaultAlertMessage", comment: "Default alert message")
+    @Published var alertDescription: String = NSLocalizedString("CommonView.UnknownError", comment: "Default alert message")
     @Published var showingAlert = false
     @Published var showingSheet = false
     @Published var cityId: String = ""
     @Published var isShowingListView = false
     
-    private var couchInteractor = MyCouchInteractor()
+    private var couchInteractor = CouchInteractor()
     
     private var reversedCity = ""
     
@@ -24,7 +25,8 @@ class ExplorationViewModel: GooglePlacesViewModel {
         couchInteractor.loadNewestCouch { couch, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
@@ -39,13 +41,13 @@ class ExplorationViewModel: GooglePlacesViewModel {
             DispatchQueue.main.async {
                 completionHandler(loggedIn)
             }
-            
         }
     }
     
     func validateFilter(filter: CouchFilter) -> Bool {
         if filter.city.isEmpty || filter.numberOfGuests.isEmpty {
-            updateAlert(with: "Fields can not be empty")
+            self.alertDescription = NSLocalizedString("NetworkError.EmptyFieldsWarning", comment: "Fields can not be empty")
+            self.showingAlert = true
             return false
         }
         
@@ -60,10 +62,4 @@ class ExplorationViewModel: GooglePlacesViewModel {
         self.couchPreview.name = preview.name
         self.couchPreview.price = preview.price
     }
-    
-    private func updateAlert(with message: String) {
-        self.alertDescription = message
-        self.showingAlert = true
-    }
-    
 }

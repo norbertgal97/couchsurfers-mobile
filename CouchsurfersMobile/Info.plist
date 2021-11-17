@@ -39,9 +39,11 @@
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>BaseURL</key>
-	<string>http://localhost:8080</string>
+	<string>http://192.168.0.62:8080</string>
+	<key>SocketBaseURL</key>
+	<string>ws://192.168.0.62:8080/socket</string>
 	<key>GoogleApiKey</key>
-	<string>AIzaSyBg27p-uvGA4jEW-7QHDfgfconfNhxB-oE</string>
+	<string></string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

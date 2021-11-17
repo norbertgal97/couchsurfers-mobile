@@ -22,7 +22,7 @@ class GooglePlacesInteractor {
     }
     
     func autocomplete(cityname: String, sessionToken: String, completionHandler: @escaping (_ places: [Place]) -> Void) {
-        let requestUrl = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=\(cityname)&types=(cities)&key=\(API_KEY)&language=\(NSLocalizedString("autocomplete.placesAPIlanguage", comment: "language"))&sessiontoken=\(sessionToken)"
+        let requestUrl = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=\(cityname)&types=(cities)&key=\(API_KEY)&language=\(NSLocalizedString("Autocomplete.PlacesAPIlanguage", comment: "language"))&sessiontoken=\(sessionToken)"
         
         let networkManager = NetworkManager<PredictionsDTO>()
         let urlRequest = networkManager.makeRequest(url: URL(string: requestUrl)!, method: .GET)

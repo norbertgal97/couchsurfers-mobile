@@ -12,7 +12,9 @@ class ChatRoomListViewModel: ObservableObject {
     @Published var roomName = ""
     @Published var recipientEmail = ""
     
-    @Published var alertDescription: String = NSLocalizedString("defaultAlertMessage", comment: "Default alert message")
+    @Published var showPopUp = false
+    
+    @Published var alertDescription: String = NSLocalizedString("CommonView.UnknownError", comment: "Default alert message")
     @Published var showingAlert = false
     
     private var chatRoomInteractor = ChatRoomInteractor()
@@ -21,7 +23,8 @@ class ChatRoomListViewModel: ObservableObject {
         chatRoomInteractor.createChatRoom(chatRoomName: roomName, recipientEmail: recipientEmail) { chatroom, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
@@ -41,7 +44,8 @@ class ChatRoomListViewModel: ObservableObject {
         chatRoomInteractor.getOwnChatRooms { chatrooms, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
@@ -55,10 +59,5 @@ class ChatRoomListViewModel: ObservableObject {
                 completionHandler(loggedIn)
             }
         }
-    }
-    
-    private func updateAlert(with message: String) {
-        self.alertDescription = message
-        self.showingAlert = true
     }
 }

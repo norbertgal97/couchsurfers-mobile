@@ -16,9 +16,8 @@ struct MyCouchDetails: View {
     
     var body: some View {
         Form {
-            Section(header: Text("Pictures")) {
+            Section(header: Text(NSLocalizedString("MyCouchDetailsView.Pictures", comment: "Pictures"))) {
                 ScrollView(.horizontal) {
-                    
                     HStack(spacing: 20) {
                         ForEach(myCouchDetailsVM.images, id: \.fileName) { image in
                             if image.url != nil {
@@ -37,8 +36,8 @@ struct MyCouchDetails: View {
                                             .onLongPressGesture {
                                                 myCouchDetailsVM.images.removeAll{ $0.fileName == image.fileName }
                                                 
-                                                if image.id != nil {
-                                                    myCouchDetailsVM.imagesToDelete.append(image.id!)
+                                                if let imageId = image.id {
+                                                    myCouchDetailsVM.imagesToDelete.append(imageId)
                                                 }
                                                 
                                             }, alignment: .center)
@@ -75,11 +74,10 @@ struct MyCouchDetails: View {
                             }
                         }
                     }
-                    
                 }
             }
             
-            Section(header: Text("Address")) {
+            Section(header: Text(NSLocalizedString("MyCouchDetailsView.Address", comment: "Pictures"))) {
                 AutocompleteFieldWithResultsView(cityNameText: $myCouchDetailsVM.cityNameText,
                                                  cityId: $myCouchDetailsVM.myCouch.city,
                                                  places: $myCouchDetailsVM.places,
@@ -88,36 +86,33 @@ struct MyCouchDetails: View {
                                                  autocomplete: { myCouchDetailsVM.autocomplete(cityname: $0) })
                 
                 Group {
-                    TextField("Zip code", text: $myCouchDetailsVM.myCouch.zipCode)
-                    TextField("Street", text: $myCouchDetailsVM.myCouch.street)
-                    TextField("Building number", text: $myCouchDetailsVM.myCouch.buildingNumber)
+                    TextField(NSLocalizedString("MyCouchDetailsView.ZipCode", comment: "Zip code"), text: $myCouchDetailsVM.myCouch.zipCode)
+                    TextField(NSLocalizedString("MyCouchDetailsView.Street", comment: "Street"), text: $myCouchDetailsVM.myCouch.street)
+                    TextField(NSLocalizedString("MyCouchDetailsView.BuildingNumber", comment: "Building number"), text: $myCouchDetailsVM.myCouch.buildingNumber)
                 }
                 .disabled(myCouchDetailsVM.cityNameText != "")
                 .listRowBackground(myCouchDetailsVM.cityNameText != "" ? Color(UIColor.systemGroupedBackground) : Color.white)
-                
             }
             
-            Section(header: Text("Details")) {
-                TextField("Accommodation name", text: $myCouchDetailsVM.myCouch.name)
-                TextField("Number of guests", text: $myCouchDetailsVM.myCouch.numberOfGuests)
+            Section(header: Text(NSLocalizedString("MyCouchDetailsView.Details", comment: "Details"))) {
+                TextField(NSLocalizedString("MyCouchDetailsView.AccomodationName", comment: "Accomodation name"), text: $myCouchDetailsVM.myCouch.name)
+                TextField(NSLocalizedString("MyCouchDetailsView.NumberOfGuests", comment: "Number of guests"), text: $myCouchDetailsVM.myCouch.numberOfGuests)
                     .keyboardType(.numberPad)
-                TextField("Number of rooms", text: $myCouchDetailsVM.myCouch.numberOfRooms)
+                TextField(NSLocalizedString("MyCouchDetailsView.NumberOfRooms", comment: "Number of rooms"), text: $myCouchDetailsVM.myCouch.numberOfRooms)
                     .keyboardType(.numberPad)
-                TextField("Amenities", text: $myCouchDetailsVM.myCouch.amenities)
-                TextField("Price", text: $myCouchDetailsVM.myCouch.price)
+                TextField(NSLocalizedString("MyCouchDetailsView.Amenities", comment: "Number of amenities"), text: $myCouchDetailsVM.myCouch.amenities)
+                TextField(NSLocalizedString("MyCouchDetailsView.Price", comment: "Price"), text: $myCouchDetailsVM.myCouch.price)
                     .keyboardType(.decimalPad)
             }
             
-            Section(header: Text("About")) {
+            Section(header: Text(NSLocalizedString("MyCouchDetailsView.About", comment: "About"))) {
                 TextEditor(text: $myCouchDetailsVM.myCouch.about)
                     .frame(height: 200)
             }
-            
         }
-        .navigationBarTitle(Text(NSLocalizedString("couchDetails", comment: "Couch details")))
-        .navigationBarItems(trailing: Button(NSLocalizedString("save", comment: "Save")) {
+        .navigationBarTitle(Text(NSLocalizedString("MyCouchDetailsView.CouchDetails", comment: "Couch details")))
+        .navigationBarItems(trailing: Button(NSLocalizedString("MyCouchDetailsView.Save", comment: "Save")) {
             if couchId != nil {
-                
                 myCouchDetailsVM.deleteImages { loggedIn in
                     if !loggedIn {
                         self.globalEnv.userLoggedIn = false
@@ -134,9 +129,7 @@ struct MyCouchDetails: View {
                             }
                         }
                     }
-                    
                 }
-                
             } else {
                 myCouchDetailsVM.saveCouch { loggedIn in
                     if !loggedIn {
@@ -149,7 +142,6 @@ struct MyCouchDetails: View {
                         }
                     }
                 }
-                
             }
         })
         .onAppear {
@@ -162,7 +154,7 @@ struct MyCouchDetails: View {
             }
         }
         .alert(isPresented: $myCouchDetailsVM.showingAlert, content: {
-            Alert(title: Text(NSLocalizedString("authenticationView.error", comment: "Error")), message: Text(myCouchDetailsVM.alertDescription), dismissButton: .default(Text(NSLocalizedString("authenticationView.cancel", comment: "Cancel"))) {
+            Alert(title: Text(NSLocalizedString("CommonView.Error", comment: "Couch details")), message: Text(myCouchDetailsVM.alertDescription), dismissButton: .default(Text(NSLocalizedString("CommonView.Cancel", comment: "Cancel"))) {
                 print("Dismiss button pressed")
             })
         })

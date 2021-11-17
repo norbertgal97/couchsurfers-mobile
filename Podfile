@@ -4,5 +4,6 @@ use_frameworks!
 
 target 'CouchsurfersMobile' do
   pod 'StompClientLib'
+  pod 'PushNotifications'
   pod 'Kingfisher', '~> 7.0'
 end

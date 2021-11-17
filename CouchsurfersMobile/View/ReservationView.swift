@@ -18,14 +18,16 @@ struct ReservationView: View {
         NavigationView {
             VStack {
                 Picker(selection: $reservationVM.reservationState, label: Text("State of reservations")) {
-                    Text("Active").tag(0)
-                    Text("Inactive").tag(1)
+                    Text(NSLocalizedString("ReservationView.Active", comment: "Active")).tag(0)
+                    Text(NSLocalizedString("ReservationView.Inactive", comment: "Inactive")).tag(1)
                 }
                 .pickerStyle(.segmented)
                 
                 Group {
                     if reservationVM.filteredReservationPreviews.isEmpty {
-                        Text("There are no reservations.")
+                        Spacer()
+                        Text(NSLocalizedString("ReservationView.NoReservations", comment: "Nothing comes up here"))
+                        Spacer()
                     } else {
                         List(reservationVM.filteredReservationPreviews, id: \.id) { reservationPreview in
                             ZStack {
@@ -47,12 +49,11 @@ struct ReservationView: View {
                         }
                         .listStyle(GroupedListStyle())
                     }
-                    
                 }
                 
                 Spacer()
             }
-            .navigationBarTitle("Reservations", displayMode: .large)
+            .navigationBarTitle(NSLocalizedString("ReservationView.Reservations", comment: "Reservations"), displayMode: .large)
             .onAppear {
                 reservationVM.loadReservations{ loggedIn in
                     if !loggedIn {
@@ -60,9 +61,6 @@ struct ReservationView: View {
                     }
                 }
             }
-            
         }
-        
     }
-    
 }

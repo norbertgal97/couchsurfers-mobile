@@ -22,5 +22,7 @@ struct Reservation {
     var price = ""
     var startDate = ""
     var endDate = ""
+    var ownerName = ""
+    var ownerEmail = ""
     var couchPhotos = [CouchPhoto]()
 }

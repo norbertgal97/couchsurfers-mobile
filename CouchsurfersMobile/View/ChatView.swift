@@ -37,12 +37,13 @@ struct ChatView: View {
                     .border(Color.gray)
 
                 Button(action: { chatVM.sendMessage(senderId: myId) }) {
-                    Text("Send")
+                    Text(NSLocalizedString("ChatView.Send", comment: "Send"))
                 }
                 .disabled(chatVM.message.isEmpty)
             }
             .padding()
         }
+        .navigationBarTitle(Text(NSLocalizedString("ChatView.Messages", comment: "Messages")), displayMode: .inline)
         .onAppear {
             chatVM.getMessages(chatRoomId: chatRoomId) { loggedIn in
                 if !loggedIn {

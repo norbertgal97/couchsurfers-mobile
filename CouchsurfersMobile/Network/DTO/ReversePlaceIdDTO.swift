@@ -17,10 +17,4 @@ struct ReversePlaceIdDTO: Decodable {
     }
 }
 
-struct PlaceIdResultDTO: Decodable {
-    let address: String
-    
-    enum CodingKeys: String, CodingKey {
-        case address = "formatted_address"
-    }
-}
+

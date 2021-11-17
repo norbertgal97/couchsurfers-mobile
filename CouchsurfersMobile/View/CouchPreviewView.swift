@@ -5,14 +5,13 @@
 //  Created by Norbert Gál on 2021. 10. 06..
 //
 
-import Foundation
 import SwiftUI
 import Kingfisher
 
 struct CouchPreviewView: View {
-    var city = ""
-    var name = ""
-    var price = ""
+    let city: String
+    let name: String
+    let price: String
     var photoUrl: String?
     
     var body: some View {
@@ -22,7 +21,6 @@ struct CouchPreviewView: View {
                 .shadow(radius: 5)
             
             VStack {
-                
                 if photoUrl != nil {
                     KingFisherImage(url: photoUrl!)
                         .resizable()
@@ -42,7 +40,7 @@ struct CouchPreviewView: View {
                     Text(city)
                     HStack {
                         Text("$\(price)").fontWeight(.bold)
-                        Text("/ night")
+                        Text(NSLocalizedString("CouchPreviewView.Night", comment: "Night"))
                     }
                 }
                 .padding(.horizontal)

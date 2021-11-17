@@ -24,9 +24,8 @@ struct UserReservationListView: View {
             }
             .listStyle(GroupedListStyle())
         } else {
-            Text("There are no reservations")
+            Text(NSLocalizedString("UserReservationListView.NoReservations", comment: "Empty list"))
                 .padding(.horizontal)
         }
     }
-    
 }

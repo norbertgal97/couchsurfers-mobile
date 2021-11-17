@@ -10,7 +10,7 @@ import Foundation
 class ProfileViewModel: ObservableObject {
     @Published var profileData = ProfileData()
     
-    @Published var alertDescription: String = NSLocalizedString("defaultAlertMessage", comment: "Default alert message")
+    @Published var alertDescription: String = NSLocalizedString("CommonView.UnknowError", comment: "Default alert message")
     @Published var showingAlert = false
     
     private var userInteractor = UserInteractor()

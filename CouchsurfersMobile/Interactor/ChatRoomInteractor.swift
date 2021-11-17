@@ -8,7 +8,7 @@
 import Foundation
 import os
 
-class ChatRoomInteractor {
+class ChatRoomInteractor: UnmanagedErrorHandler {
     
     private let baseUrl: String
     private let chatRoomUrl = "/api/v1/chat-rooms"
@@ -48,16 +48,16 @@ class ChatRoomInteractor {
                     if let unwrappedStatusCode = statusCode {
                         switch unwrappedStatusCode {
                         case 404:
-                            message = "\(recipientEmail) is not found"
+                            message = "\(recipientEmail) " + NSLocalizedString("NetworkError.IsNotFound", comment: "Not found")
                         case 422:
-                            message = "Empty fields"
+                            message = NSLocalizedString("NetworkError.EmptyField", comment: "Empty Field")
                         default:
-                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                            message = NSLocalizedString("NetworkError.UnknownError", comment: "Unknown error")
                         }
                         self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
                     }
                 } else {
-                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                    message = self.handleUnmanagedErrors(statusCode: statusCode, logger: self.logger)
                 }
                 
                 completionHandler(nil, message, true)
@@ -88,11 +88,11 @@ class ChatRoomInteractor {
                 
                 if let unwrappedError = error {
                     if statusCode != nil {
-                        message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                        message = NSLocalizedString("NetworkError.UnknownError", comment: "Unknown error")
                         self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
                     }
                 } else {
-                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                    message = self.handleUnmanagedErrors(statusCode: statusCode, logger: self.logger)
                 }
                 
                 completionHandler(nil, message, true)
@@ -121,15 +121,4 @@ class ChatRoomInteractor {
         let chatRoom = ChatRoom(id: dto.id, myId: dto.myId, name: dto.chatRoomName, recipientEmail: dto.recipientEmail)
         return chatRoom
     }
-    
-    private func handleUnmanagedErrors(statusCode: Int?) -> String {
-        if let unwrappedStatusCode = statusCode {
-            self.logger.debug("Unknown error with status code: \(unwrappedStatusCode)")
-            return NSLocalizedString("networkError.unknownError", comment: "Unknown error")
-        } else {
-            self.logger.debug("Could not connect to the server!")
-            return NSLocalizedString("networkError.connectionError", comment: "Connection error")
-        }
-    }
-    
 }

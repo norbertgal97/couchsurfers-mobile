@@ -79,6 +79,7 @@
 		AE5FF990270E4D0400A8B961 /* CouchPreviewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5FF98F270E4D0400A8B961 /* CouchPreviewDTO.swift */; };
 		AE6C815D26FD3DD800F68E78 /* CouchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6C815C26FD3DD800F68E78 /* CouchDTO.swift */; };
 		AE6C815F26FD427A00F68E78 /* LocationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6C815E26FD427A00F68E78 /* LocationDTO.swift */; };
+		AE84D5CD27401EB7008C18A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE84D5CC27401EB7008C18A7 /* AppDelegate.swift */; };
 		AE8AAD4A272B5B3A0019594F /* UserReservationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8AAD49272B5B3A0019594F /* UserReservationDTO.swift */; };
 		AE8AAD4C272B69940019594F /* UserReservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8AAD4B272B69940019594F /* UserReservation.swift */; };
 		AE8AAD4E272CACE00019594F /* UserReservationPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8AAD4D272CACE00019594F /* UserReservationPreviewView.swift */; };
@@ -95,7 +96,7 @@
 		AE9E1EC92728CD2000550BFD /* ProfileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9E1EC82728CD2000550BFD /* ProfileData.swift */; };
 		AE9E1ECB2728CDB100550BFD /* ProfileDataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9E1ECA2728CDB100550BFD /* ProfileDataDTO.swift */; };
 		AE9F0A272701283300CC45C3 /* UserSessionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F0A262701283300CC45C3 /* UserSessionInteractor.swift */; };
-		AE9F0A2927014C7F00CC45C3 /* MyCouchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F0A2827014C7F00CC45C3 /* MyCouchInteractor.swift */; };
+		AE9F0A2927014C7F00CC45C3 /* CouchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F0A2827014C7F00CC45C3 /* CouchInteractor.swift */; };
 		AEB6DDD0270F80FC00EECDE0 /* KingFisherImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB6DDCF270F80FC00EECDE0 /* KingFisherImage.swift */; };
 		AEB6DDD22711DF7000EECDE0 /* GooglePlacesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB6DDD12711DF7000EECDE0 /* GooglePlacesInteractor.swift */; };
 		AEB6DDD42711E18D00EECDE0 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB6DDD32711E18D00EECDE0 /* Place.swift */; };
@@ -111,8 +112,10 @@
 		AEC30DD62737E9C900B877DF /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC30DD52737E9C900B877DF /* ChatMessage.swift */; };
 		AEC30DD82737EC0500B877DF /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC30DD72737EC0500B877DF /* ChatViewModel.swift */; };
 		AEC30DDB27385D9100B877DF /* UnmanagedErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC30DDA27385D9100B877DF /* UnmanagedErrorHandler.swift */; };
+		AEC30DDE273C868300B877DF /* PlaceIdResultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC30DDD273C868300B877DF /* PlaceIdResultDTO.swift */; };
+		AEC30DE0273C967200B877DF /* ImageCompressionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC30DDF273C967200B877DF /* ImageCompressionHandler.swift */; };
 		AEF6C99727123EBE00453191 /* GooglePlacesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF6C99627123EBE00453191 /* GooglePlacesViewModel.swift */; };
-		AEF6C99B2712518A00453191 /* ReversePlaceId.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF6C99A2712518A00453191 /* ReversePlaceId.swift */; };
+		AEF6C99B2712518A00453191 /* ReversePlaceIdDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF6C99A2712518A00453191 /* ReversePlaceIdDTO.swift */; };
 		AEF6C99D2712641200453191 /* ExplorationFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF6C99C2712641200453191 /* ExplorationFormView.swift */; };
 		AEF6C99F27126CE100453191 /* ExplorationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF6C99E27126CE100453191 /* ExplorationListView.swift */; };
 		AEF6C9A12713159700453191 /* CouchFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF6C9A02713159700453191 /* CouchFilter.swift */; };
@@ -202,6 +205,8 @@
 		AE5FF98F270E4D0400A8B961 /* CouchPreviewDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchPreviewDTO.swift; sourceTree = "<group>"; };
 		AE6C815C26FD3DD800F68E78 /* CouchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchDTO.swift; sourceTree = "<group>"; };
 		AE6C815E26FD427A00F68E78 /* LocationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDTO.swift; sourceTree = "<group>"; };
+		AE84D5CC27401EB7008C18A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AE84D5CE27402419008C18A7 /* CouchsurfersMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CouchsurfersMobile.entitlements; sourceTree = "<group>"; };
 		AE8AAD49272B5B3A0019594F /* UserReservationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReservationDTO.swift; sourceTree = "<group>"; };
 		AE8AAD4B272B69940019594F /* UserReservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReservation.swift; sourceTree = "<group>"; };
 		AE8AAD4D272CACE00019594F /* UserReservationPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReservationPreviewView.swift; sourceTree = "<group>"; };
@@ -218,7 +223,7 @@
 		AE9E1EC82728CD2000550BFD /* ProfileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileData.swift; sourceTree = "<group>"; };
 		AE9E1ECA2728CDB100550BFD /* ProfileDataDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataDTO.swift; sourceTree = "<group>"; };
 		AE9F0A262701283300CC45C3 /* UserSessionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSessionInteractor.swift; sourceTree = "<group>"; };
-		AE9F0A2827014C7F00CC45C3 /* MyCouchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCouchInteractor.swift; sourceTree = "<group>"; };
+		AE9F0A2827014C7F00CC45C3 /* CouchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchInteractor.swift; sourceTree = "<group>"; };
 		AEB6DDCF270F80FC00EECDE0 /* KingFisherImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingFisherImage.swift; sourceTree = "<group>"; };
 		AEB6DDD12711DF7000EECDE0 /* GooglePlacesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesInteractor.swift; sourceTree = "<group>"; };
 		AEB6DDD32711E18D00EECDE0 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
@@ -234,8 +239,10 @@
 		AEC30DD52737E9C900B877DF /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		AEC30DD72737EC0500B877DF /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		AEC30DDA27385D9100B877DF /* UnmanagedErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnmanagedErrorHandler.swift; sourceTree = "<group>"; };
+		AEC30DDD273C868300B877DF /* PlaceIdResultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceIdResultDTO.swift; sourceTree = "<group>"; };
+		AEC30DDF273C967200B877DF /* ImageCompressionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCompressionHandler.swift; sourceTree = "<group>"; };
 		AEF6C99627123EBE00453191 /* GooglePlacesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesViewModel.swift; sourceTree = "<group>"; };
-		AEF6C99A2712518A00453191 /* ReversePlaceId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversePlaceId.swift; sourceTree = "<group>"; };
+		AEF6C99A2712518A00453191 /* ReversePlaceIdDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversePlaceIdDTO.swift; sourceTree = "<group>"; };
 		AEF6C99C2712641200453191 /* ExplorationFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorationFormView.swift; sourceTree = "<group>"; };
 		AEF6C99E27126CE100453191 /* ExplorationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorationListView.swift; sourceTree = "<group>"; };
 		AEF6C9A02713159700453191 /* CouchFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouchFilter.swift; sourceTree = "<group>"; };
@@ -288,6 +295,7 @@
 		AE0ECA0B26EC1C08002AD67D /* CouchsurfersMobile */ = {
 			isa = PBXGroup;
 			children = (
+				AE84D5CE27402419008C18A7 /* CouchsurfersMobile.entitlements */,
 				AE13C74C26F2A9690032C081 /* Interactor */,
 				AE0ECA2926EC2889002AD67D /* Fonts */,
 				AE0ECA1E26EC225E002AD67D /* Network */,
@@ -300,6 +308,7 @@
 				AE0ECA1526EC1C09002AD67D /* Info.plist */,
 				AE0ECA1226EC1C09002AD67D /* Preview Content */,
 				AE13C78226F7E0CD0032C081 /* Util.swift */,
+				AE84D5CC27401EB7008C18A7 /* AppDelegate.swift */,
 			);
 			path = CouchsurfersMobile;
 			sourceTree = "<group>";
@@ -397,33 +406,13 @@
 		AE0ECA1E26EC225E002AD67D /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				AEC30DDC273C864A00B877DF /* DTO */,
 				AE13C77726F7BF1A0032C081 /* RequestHandler */,
 				AE13C76E26F7AB820032C081 /* ResponseHandler */,
-				AE13C75D26F6A3520032C081 /* Request */,
-				AE13C75C26F6A34A0032C081 /* Response */,
-				AE0ECA3626ED4EA4002AD67D /* ErrorDTO.swift */,
 				AE13C74D26F3F8CB0032C081 /* NetworkManager.swift */,
 				AE13C74F26F3FF900032C081 /* NetworkStatus.swift */,
 				AE13C75526F687470032C081 /* HTTPMethod.swift */,
-				AE5FF9752708EF6100A8B961 /* CouchPhotoDTO.swift */,
-				AE5FF97B270A08DB00A8B961 /* FileUploadDTO.swift */,
-				AE5FF981270A801800A8B961 /* MessageDTO.swift */,
-				AE5FF983270A80E100A8B961 /* FilesToDeleteDTO.swift */,
-				AE5FF985270BBD0C00A8B961 /* HostDTO.swift */,
-				AE5FF98F270E4D0400A8B961 /* CouchPreviewDTO.swift */,
-				AEF6C99A2712518A00453191 /* ReversePlaceId.swift */,
-				AEFE81E3271F7B49002FDDA4 /* ReserveCouchDTO.swift */,
-				AEFE81E7271F8F34002FDDA4 /* ReserveDTO.swift */,
-				AE3EE83B2722194D008258FC /* ReservationPreviewDTO.swift */,
-				AE3EE8472724D073008258FC /* ReservationDTO.swift */,
-				AE4FA507272622090025C69D /* PersonalInformationDTO.swift */,
-				AE4FA509272622840025C69D /* UserPhotoDTO.swift */,
-				AE9E1ECA2728CDB100550BFD /* ProfileDataDTO.swift */,
-				AE8AAD49272B5B3A0019594F /* UserReservationDTO.swift */,
-				AE8AAD53272EC0C90019594F /* ReviewDTO.swift */,
 				AE4FBD6D2733207D008D303F /* WebsocketManager.swift */,
-				AEC30DC92734B9EF00B877DF /* ChatRoomDTO.swift */,
-				AEC30DD32737E91B00B877DF /* ChatMessageDTO.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -441,7 +430,7 @@
 			children = (
 				AEC30DD927385D6F00B877DF /* Handler */,
 				AE9F0A262701283300CC45C3 /* UserSessionInteractor.swift */,
-				AE9F0A2827014C7F00CC45C3 /* MyCouchInteractor.swift */,
+				AE9F0A2827014C7F00CC45C3 /* CouchInteractor.swift */,
 				AE5FF9732708C14E00A8B961 /* HostInteractor.swift */,
 				AEB6DDD12711DF7000EECDE0 /* GooglePlacesInteractor.swift */,
 				AEFE81E5271F882E002FDDA4 /* ReservationInteractor.swift */,
@@ -451,31 +440,6 @@
 				AEC30DC52734A5E400B877DF /* ChatRoomInteractor.swift */,
 			);
 			path = Interactor;
-			sourceTree = "<group>";
-		};
-		AE13C75C26F6A34A0032C081 /* Response */ = {
-			isa = PBXGroup;
-			children = (
-				AE13C75126F657CE0032C081 /* LoginResponseDTO.swift */,
-				AE13C75326F6814E0032C081 /* SignUpResponseDTO.swift */,
-				AE13C78026F7D40A0032C081 /* PredictionsDTO.swift */,
-				AE6C815C26FD3DD800F68E78 /* CouchDTO.swift */,
-				AE6C815E26FD427A00F68E78 /* LocationDTO.swift */,
-				AE5FF96F2708BB9600A8B961 /* OwnHostedCouchDTO.swift */,
-			);
-			path = Response;
-			sourceTree = "<group>";
-		};
-		AE13C75D26F6A3520032C081 /* Request */ = {
-			isa = PBXGroup;
-			children = (
-				AE0ECA3426ED41CB002AD67D /* LoginRequestDTO.swift */,
-				AE13C74A26F158F90032C081 /* SignUpRequestDTO.swift */,
-				AE8AAD5B272F70EC0019594F /* ReviewRequestDTO.swift */,
-				AE4FBD7127334D68008D303F /* MessageRequestDTO.swift */,
-				AEC30DC72734B05300B877DF /* ChatRoomRequestDTO.swift */,
-			);
-			path = Request;
 			sourceTree = "<group>";
 		};
 		AE13C76E26F7AB820032C081 /* ResponseHandler */ = {
@@ -499,8 +463,47 @@
 			isa = PBXGroup;
 			children = (
 				AEC30DDA27385D9100B877DF /* UnmanagedErrorHandler.swift */,
+				AEC30DDF273C967200B877DF /* ImageCompressionHandler.swift */,
 			);
 			path = Handler;
+			sourceTree = "<group>";
+		};
+		AEC30DDC273C864A00B877DF /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				AE0ECA3426ED41CB002AD67D /* LoginRequestDTO.swift */,
+				AE13C74A26F158F90032C081 /* SignUpRequestDTO.swift */,
+				AE8AAD5B272F70EC0019594F /* ReviewRequestDTO.swift */,
+				AE4FBD7127334D68008D303F /* MessageRequestDTO.swift */,
+				AEC30DC72734B05300B877DF /* ChatRoomRequestDTO.swift */,
+				AE13C75126F657CE0032C081 /* LoginResponseDTO.swift */,
+				AE13C75326F6814E0032C081 /* SignUpResponseDTO.swift */,
+				AE13C78026F7D40A0032C081 /* PredictionsDTO.swift */,
+				AE6C815C26FD3DD800F68E78 /* CouchDTO.swift */,
+				AE6C815E26FD427A00F68E78 /* LocationDTO.swift */,
+				AE5FF96F2708BB9600A8B961 /* OwnHostedCouchDTO.swift */,
+				AEC30DC92734B9EF00B877DF /* ChatRoomDTO.swift */,
+				AEC30DD32737E91B00B877DF /* ChatMessageDTO.swift */,
+				AEFE81E3271F7B49002FDDA4 /* ReserveCouchDTO.swift */,
+				AEFE81E7271F8F34002FDDA4 /* ReserveDTO.swift */,
+				AE3EE83B2722194D008258FC /* ReservationPreviewDTO.swift */,
+				AE3EE8472724D073008258FC /* ReservationDTO.swift */,
+				AE4FA507272622090025C69D /* PersonalInformationDTO.swift */,
+				AE4FA509272622840025C69D /* UserPhotoDTO.swift */,
+				AE9E1ECA2728CDB100550BFD /* ProfileDataDTO.swift */,
+				AE8AAD49272B5B3A0019594F /* UserReservationDTO.swift */,
+				AE8AAD53272EC0C90019594F /* ReviewDTO.swift */,
+				AEF6C99A2712518A00453191 /* ReversePlaceIdDTO.swift */,
+				AE5FF9752708EF6100A8B961 /* CouchPhotoDTO.swift */,
+				AE5FF97B270A08DB00A8B961 /* FileUploadDTO.swift */,
+				AE5FF981270A801800A8B961 /* MessageDTO.swift */,
+				AE5FF983270A80E100A8B961 /* FilesToDeleteDTO.swift */,
+				AE5FF985270BBD0C00A8B961 /* HostDTO.swift */,
+				AE5FF98F270E4D0400A8B961 /* CouchPreviewDTO.swift */,
+				AE0ECA3626ED4EA4002AD67D /* ErrorDTO.swift */,
+				AEC30DDD273C868300B877DF /* PlaceIdResultDTO.swift */,
+			);
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		B3A5E9F940143BD6354AE69D /* Pods */ = {
@@ -661,6 +664,7 @@
 				AE4FA50227260D2C0025C69D /* PersonalInformationViewModel.swift in Sources */,
 				AE8AAD4A272B5B3A0019594F /* UserReservationDTO.swift in Sources */,
 				AE3EE8462724CD6A008258FC /* Reservation.swift in Sources */,
+				AEC30DDE273C868300B877DF /* PlaceIdResultDTO.swift in Sources */,
 				AE4FBD6E2733207D008D303F /* WebsocketManager.swift in Sources */,
 				AE13C78326F7E0CD0032C081 /* Util.swift in Sources */,
 				AE5FF984270A80E100A8B961 /* FilesToDeleteDTO.swift in Sources */,
@@ -672,7 +676,7 @@
 				AE5FF980270A2F6500A8B961 /* FileUpload.swift in Sources */,
 				AE4FA50C272623FC0025C69D /* UserPhoto.swift in Sources */,
 				AE5FF97C270A08DB00A8B961 /* FileUploadDTO.swift in Sources */,
-				AEF6C99B2712518A00453191 /* ReversePlaceId.swift in Sources */,
+				AEF6C99B2712518A00453191 /* ReversePlaceIdDTO.swift in Sources */,
 				AEC30DD62737E9C900B877DF /* ChatMessage.swift in Sources */,
 				AE5FF98C270E438E00A8B961 /* ExplorationViewModel.swift in Sources */,
 				AE5FF98A270D24C700A8B961 /* CouchPreviewView.swift in Sources */,
@@ -682,9 +686,10 @@
 				AE5FF982270A801800A8B961 /* MessageDTO.swift in Sources */,
 				AE4FBD7027332551008D303F /* ChatInteractor.swift in Sources */,
 				AE13C75F26F6A6220032C081 /* SignInDetails.swift in Sources */,
+				AE84D5CD27401EB7008C18A7 /* AppDelegate.swift in Sources */,
 				AEFE81E6271F882E002FDDA4 /* ReservationInteractor.swift in Sources */,
 				AE5FF9722708C01100A8B961 /* HostedCouch.swift in Sources */,
-				AE9F0A2927014C7F00CC45C3 /* MyCouchInteractor.swift in Sources */,
+				AE9F0A2927014C7F00CC45C3 /* CouchInteractor.swift in Sources */,
 				AE3EE844272374D3008258FC /* ReservationDetailsViewModel.swift in Sources */,
 				AEC30DC82734B05300B877DF /* ChatRoomRequestDTO.swift in Sources */,
 				AEC30DC62734A5E400B877DF /* ChatRoomInteractor.swift in Sources */,
@@ -734,6 +739,7 @@
 				AE0ECA2026EC2284002AD67D /* AuthenticationView.swift in Sources */,
 				AEB6DDD22711DF7000EECDE0 /* GooglePlacesInteractor.swift in Sources */,
 				AE8AAD56272F12700019594F /* Review.swift in Sources */,
+				AEC30DE0273C967200B877DF /* ImageCompressionHandler.swift in Sources */,
 				AE5FF97A27093A5100A8B961 /* CouchPhoto.swift in Sources */,
 				AE4FA50A272622840025C69D /* UserPhotoDTO.swift in Sources */,
 				AE13C75426F6814E0032C081 /* SignUpResponseDTO.swift in Sources */,
@@ -878,6 +884,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CouchsurfersMobile/CouchsurfersMobile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"CouchsurfersMobile/Preview Content\"";
 				DEVELOPMENT_TEAM = HFG2KVG887;
@@ -901,6 +908,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CouchsurfersMobile/CouchsurfersMobile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"CouchsurfersMobile/Preview Content\"";
 				DEVELOPMENT_TEAM = HFG2KVG887;

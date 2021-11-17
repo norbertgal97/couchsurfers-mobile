@@ -11,7 +11,8 @@ class ReservationDetailsViewModel: ReversePlaceIdProtocol {
     @Published var reservation: Reservation?
     @Published var description = ""
     
-    @Published var alertDescription: String = NSLocalizedString("defaultAlertMessage", comment: "Default alert message")
+    @Published var alertTitle = NSLocalizedString("CommonView.Info", comment: "Information")
+    @Published var alertDescription: String = NSLocalizedString("CommonView.UnknownError", comment: "Default alert message")
     @Published var showingAlert = false
     
     @Published var isShowingReviewsListView = false
@@ -23,7 +24,9 @@ class ReservationDetailsViewModel: ReversePlaceIdProtocol {
         reservationInteractor.loadReservationDetails(with: id) { reservation, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertTitle = NSLocalizedString("CommonView.Error", comment: "Error")
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
@@ -40,7 +43,6 @@ class ReservationDetailsViewModel: ReversePlaceIdProtocol {
             DispatchQueue.main.async {
                 completionHandler(loggedIn)
             }
-            
         }
     }
     
@@ -48,7 +50,9 @@ class ReservationDetailsViewModel: ReversePlaceIdProtocol {
         reservationInteractor.cancelReservation(with: id) { message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertTitle = NSLocalizedString("CommonView.Error", comment: "Error")
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
@@ -62,13 +66,17 @@ class ReservationDetailsViewModel: ReversePlaceIdProtocol {
         reviewInteractor.createReview(with: couchId, description) { created, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
             if created {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: "Review is created!")
+                    self.alertTitle = NSLocalizedString("CommonView.Info", comment: "Information")
+                    self.alertDescription = NSLocalizedString("ReservationDetailsViewModel.ReviewCreated", comment: "Review created")
+                    self.showingAlert = true
+                    self.description = ""
                 }
             }
             
@@ -76,12 +84,5 @@ class ReservationDetailsViewModel: ReversePlaceIdProtocol {
                 completionHandler(loggedIn)
             }
         }
-        
     }
-    
-    private func updateAlert(with message: String) {
-        self.alertDescription = message
-        self.showingAlert = true
-    }
-    
 }

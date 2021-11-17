@@ -5,15 +5,12 @@
 //  Created by Norbert Gál on 2021. 11. 03..
 //
 
-import Foundation
 import SwiftUI
 
 struct ChatRoomListView: View {
     @EnvironmentObject var globalEnv: GlobalEnvironment
     
     @ObservedObject var chatRoomListVM = ChatRoomListViewModel()
-    
-    @State private var showPopUp = false
     
     var body: some View {
         NavigationView {
@@ -34,18 +31,18 @@ struct ChatRoomListView: View {
                     }
                 }
                 
-                if showPopUp {
+                if chatRoomListVM.showPopUp {
                     ZStack {
                         Color.black.opacity(0.3).edgesIgnoringSafeArea(.all)
                         VStack {
-                            Text("Add chat room")
+                            Text(NSLocalizedString("ChatRoomListView.AddChatRoom", comment: "Add chat room"))
                                 .font(.title)
                             
-                            TextField("Room name", text: $chatRoomListVM.roomName)
+                            TextField(NSLocalizedString("ChatRoomListView.RoomName", comment: "Room name"), text: $chatRoomListVM.roomName)
                                 .textFieldStyle(.roundedBorder)
                                 .padding(.horizontal)
                             
-                            TextField("Recipient", text: $chatRoomListVM.recipientEmail)
+                            TextField(NSLocalizedString("ChatRoomListView.Recipient", comment: "Recipient"), text: $chatRoomListVM.recipientEmail)
                                 .textFieldStyle(.roundedBorder)
                                 .padding(.horizontal)
                             
@@ -58,15 +55,15 @@ struct ChatRoomListView: View {
                                             self.globalEnv.userLoggedIn = false
                                         }
                                     }
-                                    self.showPopUp = false
+                                    chatRoomListVM.showPopUp = false
                                 }, label: {
-                                    Text("Add")
+                                    Text(NSLocalizedString("ChatRoomListView.Add", comment: "Add"))
                                 }).padding(.trailing, 80)
                                 
                                 Button(action: {
-                                    self.showPopUp = false
+                                    chatRoomListVM.showPopUp = false
                                 }, label: {
-                                    Text("Close")
+                                    Text(NSLocalizedString("ChatRoomListView.Cancel", comment: "Cancel"))
                                 })
                             }
                         }
@@ -77,10 +74,10 @@ struct ChatRoomListView: View {
                     }
                 }
             }
-            .navigationBarTitle(Text("Chat rooms"), displayMode: .large)
+            .navigationBarTitle(Text(NSLocalizedString("ChatRoomListView.ChatRooms", comment: "Chat rooms")), displayMode: .large)
             .toolbar {
                 Button(action: {
-                    self.showPopUp = true
+                    chatRoomListVM.showPopUp = true
                 }, label: {
                     Image(systemName: "square.and.pencil")
                         .foregroundColor(Color.red)
@@ -93,6 +90,11 @@ struct ChatRoomListView: View {
                     }
                 }
             }
+            .alert(isPresented: $chatRoomListVM.showingAlert, content: {
+                Alert(title: Text(NSLocalizedString("CommonView.Error", comment: "Error")), message: Text(chatRoomListVM.alertDescription), dismissButton: .default(Text(NSLocalizedString("CommonView.Cancel", comment: "Cancel"))) {
+                    print("Dismiss button pressed")
+                })
+            })
         }
     }
 }

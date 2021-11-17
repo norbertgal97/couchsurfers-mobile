@@ -8,7 +8,7 @@
 import os
 import UIKit
 
-class MyCouchInteractor {
+class CouchInteractor: UnmanagedErrorHandler, ImageCompressionHandler {
     
     private let baseUrl: String
     private let couchesUrl = "/api/v1/couches"
@@ -22,7 +22,7 @@ class MyCouchInteractor {
         self.baseUrl = url
     }
     
-    func loadCouch(with id: Int, completionHandler: @escaping (_ couch: Couch?, _ message: String?, _ loggedIn: Bool, _ downloadImage: Bool) -> Void) {
+    func loadCouch(with id: Int, completionHandler: @escaping (_ couch: Couch?, _ message: String?, _ loggedIn: Bool) -> Void) {
         let networkManager = NetworkManager<CouchDTO>()
         let urlRequest = networkManager.makeRequest(url: URL(string: baseUrl + couchesUrl + "/\(id)")!, method: .GET)
         
@@ -34,7 +34,7 @@ class MyCouchInteractor {
                 if let unwrappedStatusCode = statusCode {
                     if unwrappedStatusCode == 401 {
                         self.logger.debug("Session has expired!")
-                        completionHandler(nil, nil, false, false)
+                        completionHandler(nil, nil, false)
                         return
                     }
                 }
@@ -43,24 +43,23 @@ class MyCouchInteractor {
                     if let unwrappedStatusCode = statusCode {
                         switch unwrappedStatusCode {
                         case 404:
-                            message = NSLocalizedString("networkError.couchNotFound", comment: "Couch not found")
+                            message = NSLocalizedString("NetworkError.CouchNotFound", comment: "Couch not found")
                         case 403:
-                            message = NSLocalizedString("networkError.forbidden", comment: "Forbidden")
+                            message = NSLocalizedString("NetworkError.Forbidden", comment: "Forbidden")
                         default:
-                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                            message = NSLocalizedString("NetworkError.UnknownError", comment: "Unknown error")
                         }
                         self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
                     }
                 } else {
-                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                    message = self.handleUnmanagedErrors(statusCode: statusCode, logger: self.logger)
                 }
                 
-                completionHandler(nil, message, true, false)
+                completionHandler(nil, message, true)
             case .successful:
                 self.logger.debug("Couch loaded with id: \(id)")
-                completionHandler(self.convertCouchDTOToModel(dto: data!), message, true, true)
+                completionHandler(self.convertCouchDTOToModel(dto: data!), message, true)
             }
-            
         }
     }
     
@@ -92,18 +91,18 @@ class MyCouchInteractor {
                     if let unwrappedStatusCode = statusCode {
                         switch unwrappedStatusCode {
                         case 404:
-                            message = NSLocalizedString("networkError.couchNotFound", comment: "Couch not found")
+                            message = NSLocalizedString("NetworkError.CouchNotFound", comment: "Couch not found")
                         case 403:
-                            message = NSLocalizedString("networkError.forbidden", comment: "Forbidden")
+                            message = NSLocalizedString("NetworkError.Forbidden", comment: "Forbidden")
                         case 422:
-                            message = NSLocalizedString("networkError.emptyFields", comment: "Empty fields")
+                            message = NSLocalizedString("NetworkError.EmptyFields", comment: "Empty fields")
                         default:
-                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                            message = NSLocalizedString("NetworkError.UnknownError", comment: "Unknown error")
                         }
                         self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
                     }
                 } else {
-                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                    message = self.handleUnmanagedErrors(statusCode: statusCode, logger: self.logger)
                 }
                 
                 completionHandler(nil, message, true)
@@ -111,7 +110,6 @@ class MyCouchInteractor {
                 self.logger.debug("Couch updated with id: \(id)")
                 completionHandler(self.convertCouchDTOToModel(dto: data!), message, true)
             }
-            
         }
     }
     
@@ -137,16 +135,16 @@ class MyCouchInteractor {
                     if let unwrappedStatusCode = statusCode {
                         switch unwrappedStatusCode {
                         case 422:
-                            message = NSLocalizedString("networkError.emptyFields", comment: "Empty fields")
+                            message = NSLocalizedString("NetworkError.EmptyFields", comment: "Empty fields")
                         case 409:
-                            message = NSLocalizedString("networkError.couchAlreadyExists", comment: "Already exists")
+                            message = NSLocalizedString("NetworkError.CouchAlreadyExists", comment: "Already exists")
                         default:
-                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                            message = NSLocalizedString("NetworkError.UnknownError", comment: "Unknown error")
                         }
                         self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
                     }
                 } else {
-                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                    message = self.handleUnmanagedErrors(statusCode: statusCode, logger: self.logger)
                 }
                 
                 completionHandler(nil, message, true)
@@ -154,7 +152,6 @@ class MyCouchInteractor {
                 self.logger.debug("Couch saved with id: \(data!.id!)")
                 completionHandler(self.convertCouchDTOToModel(dto: data!), message, true)
             }
-            
         }
     }
     
@@ -179,14 +176,14 @@ class MyCouchInteractor {
                     if let unwrappedStatusCode = statusCode {
                         switch unwrappedStatusCode {
                         case 404:
-                            message = NSLocalizedString("networkError.couchNotFound", comment: "Couch not found")
+                            message = NSLocalizedString("NetworkError.CouchNotFound", comment: "Couch not found")
                         default:
-                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                            message = NSLocalizedString("NetworkError.UnknownError", comment: "Unknown error")
                         }
                         self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
                     }
                 } else {
-                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                    message = self.handleUnmanagedErrors(statusCode: statusCode, logger: self.logger)
                 }
                 
                 completionHandler(nil, message, true)
@@ -194,7 +191,6 @@ class MyCouchInteractor {
                 self.logger.debug("Couch loaded with id: \(data!.id)")
                 completionHandler(self.convertCouchPreviewDTOToModel(dto: data!), message, true)
             }
-            
         }
     }
     
@@ -220,14 +216,14 @@ class MyCouchInteractor {
                     if let unwrappedStatusCode = statusCode {
                         switch unwrappedStatusCode {
                         case 403:
-                            message = NSLocalizedString("networkError.forbidden", comment: "Forbidden")
+                            message = NSLocalizedString("NetworkError.Forbidden", comment: "Forbidden")
                         default:
-                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                            message = NSLocalizedString("NetworkError.UnknownError", comment: "Unknown error")
                         }
                         self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
                     }
                 } else {
-                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                    message = self.handleUnmanagedErrors(statusCode: statusCode, logger: self.logger)
                 }
                 
                 completionHandler(message, true)
@@ -235,7 +231,6 @@ class MyCouchInteractor {
                 self.logger.debug("Message from server: \(data!.message)")
                 completionHandler(message, true)
             }
-            
         }
     }
     
@@ -283,18 +278,18 @@ class MyCouchInteractor {
                     if let unwrappedStatusCode = statusCode {
                         switch unwrappedStatusCode {
                         case 403:
-                            message = NSLocalizedString("networkError.forbidden", comment: "Forbidden")
+                            message = NSLocalizedString("NetworkError.Forbidden", comment: "Forbidden")
                         case 404:
-                            message = NSLocalizedString("networkError.couchNotFound", comment: "Couch not found")
+                            message = NSLocalizedString("NetworkError.CouchNotFound", comment: "Couch not found")
                         case 422:
-                            message = NSLocalizedString("networkError.wrongFile", comment: "Wrong file")
+                            message = NSLocalizedString("NetworkError.WrongFile", comment: "Wrong file")
                         default:
-                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                            message = NSLocalizedString("NetworkError.UnknownError", comment: "Unknown error")
                         }
                         self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
                     }
                 } else {
-                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                    message = self.handleUnmanagedErrors(statusCode: statusCode, logger: self.logger)
                 }
                 
                 completionHandler(nil, message, true)
@@ -307,36 +302,12 @@ class MyCouchInteractor {
                 }
                 
                 if numberOfBigImages != 0 {
-                    message = "Some of the images are big."
+                    message = NSLocalizedString("NetworkError.BigImages", comment: "Big images")
                 }
                 
                 completionHandler(couchPhotosList, message, true)
             }
-            
         }
-    }
-    
-    func compressImage(image: UIImage) -> Data? {
-        var compressionQuality: CGFloat = 1.0
-        let maxSize: Double = 2.0
-        
-        var compressedImage: Data
-        var sizeInMB: Double
-        
-        repeat {
-            compressedImage = image.jpegData(compressionQuality: compressionQuality)!
-            let imageSize: Double = Double(compressedImage.count)
-            sizeInMB = Double(imageSize) / 1024 / 1024;
-            
-            if compressionQuality < 0.01 {
-                break
-            }
-            
-            compressionQuality -= 0.2
-            
-        } while sizeInMB > maxSize
-        
-        return sizeInMB > maxSize ? nil : compressedImage
     }
     
     private func convertModelToDTO(model: Couch) -> CouchDTO {
@@ -373,6 +344,8 @@ class MyCouchInteractor {
         couch.amenities = dto.amenities ?? ""
         couch.price = String(dto.price)
         couch.about = dto.about ?? ""
+        couch.ownerEmail = dto.ownerEmail ?? ""
+        couch.ownerName = dto.ownerName ?? ""
         
         if let unwrappedPhotos = dto.couchPhotos {
             for couchPhoto in unwrappedPhotos  {
@@ -466,15 +439,4 @@ class MyCouchInteractor {
         
         return couchDictionary
     }
-    
-    private func handleUnmanagedErrors(statusCode: Int?) -> String {
-        if let unwrappedStatusCode = statusCode {
-            self.logger.debug("Unknown error with status code: \(unwrappedStatusCode)")
-            return NSLocalizedString("networkError.unknownError", comment: "Unknown error")
-        } else {
-            self.logger.debug("Could not connect to the server!")
-            return NSLocalizedString("networkError.connectionError", comment: "Connection error")
-        }
-    }
-    
 }

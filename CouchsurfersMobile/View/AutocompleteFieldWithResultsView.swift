@@ -18,7 +18,7 @@ struct AutocompleteFieldWithResultsView: View {
     
     var body: some View {
         if selectedCity != "" {
-            TextField("City name", text: $selectedCity)
+            TextField(NSLocalizedString("AutocompleteFieldWithResultsView.City", comment: "City"), text: $selectedCity)
                 .disabled(true)
                 .overlay(
                     HStack {
@@ -33,7 +33,7 @@ struct AutocompleteFieldWithResultsView: View {
                     }
                         .padding(), alignment: .center)
         } else {
-            TextField("City name", text: $cityNameText)
+            TextField(NSLocalizedString("AutocompleteFieldWithResultsView.City", comment: "City"), text: $cityNameText)
                 .onChange(of: cityNameText) {
                     if $0 == "" {
                         generateSessionToken()
@@ -66,6 +66,5 @@ struct AutocompleteFieldWithResultsView: View {
                 }
             }
         }
-        
     }
 }

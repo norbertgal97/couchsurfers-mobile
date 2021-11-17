@@ -11,7 +11,7 @@ class ChatViewModel: ObservableObject, StompClientDelegate {
     @Published var chatMessages = [ChatMessage]()
     @Published var message = ""
     
-    @Published var alertDescription: String = NSLocalizedString("defaultAlertMessage", comment: "Default alert message")
+    @Published var alertDescription: String = NSLocalizedString("CommonView.UnknownError", comment: "Default alert message")
     @Published var showingAlert = false
     
     private var chatInteracor: ChatInteractor
@@ -25,7 +25,8 @@ class ChatViewModel: ObservableObject, StompClientDelegate {
         chatInteracor.getMessagesForChatRoom(chatRoomId: chatRoomId) { chatMessages, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
@@ -39,11 +40,6 @@ class ChatViewModel: ObservableObject, StompClientDelegate {
                 completionHandler(loggedIn)
             }
         }
-    }
-    
-    private func updateAlert(with message: String) {
-        self.alertDescription = message
-        self.showingAlert = true
     }
     
     func registerSocket() {
