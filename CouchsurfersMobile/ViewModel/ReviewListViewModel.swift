@@ -10,7 +10,7 @@ import Foundation
 class ReviewListViewModel: ObservableObject {
     @Published var reviews = [Review]()
 
-    @Published var alertDescription: String = NSLocalizedString("defaultAlertMessage", comment: "Default alert message")
+    @Published var alertDescription: String = NSLocalizedString("CommonView.UnknowError", comment: "Default alert message")
     @Published var showingAlert = false
     
     private var reviewInteractor = ReviewInteractor()
@@ -19,7 +19,8 @@ class ReviewListViewModel: ObservableObject {
         reviewInteractor.getReviewsForSpecificCouch(with: couchId) { reviews, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
@@ -33,12 +34,5 @@ class ReviewListViewModel: ObservableObject {
                 completionHandler(loggedIn)
             }
         }
-        
     }
-    
-    private func updateAlert(with message: String) {
-        self.alertDescription = message
-        self.showingAlert = true
-    }
-    
 }

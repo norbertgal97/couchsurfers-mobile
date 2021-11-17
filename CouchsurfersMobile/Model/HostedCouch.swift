@@ -5,7 +5,7 @@
 //  Created by Norbert Gál on 2021. 10. 02..
 //
 
-import UIKit
+import Foundation
 
 struct HostedCouch {
     var id: Int?

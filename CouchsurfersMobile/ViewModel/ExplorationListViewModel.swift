@@ -8,7 +8,7 @@
 import SwiftUI
 
 class ExplorationListViewModel: ReversePlaceIdProtocol {
-    @Published var alertDescription: String = NSLocalizedString("defaultAlertMessage", comment: "Default alert message")
+    @Published var alertDescription: String = NSLocalizedString("CommonView.UnknowError", comment: "Default alert message")
     @Published var showingAlert = false
     @Published var filteredCouches = [CouchPreview]()
     
@@ -18,7 +18,8 @@ class ExplorationListViewModel: ReversePlaceIdProtocol {
         hostInteractor.filterHostedCouches(couchFilter: couchFilter) { couchPreviews, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
@@ -34,7 +35,6 @@ class ExplorationListViewModel: ReversePlaceIdProtocol {
                 completionHandler(loggedIn)
             }
         }
-        
     }
     
     private func updatePreviewsWithReversedCity(previews: [CouchPreview], cityId: String, completionHandler: @escaping (_ couches: [CouchPreview]) -> Void) {
@@ -48,10 +48,4 @@ class ExplorationListViewModel: ReversePlaceIdProtocol {
             completionHandler(couchPreviews)
         }
     }
-    
-    private func updateAlert(with message: String) {
-        self.alertDescription = message
-        self.showingAlert = true
-    }
-    
 }

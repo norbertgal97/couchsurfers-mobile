@@ -8,7 +8,7 @@
 import Foundation
 import os
 
-class HostInteractor {
+class HostInteractor: UnmanagedErrorHandler {
     private let baseUrl: String
     private let hostsUrl = "/api/v1/hosts"
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "Network")
@@ -21,7 +21,7 @@ class HostInteractor {
         self.baseUrl = url
     }
     
-    func getOwnHostedCouch(completionHandler: @escaping (_ couch: HostedCouch?, _ message: String?, _ loggedIn: Bool, _ downloadImage: Bool) -> Void) {
+    func getOwnHostedCouch(completionHandler: @escaping (_ couch: HostedCouch?, _ message: String?, _ loggedIn: Bool) -> Void) {
         let networkManager = NetworkManager<OwnHostedCouchDTO>()
         let urlRequest = networkManager.makeRequest(url: URL(string: baseUrl + hostsUrl + "/own")!, method: .GET)
         
@@ -33,7 +33,7 @@ class HostInteractor {
                 if let unwrappedStatusCode = statusCode {
                     if unwrappedStatusCode == 401 {
                         self.logger.debug("Session has expired!")
-                        completionHandler(nil, nil, false, false)
+                        completionHandler(nil, nil, false)
                         return
                     }
                 }
@@ -42,20 +42,20 @@ class HostInteractor {
                     if let unwrappedStatusCode = statusCode {
                         switch unwrappedStatusCode {
                         case 404:
-                            message = NSLocalizedString("networkError.couchNotFound", comment: "Couch not found")
+                            message = NSLocalizedString("NetworkError.CouchNotFound", comment: "Couch not found")
                         default:
-                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                            message = NSLocalizedString("NetworkError.UnknownError", comment: "Unknown error")
                         }
                         self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
                     }
                 } else {
-                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                    message = self.handleUnmanagedErrors(statusCode: statusCode, logger: self.logger)
                 }
                 
-                completionHandler(nil, message, true, false)
+                completionHandler(nil, message, true)
             case .successful:
                 self.logger.debug("Hosted couch loaded with id: \(data!.couchId)")
-                completionHandler(self.convertDTOToModel(dto: data!), message, true, true)
+                completionHandler(self.convertDTOToModel(dto: data!), message, true)
             }
             
         }
@@ -64,6 +64,7 @@ class HostInteractor {
     func hostCouch(couchId: Int, hosted: Bool, completionHandler: @escaping (_ hosted: Bool?, _ message: String?, _ loggedIn: Bool) -> Void) {
         let networkManager = NetworkManager<HostDTO>()
         let hostedDTO = HostDTO(hosted: hosted)
+        hostedDTO.language = NSLocalizedString("PushNotification.Language", comment: "language")
         let urlRequest = networkManager.makeRequest(from: hostedDTO, url: URL(string: baseUrl + hostsUrl + "/\(couchId)")!, method: .PATCH)
         
         networkManager.dataTask(with: urlRequest) { (networkStatus, data, error) in
@@ -83,18 +84,18 @@ class HostInteractor {
                     if let unwrappedStatusCode = statusCode {
                         switch unwrappedStatusCode {
                         case 404:
-                            message = NSLocalizedString("networkError.couchNotFound", comment: "Couch not found")
+                            message = NSLocalizedString("NetworkError.CouchNotFound", comment: "Couch not found")
                         case 403:
-                            message = NSLocalizedString("networkError.forbidden", comment: "Forbidden")
+                            message = NSLocalizedString("NetworkError.Forbidden", comment: "Forbidden")
                         case 422:
-                            message = NSLocalizedString("networkError.emptyFields", comment: "Empty fields")
+                            message = NSLocalizedString("NetworkError.EmptyField", comment: "Empty fields")
                         default:
-                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                            message = NSLocalizedString("NetworkError.UnknownError", comment: "Unknown error")
                         }
                         self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
                     }
                 } else {
-                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                    message = self.handleUnmanagedErrors(statusCode: statusCode, logger: self.logger)
                 }
                 
                 completionHandler(nil, message, true)
@@ -102,7 +103,6 @@ class HostInteractor {
                 self.logger.debug("Couch hosted with id: \(couchId)")
                 completionHandler(data!.hosted, message, true)
             }
-            
         }
     }
     
@@ -115,8 +115,8 @@ class HostInteractor {
         let formattedToDate = dateformat.string(from: couchFilter.toDate)
         
         let url = URL(string: baseUrl +
-                            hostsUrl +
-                            "/query?city=\(couchFilter.city)&guests=\(couchFilter.numberOfGuests)&checkin=\(formattedFromDate)&checkout=\(formattedToDate)")!
+                      hostsUrl +
+                      "/query?city=\(couchFilter.city)&guests=\(couchFilter.numberOfGuests)&checkin=\(formattedFromDate)&checkout=\(formattedToDate)")!
         let urlRequest = networkManager.makeRequest(url: url, method: .GET)
         networkManager.dataTask(with: urlRequest) { (networkStatus, data, error) in
             var message: String?
@@ -135,14 +135,14 @@ class HostInteractor {
                     if let unwrappedStatusCode = statusCode {
                         switch unwrappedStatusCode {
                         case 422:
-                            message = NSLocalizedString("networkError.emptyFields", comment: "Empty fields")
+                            message = NSLocalizedString("NetworkError.EmptyFieldsWarning", comment: "Empty fields")
                         default:
-                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                            message = NSLocalizedString("NetworkError.UnknownError", comment: "Unknown error")
                         }
                         self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
                     }
                 } else {
-                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                    message = self.handleUnmanagedErrors(statusCode: statusCode, logger: self.logger)
                 }
                 
                 completionHandler(nil, message, true)
@@ -150,7 +150,6 @@ class HostInteractor {
                 self.logger.debug("Couch previews loaded. Count: \(data!.count)")
                 completionHandler(self.convertPreviewDTOToPreviewModel(dto: data!), message, true)
             }
-            
         }
     }
     
@@ -191,15 +190,5 @@ class HostInteractor {
         hostedCouch.reservations.append(contentsOf: reservations)
         
         return hostedCouch
-    }
-    
-    private func handleUnmanagedErrors(statusCode: Int?) -> String {
-        if let unwrappedStatusCode = statusCode {
-            self.logger.debug("Unknown error with status code: \(unwrappedStatusCode)")
-            return NSLocalizedString("networkError.unknownError", comment: "Unknown error")
-        } else {
-            self.logger.debug("Could not connect to the server!")
-            return NSLocalizedString("networkError.connectionError", comment: "Connection error")
-        }
     }
 }

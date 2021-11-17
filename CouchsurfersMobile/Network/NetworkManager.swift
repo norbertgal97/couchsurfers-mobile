@@ -57,11 +57,7 @@ class NetworkManager<Res: Decodable> {
                 return
             }
             
-            
             do {
-                //let outputStr  = String(data: data, encoding: String.Encoding.utf8) as String?
-                //print(outputStr)
-                
                 let decodedData: Res = try self.decodeResponse(from: data, httpResponse: httpResponse)
                 
                 completionHandler(.successful, decodedData, nil)
@@ -101,7 +97,6 @@ class NetworkManager<Res: Decodable> {
                 return
             }
             
-            
             do {
                 let decodedData: Res = try self.decodeResponse(from: data, httpResponse: httpResponse)
                 
@@ -116,7 +111,5 @@ class NetworkManager<Res: Decodable> {
             }
             
         }.resume()
-        
     }
-    
 }

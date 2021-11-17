@@ -6,46 +6,206 @@
   
 */
 
-// AuthenticationView
-"authenticationView.fullNamePlaceholder" = "Enter your full name";
-"authenticationView.emailAddressPlaceholder" = "Enter your email address";
-"authenticationView.passwordPlaceholder" = "Enter your password";
-"authenticationView.signUpButton" = "Sign up";
-"authenticationView.signInButton" = "Sign in";
-"authenticationView.alreadyMemberButton" = "Already have an account?";
-"authenticationView.notMemberButton" = "Don't have an account?";
-"authenticationView.forgottenPasswordButton" = "Forgotten password?";
-"authenticationView.cancel" = "Cancel";
-"authenticationView.error" = "Error";
-"authenticationView.info" = "Information";
-
-// AuthenticationNetwork
-"authenticationNetwork.emptyFields" = "Please fill required fields";
-"authenticationNetwork.shortPassword" = "Your password must be at least 6 characters long";
-"authenticationNetwork.passwordsDoNotMatch" = "Passwords do not match!";
-"authenticationNetwork.userCreated" = "Your account has been created";
-
 // NetworkError
-"networkError.unknownError" = "Unknown error";
-"networkError.badCredentials" = "Invalid username/password supplied";
-"networkError.alreadyRegistered" = "Email address is already registered";
-"networkError.connectionError" = "Could not connect to the server";
-"networkError.forbidden" = "You can't access this resource";
-"networkError.couchNotFound" = "Couch is not found";
-"networkError.userNotFound" = "User is not found";
-"networkError.emptyFields" = "Name / NumberOfRooms / NumberOfGuests / City cant be null!";
-"networkError.couchAlreadyExists" = "Couch is already created";
-"networkError.emptyFile" = "Unprocessable image(s)";
+"NetworkError.BadCredentials" = "Invalid username/password supplied";
+"NetworkError.UnknownError" = "Unknown error";
+"NetworkError.ConnectionError" = "Could not connect to the server";
+"NetworkError.AlreadyRegistered" = "Email address is already registered";
+"NetworkError.PersonalInformation" = "Personal information is not found";
+"NetworkError.Forbidden" = "You can't access this resource";
+"NetworkError.EmptyField" = "Field is empty";
+"NetworkError.EmptyFields" = "Name, number of rooms, number of guests and city cant be empty";
+"NetworkError.WrongFile" = "Unprocessable image(s)";
+"NetworkError.BigImage" = "Image is too big";
+"NetworkError.BigImages" = "Some of the images are big";
+"NetworkError.CouchNotFound" = "Couch not found";
+"NetworkError.ReservationNotFound" = "Reservation not found";
+"NetworkError.NotReserved" = "Could not reserve this couch";
+"NetworkError.TooLateToCancel" = "It's too late to cancel";
+"NetworkError.IsNotFound" = "is not found";
+"NetworkError.ChatRoomNotFound" = "Chat room not found";
+"NetworkError.EmptyFieldsWarning" = "Fields can not be empty";
+"NetworkError.CouchAlreadyExists" = "Couch already exists";
+
+// NetworkStatus
+"NetworkStatus.UserCreated" = "Your account has been created";
+
+// CommonView
+"CommonView.UnknownError" = "Something went wrong";
+"CommonView.Error" = "Error";
+"CommonView.Cancel" = "Cancel";
+"CommonView.Info" = "Information";
+
+// SignInViewModel
+"SignInViewModel.EmptyFields" = "Please fill required fields";
+
+// AuthenticationView
+"AuthenticationView.AlreadyMemberButton" = "Already have an account?";
+"AuthenticationView.NotMemberButton" = "Don't have an account?";
+"AuthenticationView.SignUpButton" = "Sign up";
+"AuthenticationView.SignInButton" = "Sign in";
+
+// SignInView
+"SignInView.EmailAddressPlaceholder" = "Enter your email address";
+"SignInView.PasswordPlaceholder" = "Enter your password";
+"SignInView.ForgottenPasswordButton" = "Forgotten password?";
+"SignInView.SignInButton" = "Sign in";
+"SignInView.Error" = "Error";
+"SignInView.Cancel" = "Cancel";
+
+// SignUpView
+"SignUpView.FullNamePlaceholder" = "Enter your full name";
+"SignUpView.EmailAddressPlaceholder" = "Enter your email address";
+"SignUpView.PasswordPlaceholder" = "Enter your password";
+"SignUpView.ConfirmPasswordPlaceholder" = "Confirm your password";
+"SignUpView.SignUpButton" = "Sign up";
+"SignUpView.Cancel" = "Cancel";
+
+// SignUpViewModel
+"SignUpViewModel.ShortPassword" = "Your password must be at least 6 characters long";
+"SignUpViewModel.EmptyFieldsWarning" = "Fields can not be empty";
+"SignUpViewModel.PasswordsDoNotMatch" = "Passwords do not match!";
+
+// MainTabView
+"MainTabView.ExploreTabItem" = "Explore";
+"MainTabView.ReservationsTabItem" = "Reservations";
+"MainTabView.InboxTabItem" = "Inbox";
+"MainTabView.ProfileTabItem" = "Profile";
+
+// ProfileView
+"ProfileView.AccountSettings" = "Account settings";
+"ProfileView.PersonalInformation" = "Personal Information";
+"ProfileView.Notifications" = "Notifications";
+"ProfileView.Hosting" = "Hosting";
+"ProfileView.ListYourCouch" = "List your couch";
+"ProfileView.Profile" = "Profile";
+"ProfileView.LogOut" = "Log out";
+
+// PersonalInformationView
+"PersonalInformationView.Image" = "Image";
+"PersonalInformationView.Name" = "Name";
+"PersonalInformationView.FullName" = "Full name";
+"PersonalInformationView.Contact" = "Contact";
+"PersonalInformationView.PhoneNumber" = "Phone number";
+"PersonalInformationView.Save" = "Save";
+"PersonalInformationView.PersonalInformation" = "Personal Information";
+
+// MyCouchView
+"MyCouchView.NoImage" = "Image not found";
+"MyCouchView.Description" = "Description";
+"MyCouchView.Hide" = "Hide your couch";
+"MyCouchView.Host" = "Host your couch";
+"MyCouchView.Reservations" = "Reservations";
+"MyCouchView.ShowAllReservations" = "Show all reservations";
+"MyCouchView.Reviews" = "Reviews";
+"MyCouchView.ShowAllReviews" = "Show all reviews";
+"MyCouchView.NoSavedCouch" = "Nothing comes up here";
+"MyCouchView.MyCouch" = "My Couch";
+
+// MyCouchDetailsView
+"MyCouchDetailsView.Pictures" = "Pictures";
+"MyCouchDetailsView.Address" = "Address";
+"MyCouchDetailsView.ZipCode" = "Zip code";
+"MyCouchDetailsView.Street" = "Street";
+"MyCouchDetailsView.BuildingNumber" = "Building number";
+"MyCouchDetailsView.Details" = "Details";
+"MyCouchDetailsView.AccomodationName" = "Accomodation name";
+"MyCouchDetailsView.NumberOfGuests" = "Number of guests";
+"MyCouchDetailsView.NumberOfRooms" = "Number of rooms";
+"MyCouchDetailsView.Amenities" = "Amenities";
+"MyCouchDetailsView.Price" = "Price";
+"MyCouchDetailsView.About" = "About";
+"MyCouchDetailsView.CouchDetails" = "Couch Details";
+"MyCouchDetailsView.Save" = "Save";
+
+// UserReservationListView
+"UserReservationListView.NoReservations" = "Nothing comes up here";
+
+// UserReservationPreviewView
+"UserReservationPreviewView.Guest" = "guest(s)";
+
+// ReservationView
+"ReservationView.Active" = "Active";
+"ReservationView.Inactive" = "Inactive";
+"ReservationView.NoReservations" = "Nothing comes up here";
+"ReservationView.Reservations" = "Reservations";
+
+// ReservationPreviewView
+"ReservationPreviewView.Guest" = "guest(s)";
+"ReservationPreviewView.NightGuest" = "/ night / guest";
+
+// ReviewList
+"ReviewList.NoReservations" = "Nothing comes up here";
+"ReviewList.Reviews" = "Reviews";
+
+// ChatRoomListView
+"ChatRoomListView.AddChatRoom" = "Add chat room";
+"ChatRoomListView.RoomName" = "Room name";
+"ChatRoomListView.Recipient" = "Recipient";
+"ChatRoomListView.Add" = "Add";
+"ChatRoomListView.Cancel" = "Cancel";
+"ChatRoomListView.ChatRooms" = "Chat rooms";
+
+// ChatView
+"ChatView.Send" = "Send";
+"ChatView.Messages" = "Messages";
+
+// ExplorationView
+"ExplorationView.ExploreNewPlaces" = "Explore new places";
+"ExplorationView.Explore" = "Explore";
+
+// CouchPreviewView
+"CouchPreviewView.Night" = "/ night";
+
+// ExplorationListView
+"ExplorationListView.EmptyList" = "Nothing comes up here";
+"ExplorationListView.Couches" = "Couches";
+
+// ExplorationFormView
+"ExplorationFormView.Address" = "Address";
+"ExplorationFormView.Details" = "Details";
+"ExplorationFormView.NumberOfGuests" = "Number of guests";
+"ExplorationFormView.Date" = "Date";
+"ExplorationFormView.Checkin" = "Check-in";
+"ExplorationFormView.Checkout" = "Check-out";
+"ExplorationFormView.Search" = "Search";
+
+// AutocompleteFieldWithResultsView
+"AutocompleteFieldWithResultsView.City" = "City name";
+
+// CouchDetailsView
+"CouchDetailsView.ImageNotFound" = "Image not found";
+"CouchDetailsView.Highlights" = "Highlights";
+"CouchDetailsView.Guests" = "guest(s)";
+"CouchDetailsView.Rooms" = "room(s)";
+"CouchDetailsView.NightGuest" = "/ night / guest";
+"CouchDetailsView.WhatOffers" = "What this place offers";
+"CouchDetailsView.About" = "About this place";
+"CouchDetailsView.Reserve" = "Reserve";
+"CouchDetailsView.Reviews" = "Reviews";
+"CouchDetailsView.ShowAllReviews" = "Show all reviews";
+"CouchDetailsView.Details" = "Details";
+"CouchDetailsView.HostedBy" = "Hosted by %@";
+
+// ReservationDetailsView
+"ReservationDetailsView.ImageNotFound" = "Image not found";
+"ReservationDetailsView.About" = "About your reservation";
+"ReservationDetailsView.Guests" = "guest(s)";
+"ReservationDetailsView.NightGuest" = "/ night / guest";
+"ReservationDetailsView.WhatOffers" = "What this place offers";
+"ReservationDetailsView.About" = "About this place";
+"ReservationDetailsView.CancelReservation" = "Cancel reservation";
+"ReservationDetailsView.Reviews" = "Reviews";
+"ReservationDetailsView.ShowAllReviews" = "Show all reviews";
+"ReservationDetailsView.SendReview" = "Send review";
+"ReservationDetailsView.Details" = "Details";
+"ReservationDetailsView.HostedBy" = "Hosted by %@";
+
+// ReservationDetailsViewModel
+"ReservationDetailsViewModel.ReviewCreated" = "Review is created";
 
 // Autocomplete
-"autocomplete.placesAPIlanguage" = "en-GB";
+"Autocomplete.PlacesAPIlanguage" = "en-GB";
 
-// MyCouch
-
-"myCouch.navigationBarTitle" = "My Couch";
-
-// Profile
-"profileView.logOut" = "Log out";
-"profileView.pInformation" = "Personal information";
-"profileView.notifications" = "Notifications";
-"profileView.listYourCouch" = "List your couch";
+// PushNotification
+"PushNotification.Language" = "en";

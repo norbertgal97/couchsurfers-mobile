@@ -24,7 +24,7 @@ struct MyCouchView: View {
                             .frame(maxWidth: UIScreen.main.bounds.size.width)
                             .clipped()
                     } else {
-                        Text("No content")
+                        Text(NSLocalizedString("MyCouchView.NoImage", comment: "No image"))
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300, maxHeight: 300, alignment: .center)
                             .background(Color.gray)
                     }
@@ -42,7 +42,7 @@ struct MyCouchView: View {
                             Text("\(myCouchVM.hostedCouch.about)")
                                 .padding(.horizontal)
                         } else {
-                            Text("Description")
+                            Text(NSLocalizedString("MyCouchView.Description", comment: "Description"))
                                 .padding(.horizontal)
                         }
                         
@@ -53,7 +53,7 @@ struct MyCouchView: View {
                                 }
                             }
                         }) {
-                            Text(myCouchVM.hostedCouch.hosted ? "Hide your couch" : "Host your couch")
+                            Text(myCouchVM.hostedCouch.hosted ? NSLocalizedString("MyCouchView.Hide", comment: "Hide") : NSLocalizedString("MyCouchView.Host", comment: "Host"))
                                 .foregroundColor(Color.white)
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity, alignment: .center)
@@ -66,7 +66,7 @@ struct MyCouchView: View {
                         Divider()
                         
                         Group {
-                            Text("Reservations")
+                            Text(NSLocalizedString("MyCouchView.Reservations", comment: "Reservations"))
                                 .fontWeight(.bold)
                                 .font(.title)
                                 .padding(.horizontal)
@@ -74,7 +74,7 @@ struct MyCouchView: View {
                             Button(action : {
                                 myCouchVM.isShowingUserReservationsListView = true
                             }) {
-                                Text("Show all reservations")
+                                Text(NSLocalizedString("MyCouchView.ShowAllReservations", comment: "Show all reservations"))
                                     .foregroundColor(Color.black)
                                     .fontWeight(.bold)
                                     .frame(maxWidth: .infinity, alignment: .center)
@@ -93,7 +93,7 @@ struct MyCouchView: View {
                         Divider()
                         
                         Group {
-                            Text("Reviews")
+                            Text(NSLocalizedString("MyCouchView.Reviews", comment: "Reviews"))
                                 .fontWeight(.bold)
                                 .font(.title)
                                 .padding(.horizontal)
@@ -101,7 +101,7 @@ struct MyCouchView: View {
                             Button(action : {
                                 myCouchVM.isShowingReviewsListView = true
                             }) {
-                                Text("Show all reviews")
+                                Text(NSLocalizedString("MyCouchView.ShowAllReviews", comment: "Show all reviews"))
                                     .foregroundColor(Color.black)
                                     .fontWeight(.bold)
                                     .frame(maxWidth: .infinity, alignment: .center)
@@ -121,23 +121,23 @@ struct MyCouchView: View {
                     
                 }
             } else {
-                Text("Nincs elmentve szállás.")
+                Text(NSLocalizedString("MyCouchView.NoSavedCouch", comment: "There is no saved couch"))
             }
         }
-        .navigationBarTitle(Text(NSLocalizedString("myCouch.navigationBarTitle", comment: "My Couch")), displayMode: .inline)
+        .navigationBarTitle(Text(NSLocalizedString("MyCouchView.MyCouch", comment: "My Couch")), displayMode: .inline)
         .navigationBarItems(trailing: NavigationLink(destination: MyCouchDetails(myCouchDetailsVM: MyCouchDetailsViewModel(), couchId: myCouchVM.hostedCouch.id)) {
             Image(systemName: "square.and.pencil")
                 .foregroundColor(Color.red)
         })
         .onAppear() {
-            myCouchVM.getOwnHostedCouch { loggedIn, downloadImage in
+            myCouchVM.getOwnHostedCouch { loggedIn in
                 if !loggedIn {
                     self.globalEnv.userLoggedIn = false
                 }
             }
         }
         .alert(isPresented: $myCouchVM.showingAlert, content: {
-            Alert(title: Text(NSLocalizedString("authenticationView.error", comment: "Error")), message: Text(myCouchVM.alertDescription), dismissButton: .default(Text(NSLocalizedString("authenticationView.cancel", comment: "Cancel"))) {
+            Alert(title: Text(NSLocalizedString("CommonView.Error", comment: "Error")), message: Text(myCouchVM.alertDescription), dismissButton: .default(Text(NSLocalizedString("CommonView.Cancel", comment: "Cancel"))) {
                 print("Dismiss button pressed")
             })
         })

@@ -14,9 +14,9 @@ struct PersonalInformationView: View {
     
     var body: some View {
         Form {
-            Section(header: Text("Image")) {
-                if personalInformationVM.image.url != nil {
-                    KingFisherImage(url: personalInformationVM.image.url!)
+            Section(header: Text(NSLocalizedString("PersonalInformationView.Image", comment: "Image"))) {
+                if let image = personalInformationVM.image.url {
+                    KingFisherImage(url: image)
                         .resizable()
                         .scaledToFill()
                         .frame(height: 200)
@@ -34,8 +34,8 @@ struct PersonalInformationView: View {
                                     personalInformationVM.image.url = nil
                                 }, alignment: .center)
                         .listRowBackground(Color.clear)
-                } else if personalInformationVM.imageToUpload?.uiImage != nil {
-                    Image(uiImage: personalInformationVM.imageToUpload!.uiImage!)
+                } else if let uiImage = personalInformationVM.imageToUpload?.uiImage {
+                    Image(uiImage: uiImage)
                         .resizable()
                         .scaledToFill()
                         .frame(height: 200)
@@ -53,7 +53,6 @@ struct PersonalInformationView: View {
                                 }, alignment: .center)
                         .listRowBackground(Color.clear)
                 } else {
-                    
                     Button(action: {
                         self.personalInformationVM.showingImagePicker = true
                     } ) {
@@ -61,31 +60,29 @@ struct PersonalInformationView: View {
                             .font(.title)
                     }
                     .frame(maxWidth: .infinity, alignment: .center)
-                    
                 }
-                    
             }
             
-            Section(header: Text("Name")) {
-                TextField("Full name", text: $personalInformationVM.personalInformation.fullName)
+            Section(header: Text(NSLocalizedString("PersonalInformationView.Name", comment: "Name"))) {
+                TextField(NSLocalizedString("PersonalInformationView.FullName", comment: "Full name"), text: $personalInformationVM.personalInformation.fullName)
             }
             
-            Section(header: Text("Contact")) {
-                TextField(NSLocalizedString("number", comment: "Number"), text: $personalInformationVM.personalInformation.phoneNumber)
+            Section(header: Text(NSLocalizedString("PersonalInformationView.Contact", comment: "Contact"))) {
+                TextField(NSLocalizedString("PersonalInformationView.PhoneNumber", comment: "Phone number"), text: $personalInformationVM.personalInformation.phoneNumber)
                     .keyboardType(.phonePad)
                 Text(personalInformationVM.personalInformation.email)
             }
             
             
         }
-        .navigationBarItems(trailing: Button(NSLocalizedString("save", comment: "Save")) {
-            if personalInformationVM.personalInformation.id != nil {
+        .navigationBarItems(trailing: Button(NSLocalizedString("PersonalInformationView.Save", comment: "Save")) {
+            if let unwrappedId = personalInformationVM.personalInformation.id {
                 personalInformationVM.deleteImage { loggedIn in
                     if !loggedIn {
                         self.globalEnv.userLoggedIn = false
                     }
                     
-                    personalInformationVM.updatePersonalInformation(with: personalInformationVM.personalInformation.id!, personalInformationVM.personalInformation) { loggedIn in
+                    personalInformationVM.updatePersonalInformation(with: unwrappedId, personalInformationVM.personalInformation) { loggedIn in
                         if !loggedIn {
                             self.globalEnv.userLoggedIn = false
                         }
@@ -99,7 +96,7 @@ struct PersonalInformationView: View {
                 }
             }
         })
-        .navigationBarTitle(Text("Personal Information"), displayMode: .inline)
+        .navigationBarTitle(Text(NSLocalizedString("PersonalInformationView.PersonalInformation", comment: "Personal Information")), displayMode: .inline)
         .onAppear {
             personalInformationVM.loadPersonalInformation { loggedIn in
                 if !loggedIn {

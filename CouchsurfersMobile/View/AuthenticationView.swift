@@ -17,6 +17,7 @@ struct AuthenticationView: View {
             Text("Couchsurfers")
                 .font(.custom("Pacifico-Regular", size: 60))
                 .padding(.vertical)
+            
             ZStack {
                 if showSignUp {
                     SignUp()
@@ -26,7 +27,6 @@ struct AuthenticationView: View {
                         .transition(.move(edge: .trailing))
                 }
             }
-            
         }
         .frame(maxHeight: .infinity)
         .overlay(
@@ -34,7 +34,7 @@ struct AuthenticationView: View {
                 Divider()
                 
                 HStack {
-                    Text(showSignUp ? NSLocalizedString("authenticationView.alreadyMemberButton", comment: "already have an account") : NSLocalizedString("authenticationView.notMemberButton", comment: "not a member"))
+                    Text(showSignUp ? NSLocalizedString("AuthenticationView.AlreadyMemberButton", comment: "Already have an account") : NSLocalizedString("AuthenticationView.NotMemberButton", comment: "Not a member"))
                         .fontWeight(.bold)
                         .foregroundColor(.gray)
                     
@@ -43,16 +43,13 @@ struct AuthenticationView: View {
                             showSignUp.toggle()
                         }
                     }, label: {
-                        Text(showSignUp ? NSLocalizedString("authenticationView.signInButton", comment: "Sign in") : NSLocalizedString("authenticationView.signUpButton", comment: "Sign up"))
+                        Text(showSignUp ? NSLocalizedString("AuthenticationView.SignInButton", comment: "Sign in") : NSLocalizedString("AuthenticationView.SignUpButton", comment: "Sign up"))
                             .fontWeight(.bold)
                             .foregroundColor(.red)
-                        
                     })
                 }
             }
-            , alignment: .bottom
-        )
-        
+            , alignment: .bottom)
     }
 }
 

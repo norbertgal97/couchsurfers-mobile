@@ -19,5 +19,7 @@ struct Couch {
     var amenities = ""
     var about = ""
     var price = ""
+    var ownerName = ""
+    var ownerEmail = ""
     var couchPhotos = [CouchPhoto]()
 }

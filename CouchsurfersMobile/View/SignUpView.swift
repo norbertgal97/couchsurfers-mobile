@@ -12,19 +12,18 @@ struct SignUp: View {
     
     var body: some View {
         VStack {
-            
             VStack(spacing: 13) {
-                InputFieldWithImage(text: $signUpVM.signUpDetails.fullName, textFieldPlaceholder: NSLocalizedString("authenticationView.fullNamePlaceholder", comment: "Full Name"), imageSystemName:"person", isSecret: false)
-                InputFieldWithImage(text: $signUpVM.signUpDetails.emailAddress, textFieldPlaceholder: NSLocalizedString("authenticationView.emailAddressPlaceholder", comment: "Email address"), imageSystemName:"envelope", isSecret: false)
-                InputFieldWithImage(text: $signUpVM.signUpDetails.password, textFieldPlaceholder: NSLocalizedString("authenticationView.passwordPlaceholder", comment: "Password"), imageSystemName:"lock", isSecret: true)
-                InputFieldWithImage(text: $signUpVM.signUpDetails.confirmedPassword, textFieldPlaceholder: NSLocalizedString("authenticationView.passwordPlaceholder", comment: "Password"), imageSystemName:"lock", isSecret: true)
+                InputFieldWithImage(text: $signUpVM.signUpDetails.fullName, textFieldPlaceholder: NSLocalizedString("SignUpView.FullNamePlaceholder", comment: "Full Name"), imageSystemName:"person", isSecret: false)
+                InputFieldWithImage(text: $signUpVM.signUpDetails.emailAddress, textFieldPlaceholder: NSLocalizedString("SignUpView.EmailAddressPlaceholder", comment: "Email address"), imageSystemName:"envelope", isSecret: false)
+                InputFieldWithImage(text: $signUpVM.signUpDetails.password, textFieldPlaceholder: NSLocalizedString("SignUpView.PasswordPlaceholder", comment: "Password"), imageSystemName:"lock", isSecret: true)
+                InputFieldWithImage(text: $signUpVM.signUpDetails.confirmedPassword, textFieldPlaceholder: NSLocalizedString("SignUpView.ConfirmPasswordPlaceholder", comment: "Confirm password"), imageSystemName:"lock", isSecret: true)
             }
             
             Button(action: {
                 signUpVM.createNewUser()
             }, label: {
                 HStack(spacing: 10) {
-                    Text(NSLocalizedString("authenticationView.signUpButton", comment: "Sign up"))
+                    Text(NSLocalizedString("SignUpView.SignUpButton", comment: "Sign up"))
                         .fontWeight(.heavy)
                     
                     Image(systemName: "arrow.right")
@@ -40,13 +39,14 @@ struct SignUp: View {
                 
                 
             })
-            .frame(maxWidth: .infinity, alignment: .trailing)
-            .padding(.top, 10)
-            .alert(isPresented: $signUpVM.showingAlert, content: {
-                Alert(title: Text(signUpVM.alertTitle), message: Text(signUpVM.alertDescription), dismissButton: .default(Text("Cancel")) {
-                    print("Dismiss button pressed")
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.top, 10)
+                .alert(isPresented: $signUpVM.showingAlert, content: {
+                    Alert(title: Text(signUpVM.alertTitle), message: Text(signUpVM.alertDescription),
+                          dismissButton: .default(Text(NSLocalizedString("SignUpView.Cancel", comment: "Cancel"))) {
+                        print("Dismiss button pressed")
+                    })
                 })
-            })
             
         }
         .padding()

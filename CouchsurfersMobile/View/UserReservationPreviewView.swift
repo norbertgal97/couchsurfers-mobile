@@ -23,7 +23,6 @@ struct UserReservationPreviewView: View {
                 .shadow(radius: 5)
             
             VStack {
-                
                 if photoUrl != nil {
                     KingFisherImage(url: photoUrl!)
                         .resizable()
@@ -42,7 +41,7 @@ struct UserReservationPreviewView: View {
                     Text(name)
                         .fontWeight(.bold)
                     Text(email)
-                    Text("\(numberOfGuests) guest(s)")
+                    Text("\(numberOfGuests) " + NSLocalizedString("UserReservationPreviewView.Guest", comment: "Guest"))
                     Text("\(startDate) - \(endDate)")
                 }
                 .padding(.horizontal)

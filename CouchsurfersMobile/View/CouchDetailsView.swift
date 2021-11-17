@@ -27,7 +27,7 @@ struct CouchDetailsView: View {
                                 .frame(maxWidth: UIScreen.main.bounds.size.width)
                                 .clipped()
                         } else {
-                            Text("No content")
+                            Text(NSLocalizedString("CouchDetailsView.ImageNotFound", comment: "Image not found"))
                                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300, maxHeight: 300, alignment: .center)
                                 .background(Color.gray)
                         }
@@ -57,23 +57,33 @@ struct CouchDetailsView: View {
                 }
                 .padding(.horizontal)
                 
-                
-                
                 VStack(alignment: .leading) {
-                    Text("Highlights")
+                    Text(NSLocalizedString("CouchDetailsView.Highlights", comment: "Highlights"))
                         .fontWeight(.bold)
                     
-                    Text("• \(couchDetailsVM.couch.numberOfGuests) guest(s)")
-                    Text("• \(couchDetailsVM.couch.numberOfRooms) room(s)")
-                    Text("• $\(couchDetailsVM.couch.price) / night / guest")
+                    Text("• \(couchDetailsVM.couch.numberOfGuests) " + NSLocalizedString("CouchDetailsView.Guests", comment: "guests"))
+                    Text("• \(couchDetailsVM.couch.numberOfRooms) " + NSLocalizedString("CouchDetailsView.Rooms", comment: "rooms"))
+                    Text("• $\(couchDetailsVM.couch.price) " + NSLocalizedString("CouchDetailsView.NightGuest", comment: "night/guest"))
                     
                     Divider()
                 }
                 .padding(.horizontal)
                 
+                if !couchDetailsVM.couch.ownerName.isEmpty && !couchDetailsVM.couch.ownerEmail.isEmpty {
+                    VStack(alignment: .leading) {
+                        Text(String.localizedStringWithFormat(NSLocalizedString("CouchDetailsView.HostedBy", comment: "Hosted by"), couchDetailsVM.couch.ownerName))
+                            .fontWeight(.bold)
+                        
+                        Text(couchDetailsVM.couch.ownerEmail)
+                        
+                        Divider()
+                    }
+                    .padding(.horizontal)
+                }
+                
                 
                 VStack(alignment: .leading) {
-                    Text("What this place offers")
+                    Text(NSLocalizedString("CouchDetailsView.WhatOffers", comment: "WhatOffers"))
                         .fontWeight(.bold)
                     
                     Text(couchDetailsVM.couch.amenities)
@@ -83,12 +93,11 @@ struct CouchDetailsView: View {
                 .padding(.horizontal)
                 
                 VStack(alignment: .leading) {
-                    Text("About this place")
+                    Text(NSLocalizedString("CouchDetailsView.About", comment: "WhatOffers"))
                         .fontWeight(.bold)
                     
                     Text(couchDetailsVM.couch.about)
                         .multilineTextAlignment(.leading)
-                    
                 }
                 .padding(.horizontal)
                 
@@ -100,7 +109,7 @@ struct CouchDetailsView: View {
                             }
                         }
                     }) {
-                        Text("Reserve")
+                        Text(NSLocalizedString("CouchDetailsView.Reserve", comment: "Reserve"))
                             .foregroundColor(Color.white)
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -114,7 +123,7 @@ struct CouchDetailsView: View {
                 Divider()
                 
                 Group {
-                    Text("Reviews")
+                    Text(NSLocalizedString("CouchDetailsView.Reviews", comment: "Reviews"))
                         .fontWeight(.bold)
                         .font(.title)
                         .padding(.horizontal)
@@ -122,7 +131,7 @@ struct CouchDetailsView: View {
                     Button(action : {
                         couchDetailsVM.isShowingReviewsListView = true
                     }) {
-                        Text("Show all reviews")
+                        Text(NSLocalizedString("CouchDetailsView.ShowAllReviews", comment: "Show all reviews"))
                             .foregroundColor(Color.black)
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -139,6 +148,7 @@ struct CouchDetailsView: View {
                 }
             }
         }
+        .navigationBarTitle(Text(NSLocalizedString("CouchDetailsView.Details", comment: "Details")), displayMode: .inline)
         .onAppear {
             if couchId != nil {
                 couchDetailsVM.loadCouch(with: couchId!) { loggedIn in
@@ -148,7 +158,5 @@ struct CouchDetailsView: View {
                 }
             }
         }
-        
     }
-    
 }

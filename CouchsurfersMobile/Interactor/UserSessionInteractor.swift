@@ -8,8 +8,7 @@
 import Foundation
 import os
 
-class UserSessionInteractor {
-    
+class UserSessionInteractor: UnmanagedErrorHandler {
     private let baseUrl: String
     private let loginUrl = "/api/v1/users/session/login"
     private let registerUrl = "/api/v1/users/session/register"
@@ -37,15 +36,15 @@ class UserSessionInteractor {
                 if let unwrappedError = error {
                     if let unwrappedStatusCode = statusCode {
                         switch unwrappedStatusCode {
-                        case 400:
-                            message = NSLocalizedString("networkError.badCredentials", comment: "Bad credentials")
+                        case 401:
+                            message = NSLocalizedString("NetworkError.BadCredentials", comment: "Bad credentials")
                         default:
-                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                            message = NSLocalizedString("NetworkError.UnknownError", comment: "Unknown error")
                         }
                         self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
                     }
                 } else {
-                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                    message = self.handleUnmanagedErrors(statusCode: statusCode, logger: self.logger)
                 }
                 
                 completionHandler(false, message)
@@ -53,7 +52,6 @@ class UserSessionInteractor {
                 self.logger.debug("User logged in with id: \(data!.userId)")
                 completionHandler(true, message)
             }
-            
         }
     }
     
@@ -71,34 +69,43 @@ class UserSessionInteractor {
                     if let unwrappedStatusCode = statusCode {
                         switch unwrappedStatusCode {
                         case 409:
-                            message = NSLocalizedString("networkError.alreadyRegistered", comment: "Already registered")
+                            message = NSLocalizedString("NetworkError.AlreadyRegistered", comment: "Already registered")
                         default:
-                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                            message = NSLocalizedString("NetworkError.UnknownError", comment: "Unknown error")
                         }
                         self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
                     }
                 } else {
-                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                    message = self.handleUnmanagedErrors(statusCode: statusCode, logger: self.logger)
                 }
                 
                 completionHandler(false, message)
             case .successful:
                 self.logger.debug("User created with id: \(data!.userId)")
-                message = NSLocalizedString("authenticationNetwork.userCreated", comment: "User created")
+                message = NSLocalizedString("NetworkStatus.UserCreated", comment: "User created")
                 completionHandler(true, message)
             }
+        }
+    }
+    
+    func logout(completionHandler: @escaping (_ messsage: String?) -> Void) {
+        let networkManager = NetworkManager<MessageDTO>()
+        let urlRequest = networkManager.makeRequest(url: URL(string: baseUrl + logoutUrl)!, method: .POST)
+        
+        networkManager.dataTask(with: urlRequest) {(networkStatus, data, error) in
+            var message: String?
             
+            switch networkStatus {
+            case .failure(let statusCode):
+                guard let _ = error  else {
+                    message = self.handleUnmanagedErrors(statusCode: statusCode, logger: self.logger)
+                    completionHandler(message)
+                    return
+                }
+            case .successful:
+                self.logger.debug("\(data!.message)")
+                completionHandler(message)
+            }
         }
     }
-    
-    private func handleUnmanagedErrors(statusCode: Int?) -> String {
-        if let unwrappedStatusCode = statusCode {
-            self.logger.debug("Unknown error with status code: \(unwrappedStatusCode)")
-            return NSLocalizedString("networkError.unknownError", comment: "Unknown error")
-        } else {
-            self.logger.debug("Could not connect to the server!")
-            return NSLocalizedString("networkError.connectionError", comment: "Connection error")
-        }
-    }
-    
 }

@@ -11,14 +11,14 @@ import UIKit
 class MyCouchDetailsViewModel: GooglePlacesViewModel {
     @Published var myCouch = Couch()
     
-    @Published var alertDescription: String = NSLocalizedString("defaultAlertMessage", comment: "Default alert message")
+    @Published var alertDescription: String = NSLocalizedString("CommonView.UnknownError", comment: "Default alert message")
     @Published var showingAlert = false
     
     @Published var showingImagePicker = false
     @Published var pickedImage: UIImage?
     
     private var savedCouch : Couch?
-    private var interactor = MyCouchInteractor()
+    private var interactor = CouchInteractor()
     
     @Published var imagesToUpload = [CouchPhoto]()
     @Published var images = [CouchPhoto]()
@@ -30,7 +30,8 @@ class MyCouchDetailsViewModel: GooglePlacesViewModel {
         interactor.saveCouch(myCouch: myCouch) { couch, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
@@ -57,7 +58,8 @@ class MyCouchDetailsViewModel: GooglePlacesViewModel {
         interactor.updateCouch(with: id, myCouch: myCouch, savedCouch: savedCouch) { couch, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
@@ -80,10 +82,11 @@ class MyCouchDetailsViewModel: GooglePlacesViewModel {
     }
     
     func loadCouch(with id: Int, completionHandler: @escaping (_ loggedIn: Bool) -> Void) {
-        interactor.loadCouch(with: id) { couch, message, loggedIn, downloadImage in
+        interactor.loadCouch(with: id) { couch, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
@@ -99,7 +102,7 @@ class MyCouchDetailsViewModel: GooglePlacesViewModel {
                     if !unwrappedCouch.couchPhotos.isEmpty {
                         self.images = unwrappedCouch.couchPhotos
                     }
-
+                    
                 }
             }
             
@@ -124,7 +127,8 @@ class MyCouchDetailsViewModel: GooglePlacesViewModel {
         interactor.uploadImages(couchId: self.myCouch.id!, images: imagesToUpload) { imageUploads, message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
@@ -134,7 +138,7 @@ class MyCouchDetailsViewModel: GooglePlacesViewModel {
                         self.imagesToUpload.removeAll { $0.fileName == imageUpload.fileName }
                         self.images.append(CouchPhoto(id: imageUpload.id, fileName: imageUpload.fileName, url: imageUpload.url, uiImage: nil))
                     }
-
+                    
                 }
             }
             
@@ -145,15 +149,16 @@ class MyCouchDetailsViewModel: GooglePlacesViewModel {
     }
     
     func deleteImages(completionHandler: @escaping (_ loggedIn: Bool) -> Void) {
-        if self.myCouch.id == nil || self.imagesToDelete.isEmpty {
+        if myCouch.id == nil || imagesToDelete.isEmpty {
             completionHandler(true)
             return
         }
         
-        interactor.deleteImages(couchId: self.myCouch.id!, imageIds: imagesToDelete) { message, loggedIn in
+        interactor.deleteImages(couchId: myCouch.id!, imageIds: imagesToDelete) { message, loggedIn in
             if let unwrappedMessage = message {
                 DispatchQueue.main.async {
-                    self.updateAlert(with: unwrappedMessage)
+                    self.alertDescription = unwrappedMessage
+                    self.showingAlert = true
                 }
             }
             
@@ -170,11 +175,6 @@ class MyCouchDetailsViewModel: GooglePlacesViewModel {
     func getImage() {
         guard let image = pickedImage else { return }
         addImage(image: image)
-    }
-    
-    private func updateAlert(with message: String) {
-        self.alertDescription = message
-        self.showingAlert = true
     }
     
     private func validateCouchBeforeUpdate() {

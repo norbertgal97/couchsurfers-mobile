@@ -31,7 +31,7 @@ struct ReservationDetailsView: View {
                                     .frame(maxWidth: UIScreen.main.bounds.size.width)
                                     .clipped()
                             } else {
-                                Text("No content")
+                                Text(NSLocalizedString("ReservationDetailsView.ImageNotFound", comment: "Image not found"))
                                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300, maxHeight: 300, alignment: .center)
                                     .background(Color.gray)
                             }
@@ -62,20 +62,31 @@ struct ReservationDetailsView: View {
                     .padding(.horizontal)
                     
                     VStack(alignment: .leading) {
-                        Text("About your reservation")
+                        Text(NSLocalizedString("ReservationDetailsView.About", comment: "About"))
                             .fontWeight(.bold)
                         
-                        Text("• \(unwrappedReservation.reservationNumberOfGuests) guest(s)")
-                        Text("• $\(unwrappedReservation.price) / night / guest")
+                        Text("• \(unwrappedReservation.reservationNumberOfGuests) " + NSLocalizedString("ReservationDetailsView.Guests", comment: "Guests"))
+                        Text("• $\(unwrappedReservation.price) " + NSLocalizedString("ReservationDetailsView.NightGuest", comment: "Night / Guest"))
                         Text("• \(unwrappedReservation.startDate) - \(unwrappedReservation.endDate)")
                         
                         Divider()
                     }
                     .padding(.horizontal)
                     
+                    if !unwrappedReservation.ownerName.isEmpty && !unwrappedReservation.ownerEmail.isEmpty {
+                        VStack(alignment: .leading) {
+                            Text(String(format: NSLocalizedString("ReservationDetailsView.HostedBy", comment: "Hosted by"), unwrappedReservation.ownerName))
+                                .fontWeight(.bold)
+
+                            Text(unwrappedReservation.ownerEmail)
+                            
+                            Divider()
+                        }
+                        .padding(.horizontal)
+                    }
                     
                     VStack(alignment: .leading) {
-                        Text("What this place offers")
+                        Text(NSLocalizedString("ReservationDetailsView.WhatOffers", comment: "What this place offers"))
                             .fontWeight(.bold)
                         
                         Text(unwrappedReservation.amenities)
@@ -85,17 +96,14 @@ struct ReservationDetailsView: View {
                     .padding(.horizontal)
                     
                     VStack(alignment: .leading) {
-                        Text("About this place")
+                        Text(NSLocalizedString("ReservationDetailsView.About", comment: "About"))
                             .fontWeight(.bold)
                         
                         Text(unwrappedReservation.about)
                             .multilineTextAlignment(.leading)
-                        
                     }
                     .padding(.horizontal)
-                    
                 }
-                
                 
                 if active {
                     Button(action : {
@@ -105,7 +113,7 @@ struct ReservationDetailsView: View {
                             }
                         }
                     }) {
-                        Text("Cancel reservation")
+                        Text(NSLocalizedString("ReservationDetailsView.CancelReservation", comment: "Cancel"))
                             .foregroundColor(Color.white)
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -119,7 +127,7 @@ struct ReservationDetailsView: View {
                 }
                 
                 Group {
-                    Text("Reviews")
+                    Text(NSLocalizedString("ReservationDetailsView.Reviews", comment: "Reviews"))
                         .fontWeight(.bold)
                         .font(.title)
                         .padding(.horizontal)
@@ -128,7 +136,7 @@ struct ReservationDetailsView: View {
                     Button(action : {
                         reservationDetailsVM.isShowingReviewsListView = true
                     }) {
-                        Text("Show all reviews")
+                        Text(NSLocalizedString("ReservationDetailsView.ShowAllReviews", comment: "Show all reviews"))
                             .foregroundColor(Color.black)
                             .fontWeight(.bold)
                             .frame(maxWidth: .infinity, alignment: .center)
@@ -162,7 +170,7 @@ struct ReservationDetailsView: View {
                                 }
                             }
                         }) {
-                            Text("Send review")
+                            Text(NSLocalizedString("ReservationDetailsView.SendReview", comment: "Send review"))
                                 .foregroundColor(Color.white)
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity, alignment: .center)
@@ -171,7 +179,6 @@ struct ReservationDetailsView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
                         .padding(.horizontal)
-                        
                     }
                 }
             }
@@ -183,13 +190,11 @@ struct ReservationDetailsView: View {
                 }
             }
         }
-        .navigationBarTitle(Text("Details"), displayMode: .inline)
+        .navigationBarTitle(Text(NSLocalizedString("ReservationDetailsView.Details", comment: "Details")), displayMode: .inline)
         .alert(isPresented: $reservationDetailsVM.showingAlert, content: {
-            Alert(title: Text(NSLocalizedString("authenticationView.error", comment: "Error")), message: Text(reservationDetailsVM.alertDescription), dismissButton: .default(Text(NSLocalizedString("authenticationView.cancel", comment: "Cancel"))) {
+            Alert(title: Text(reservationDetailsVM.alertTitle), message: Text(reservationDetailsVM.alertDescription), dismissButton: .default(Text(NSLocalizedString("CommonView.Cancel", comment: "Cancel"))) {
                 print("Dismiss button pressed")
             })
         })
-        
     }
-    
 }

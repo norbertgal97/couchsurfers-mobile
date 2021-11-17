@@ -17,7 +17,7 @@ struct ExplorationListView: View {
     var body: some View {
         Group {
             if explorationListVM.filteredCouches.isEmpty {
-                Text("There are no couches.")
+                Text(NSLocalizedString("ExplorationListView.EmptyList", comment: "Empty List"))
             } else {
                 List(explorationListVM.filteredCouches, id: \.id) { couchPreview in
                     ZStack {
@@ -32,7 +32,6 @@ struct ExplorationListView: View {
                     }
                 }
             }
-            
         }
         .listStyle(GroupedListStyle())
         .onAppear {
@@ -42,7 +41,6 @@ struct ExplorationListView: View {
                 }
             }
         }
-        .navigationBarTitle(Text("Couches"), displayMode: .inline)
+        .navigationBarTitle(Text(NSLocalizedString("ExplorationListView.Couches", comment: "Couches")), displayMode: .inline)
     }
-    
 }

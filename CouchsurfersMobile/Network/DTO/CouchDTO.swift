@@ -17,6 +17,8 @@ class CouchDTO: Codable {
     var price: Double
     var couchPhotos: [CouchPhotoDTO]?
     var location: LocationDTO
+    var ownerName: String?
+    var ownerEmail: String?
     
     init(name: String, numberOfRooms: Int, numberOfGuests: Int, price: Double, location: LocationDTO) {
         self.name = name
@@ -38,7 +40,8 @@ class CouchDTO: Codable {
         price = try container.decode(Double.self, forKey: .price)
         location = try container.decode(LocationDTO.self, forKey: .location)
         couchPhotos = try container.decodeIfPresent([CouchPhotoDTO].self, forKey: .couchPhotos)
-
+        ownerName = try container.decodeIfPresent(String.self, forKey: .ownerName)
+        ownerEmail = try container.decodeIfPresent(String.self, forKey: .ownerEmail)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -52,7 +55,6 @@ class CouchDTO: Codable {
         try container.encodeIfPresent(amenities, forKey: .amenities)
         try container.encodeIfPresent(price, forKey: .price)
         try container.encode(location, forKey: .location)
-        //try container.encodeIfPresent(couchPhotos, forKey: .couchPhotos)
     }
     
     enum CodingKeys: String, CodingKey {
@@ -65,5 +67,7 @@ class CouchDTO: Codable {
         case price
         case location
         case couchPhotos = "couch_photos"
+        case ownerName = "owner_name"
+        case ownerEmail = "owner_email"
     }
 }

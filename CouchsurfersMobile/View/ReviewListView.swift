@@ -5,8 +5,6 @@
 //  Created by Norbert Gál on 2021. 10. 31..
 //
 
-import Foundation
-
 import SwiftUI
 
 struct ReviewListView: View {
@@ -29,7 +27,7 @@ struct ReviewListView: View {
                 }
                 .listStyle(GroupedListStyle())
             } else {
-                Text("There are no reviews")
+                Text(NSLocalizedString("ReviewList.NoReservations", comment: "No reservations"))
                     .padding(.horizontal)
             }
         }
@@ -40,7 +38,6 @@ struct ReviewListView: View {
                 }
             }
         }
-        
+        .navigationBarTitle(Text(NSLocalizedString("ReviewList.Reviews", comment: "Reviews")), displayMode: .inline)
     }
-    
 }

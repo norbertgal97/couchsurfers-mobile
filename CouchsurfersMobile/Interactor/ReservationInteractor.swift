@@ -8,7 +8,7 @@
 import Foundation
 import os
 
-class ReservationInteractor {
+class ReservationInteractor: UnmanagedErrorHandler {
     
     private let baseUrl: String
     private let reservationsUrl = "/api/v1/reservations"
@@ -50,16 +50,16 @@ class ReservationInteractor {
                     if let unwrappedStatusCode = statusCode {
                         switch unwrappedStatusCode {
                         case 404:
-                            message = NSLocalizedString("networkError.couchNotFound", comment: "Couch not found")
+                            message = NSLocalizedString("NetworkError.CouchNotFound", comment: "Couch not found")
                         case 422:
-                            message = "Could not reserve this couch"
+                            message = NSLocalizedString("NetworkError.NotReserved", comment: "Not reserved")
                         default:
-                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                            message = NSLocalizedString("NetworkError.UnknownError", comment: "Unknown error")
                         }
                         self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
                     }
                 } else {
-                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                    message = self.handleUnmanagedErrors(statusCode: statusCode, logger: self.logger)
                 }
                 
                 completionHandler(nil, message, true)
@@ -91,11 +91,11 @@ class ReservationInteractor {
                 
                 if let unwrappedError = error {
                     if statusCode != nil {
-                        message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                        message = NSLocalizedString("NetworkError.UnknownError", comment: "Unknown error")
                         self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
                     }
                 } else {
-                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                    message = self.handleUnmanagedErrors(statusCode: statusCode, logger: self.logger)
                 }
                 
                 completionHandler(nil, message, true)
@@ -103,7 +103,6 @@ class ReservationInteractor {
                 self.logger.debug("Reservations are loaded. Count: \(data!.count)")
                 completionHandler(self.convertPreviewDTOToPreviewModel(dto: data!), message, true)
             }
-            
         }
     }
     
@@ -128,16 +127,16 @@ class ReservationInteractor {
                     if let unwrappedStatusCode = statusCode {
                         switch unwrappedStatusCode {
                         case 404:
-                            message = NSLocalizedString("networkError.couchNotFound", comment: "Reservation not found")
+                            message = NSLocalizedString("NetworkError.ReservationNotFound", comment: "Reservation not found")
                         case 403:
-                            message = "You can't access this resource!"
+                            message = NSLocalizedString("NetworkError.Forbidden", comment: "Forbidden")
                         default:
-                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                            message = NSLocalizedString("NetworkError.UnknownError", comment: "Unknown error")
                         }
                         self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
                     }
                 } else {
-                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                    message = self.handleUnmanagedErrors(statusCode: statusCode, logger: self.logger)
                 }
                 
                 completionHandler(nil, message, true)
@@ -145,7 +144,6 @@ class ReservationInteractor {
                 self.logger.debug("Reservation loaded with id: \(id)")
                 completionHandler(self.convertReservationDTOToReservatioModel(dto: data!), message, true)
             }
-            
         }
     }
     
@@ -170,18 +168,18 @@ class ReservationInteractor {
                     if let unwrappedStatusCode = statusCode {
                         switch unwrappedStatusCode {
                         case 404:
-                            message = "Reservation not found"
+                            message = NSLocalizedString("NetworkError.ReservationNotFound", comment: "Reservation not found")
                         case 403:
-                            message = NSLocalizedString("networkError.forbidden", comment: "Forbidden")
+                            message = NSLocalizedString("NetworkError.Forbidden", comment: "Forbidden")
                         case 409:
-                            message = "Too late to cancel."
+                            message = NSLocalizedString("NetworkError.TooLateToCancel", comment: "Too late to cancel")
                         default:
-                            message = NSLocalizedString("networkError.unknownError", comment: "Unknown error")
+                            message = NSLocalizedString("NetworkError.UnknownError", comment: "Unknown error")
                         }
                         self.logger.debug("Error message from server: \(unwrappedError.errorMessage)")
                     }
                 } else {
-                    message = self.handleUnmanagedErrors(statusCode: statusCode)
+                    message = self.handleUnmanagedErrors(statusCode: statusCode, logger: self.logger)
                 }
                 
                 completionHandler(message, true)
@@ -189,7 +187,6 @@ class ReservationInteractor {
                 self.logger.debug("Reservation is cancelled with id: \(id)")
                 completionHandler(message, true)
             }
-            
         }
     }
     
@@ -209,6 +206,8 @@ class ReservationInteractor {
         reservation.amenities = dto.couch.amenities ?? ""
         reservation.price = String(dto.couch.price)
         reservation.about = dto.couch.about ?? ""
+        reservation.ownerName = dto.couch.ownerName ?? ""
+        reservation.ownerEmail = dto.couch.ownerEmail ?? ""
         
         if let unwrappedPhotos = dto.couch.couchPhotos {
             for couchPhoto in unwrappedPhotos  {
@@ -248,15 +247,4 @@ class ReservationInteractor {
         
         return previews
     }
-    
-    private func handleUnmanagedErrors(statusCode: Int?) -> String {
-        if let unwrappedStatusCode = statusCode {
-            self.logger.debug("Unknown error with status code: \(unwrappedStatusCode)")
-            return NSLocalizedString("networkError.unknownError", comment: "Unknown error")
-        } else {
-            self.logger.debug("Could not connect to the server!")
-            return NSLocalizedString("networkError.connectionError", comment: "Connection error")
-        }
-    }
-    
 }
