@@ -61,7 +61,7 @@ class WebsocketManager {
         if let unwrappedJsonData = jsonData, let json = String(data: unwrappedJsonData, encoding: String.Encoding.utf8) {
             var headersToSend = [String: String]()
             headersToSend["content-type"] = "application/json;charset=UTF-8"
-            socketClient.sendMessage(message: json, toDestination: "/api/v1/chat/send/\(chatRoomId)", withHeaders: headersToSend, withReceipt: nil)
+            socketClient.sendMessage(message: json, toDestination: "/app/chat/send/\(chatRoomId)", withHeaders: headersToSend, withReceipt: nil)
         }
     }
 }

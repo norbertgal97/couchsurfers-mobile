@@ -5,7 +5,7 @@
 //  Created by Norbert Gál on 2021. 10. 09..
 //
 
-import SwiftUI
+import Foundation
 
 class GooglePlacesViewModel: ReversePlaceIdProtocol {
     

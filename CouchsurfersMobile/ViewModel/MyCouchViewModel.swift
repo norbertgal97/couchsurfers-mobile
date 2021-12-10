@@ -14,7 +14,7 @@ class MyCouchViewModel: ObservableObject {
     @Published var isShowingUserReservationsListView = false
     @Published var isShowingReviewsListView = false
     
-    private var hostInteractor = HostInteractor()
+    private let hostInteractor = HostInteractor()
     
     func getOwnHostedCouch(completionHandler: @escaping (_ loggedIn: Bool) -> Void) {
         hostInteractor.getOwnHostedCouch { couch, message, loggedIn in

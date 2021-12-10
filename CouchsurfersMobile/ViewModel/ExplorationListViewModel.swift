@@ -5,7 +5,7 @@
 //  Created by Norbert Gál on 2021. 10. 10..
 //
 
-import SwiftUI
+import Foundation
 
 class ExplorationListViewModel: ReversePlaceIdProtocol {
     @Published var alertDescription: String = NSLocalizedString("CommonView.UnknowError", comment: "Default alert message")

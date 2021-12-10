@@ -15,10 +15,10 @@ struct ChatView: View {
     let chatRoomId: Int
     let myId: Int
     
-    init(chatRoomId: Int, myId: Int) {
+    init(chatRoomId: Int, myId: Int, chatViewModel: ChatViewModel) {
         self.chatRoomId = chatRoomId
         self.myId = myId
-        self.chatVM = ChatViewModel(chatRoomId: chatRoomId)
+        self.chatVM = chatViewModel
     }
     
     var body: some View {

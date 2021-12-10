@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CouchDetailsView: View {
     @EnvironmentObject var globalEnv: GlobalEnvironment
-    @ObservedObject var couchDetailsVM = CouchDetailsViewModel()
+    @StateObject var couchDetailsVM = CouchDetailsViewModel()
     
     let couchId: Int?
     let couchFilter: CouchFilter

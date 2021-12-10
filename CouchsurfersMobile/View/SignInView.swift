@@ -10,7 +10,7 @@ import SwiftUI
 struct SignIn: View {
     @EnvironmentObject var globalEnv: GlobalEnvironment
     
-    @ObservedObject private var signInVM = SignInViewModel()
+    @StateObject private var signInVM = SignInViewModel()
     
     var body: some View {
         VStack {

@@ -10,9 +10,7 @@ import SwiftUI
 struct ReservationView: View {
     @EnvironmentObject var globalEnv: GlobalEnvironment
     
-    @State private var reservationState = 0
-    
-    @ObservedObject var reservationVM = ReservationViewModel()
+    @StateObject var reservationVM = ReservationViewModel()
     
     var body: some View {
         NavigationView {

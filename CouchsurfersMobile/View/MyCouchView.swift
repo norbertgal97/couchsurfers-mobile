@@ -10,7 +10,7 @@ import SwiftUI
 struct MyCouchView: View {
     @EnvironmentObject var globalEnv: GlobalEnvironment
     
-    @ObservedObject private var myCouchVM = MyCouchViewModel()
+    @StateObject private var myCouchVM = MyCouchViewModel()
     
     var body: some View {
         Group {

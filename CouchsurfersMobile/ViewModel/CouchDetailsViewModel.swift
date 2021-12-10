@@ -5,7 +5,7 @@
 //  Created by Norbert Gál on 2021. 10. 14..
 //
 
-import SwiftUI
+import Foundation
 
 class CouchDetailsViewModel: ReversePlaceIdProtocol {
     @Published var couch = Couch()
