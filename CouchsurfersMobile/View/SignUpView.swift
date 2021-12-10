@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SignUp: View {
-    @ObservedObject private var signUpVM = SignUpViewModel()
+    @StateObject private var signUpVM = SignUpViewModel()
     
     var body: some View {
         VStack {

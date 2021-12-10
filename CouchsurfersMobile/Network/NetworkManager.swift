@@ -29,8 +29,8 @@ class NetworkManager<Res: Decodable> {
         requestHandler.makeRequest(from: dictionary, url: url, method: method)
     }
     
-    private func decodeResponse(from data: Data, httpResponse: HTTPURLResponse) throws -> Res {
-        try responseHandler.decodeResponse(from: data, httpResponse: httpResponse)
+    private func decodeResponse(from data: Data) throws -> Res {
+        try responseHandler.decodeResponse(from: data)
     }
     
     func dataTask(with URLRequest: URLRequest?, completionHandler: @escaping (NetworkStatus, Res?, ErrorDTO?) -> Void) {
@@ -58,7 +58,7 @@ class NetworkManager<Res: Decodable> {
             }
             
             do {
-                let decodedData: Res = try self.decodeResponse(from: data, httpResponse: httpResponse)
+                let decodedData: Res = try self.decodeResponse(from: data)
                 
                 completionHandler(.successful, decodedData, nil)
             } catch {
@@ -98,7 +98,7 @@ class NetworkManager<Res: Decodable> {
             }
             
             do {
-                let decodedData: Res = try self.decodeResponse(from: data, httpResponse: httpResponse)
+                let decodedData: Res = try self.decodeResponse(from: data)
                 
                 completionHandler(.successful, decodedData, nil)
             } catch {

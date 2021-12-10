@@ -10,7 +10,7 @@ import SwiftUI
 struct PersonalInformationView: View {
     @EnvironmentObject var globalEnv: GlobalEnvironment
     
-    @ObservedObject var personalInformationVM = PersonalInformationViewModel()
+    @StateObject var personalInformationVM = PersonalInformationViewModel()
     
     var body: some View {
         Form {

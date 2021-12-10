@@ -9,7 +9,7 @@ import Foundation
 
 class ResponseHandler<Res :Decodable> {
 
-    func decodeResponse(from data: Data, httpResponse: HTTPURLResponse) throws -> Res {
+    func decodeResponse(from data: Data) throws -> Res {
         let decodedData = try JSONDecoder().decode(Res.self, from: data)
         
         return decodedData

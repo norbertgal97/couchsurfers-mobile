@@ -11,7 +11,7 @@ struct ReservationDetailsView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @EnvironmentObject var globalEnv: GlobalEnvironment
-    @ObservedObject var reservationDetailsVM = ReservationDetailsViewModel()
+    @StateObject var reservationDetailsVM = ReservationDetailsViewModel()
     
     let reservationId: Int
     let couchId: Int

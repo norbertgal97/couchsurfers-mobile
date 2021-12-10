@@ -10,7 +10,7 @@ import SwiftUI
 struct ChatRoomListView: View {
     @EnvironmentObject var globalEnv: GlobalEnvironment
     
-    @ObservedObject var chatRoomListVM = ChatRoomListViewModel()
+    @StateObject var chatRoomListVM = ChatRoomListViewModel()
     
     var body: some View {
         NavigationView {
@@ -24,7 +24,7 @@ struct ChatRoomListView: View {
                                     .fontWeight(.bold)
                                 Text(chatRoom.recipientEmail)
                             }
-                            NavigationLink(destination: ChatView(chatRoomId: chatRoom.id, myId: chatRoom.myId)) {
+                            NavigationLink(destination: ChatView(chatRoomId: chatRoom.id, myId: chatRoom.myId, chatViewModel: ChatViewModel(chatRoomId: chatRoom.id))) {
                                 EmptyView()
                             }.buttonStyle(PlainButtonStyle())
                         }

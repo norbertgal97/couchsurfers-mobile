@@ -10,7 +10,7 @@ import SwiftUI
 struct ExplorationView: View {
     @EnvironmentObject var globalEnv: GlobalEnvironment
     
-    @ObservedObject var explorationVM = ExplorationViewModel()
+    @StateObject var explorationVM = ExplorationViewModel()
     
     var body: some View {
         NavigationView {

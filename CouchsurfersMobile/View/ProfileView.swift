@@ -11,7 +11,7 @@ import UIKit
 struct ProfileView: View {
     @EnvironmentObject var globalEnv: GlobalEnvironment
     
-    @ObservedObject var profileVM = ProfileViewModel()
+    @StateObject var profileVM = ProfileViewModel()
     
     var body: some View {
         NavigationView {
@@ -41,7 +41,7 @@ struct ProfileView: View {
                         .foregroundColor(Color.black)
                     }
                     
-                    NavigationLink(destination: Text("")) {
+                    NavigationLink(destination: Text("Notifications...")) {
                         HStack {
                             Image(systemName: "bell")
                                 .padding(.trailing, 3)
