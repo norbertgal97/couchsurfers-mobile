@@ -29,5 +29,14 @@ class GlobalEnvironment: ObservableObject {
     
     init() {
         self.userLoggedIn = UserDefaults.standard.object(forKey: "userLoggedIn") as? Bool ?? false
+        
+        if let cookieDictionary = UserDefaults.standard.dictionary(forKey: "savedCookies") {
+            
+            for (_, cookieProperties) in cookieDictionary {
+                if let cookie = HTTPCookie(properties: cookieProperties as! [HTTPCookiePropertyKey : Any] ) {
+                    HTTPCookieStorage.shared.setCookie(cookie)
+                }
+            }
+        }
     }
 }

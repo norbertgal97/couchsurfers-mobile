@@ -50,6 +50,15 @@ class UserSessionInteractor: UnmanagedErrorHandler {
                 completionHandler(false, message)
             case .successful:
                 self.logger.debug("User logged in with id: \(data!.userId)")
+                
+                var cookieDict = [String : AnyObject]()
+                
+                for cookie in HTTPCookieStorage.shared.cookies(for: NSURL(string: self.baseUrl)! as URL)! {
+                    cookieDict[cookie.name] = cookie.properties as AnyObject?
+                }
+                
+                UserDefaults.standard.set(cookieDict, forKey: "savedCookies")
+                
                 completionHandler(true, message)
             }
         }
