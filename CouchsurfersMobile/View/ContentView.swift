@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var globalEnv: GlobalEnvironment
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        if globalEnv.userLoggedIn {
+            MainTabView()
+        } else {
+            AuthenticationView()
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(GlobalEnvironment())
     }
 }

@@ -2,8 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Pacifico-Regular.ttf</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -29,6 +38,12 @@
 	<true/>
 	<key>UILaunchScreen</key>
 	<dict/>
+	<key>BaseURL</key>
+	<string>http://localhost:8080</string>
+	<key>SocketBaseURL</key>
+	<string>ws://localhost:8080/socket</string>
+	<key>GoogleApiKey</key>
+	<string>AIzaSyBzoghbZdJVcybiSMhy_uQmn8JSzvJwu50</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

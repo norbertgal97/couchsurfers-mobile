@@ -1,0 +1,223 @@
+/* 
+  Localizable.strings
+  CouchsurfersMobile
+
+  Created by Norbert Gál on 2021. 09. 11..
+  
+*/
+
+"authenticationView.fullNamePlaceholder" = "Írja be a teljes nevét";
+"authenticationView.emailAddressPlaceholder" = "Írja be az e-mail címét";
+"authenticationView.passwordPlaceholder" = "Írja be a jelszavát";
+"authenticationView.signUpButton" = "Regisztráció";
+"authenticationView.signInButton" = "Bejelentkezés";
+"authenticationView.alreadyMemberButton" = "Van már fiókja?";
+"authenticationView.notMemberButton" = "Nincsen fiókja?";
+"authenticationView.forgottenPasswordButton" = "Elfelejtette a jelszavát?";
+
+// Autocomplete
+"autocomplete.placesAPIlanguage" = "hu";
+
+// NetworkError
+"NetworkError.BadCredentials" = "Érvénytelen felhasználónév vagy jelszó";
+"NetworkError.UnknownError" = "Ismeretlen hiba történt";
+"NetworkError.ConnectionError" = "Nem sikerült csatlakozni a szerverhez";
+"NetworkError.AlreadyRegistered" = "Ez az email cím már használatban van";
+"NetworkError.PersonalInformation" = "Személyes adatok nem találhatóak";
+"NetworkError.Forbidden" = "Nem férhet hozzá ehhez az erőforráshoz";
+"NetworkError.EmptyField" = "A mező üres";
+"NetworkError.EmptyFields" = "Név, szobák száma, vendégek száma és a város mező nem lehet üres";
+"NetworkError.WrongFile" = "A képeket nem lehet feldolgozni";
+"NetworkError.BigImage" = "A kép mérete túl nagy";
+"NetworkError.BigImages" = "Néhány kép mérete túl nagy";
+"NetworkError.CouchNotFound" = "A kanapé nem található";
+"NetworkError.ReservationNotFound" = "A foglalás nem található";
+"NetworkError.NotReserved" = "Nem lehetett lefoglalni a kanapét";
+"NetworkError.TooLateToCancel" = "Már késő lemondani a foglalást";
+"NetworkError.IsNotFound" = "nem található";
+"NetworkError.ChatRoomNotFound" = "Chatszoba nem található";
+"NetworkError.EmptyFieldsWarning" = "A mezők nem lehetnek üresek";
+"NetworkError.CouchAlreadyExists" = "A kanapé már létezik";
+
+// NetworkStatus
+"NetworkStatus.UserCreated" = "A fiók sikeresen létrejött";
+
+// CommonView
+"CommonView.UnknownError" = "Valami elromlott";
+"CommonView.Error" = "Hiba";
+"CommonView.Cancel" = "Mégsem";
+"CommonView.Info" = "Információ";
+
+// SignInViewModel
+"SignInViewModel.EmptyFields" = "Töltse ki a kötelező mezőket";
+
+// AuthenticationView
+"AuthenticationView.AlreadyMemberButton" = "Van már fiókja?";
+"AuthenticationView.NotMemberButton" = "Nincsen fiókja?";
+"AuthenticationView.SignUpButton" = "Regisztráció";
+"AuthenticationView.SignInButton" = "Bejelentkezés";
+
+// SignInView
+"SignInView.EmailAddressPlaceholder" = "Írja be az email címét";
+"SignInView.PasswordPlaceholder" = "Írja be a jelszavát";
+"SignInView.ForgottenPasswordButton" = "Elfelejtette a jelszavát?";
+"SignInView.SignInButton" = "Bejelentkezés";
+"SignInView.Error" = "Hiba";
+"SignInView.Cancel" = "Mégsem";
+
+// SignUpView
+"SignUpView.FullNamePlaceholder" = "Írja be a teljes nevét";
+"SignUpView.EmailAddressPlaceholder" = "Írja be az email címét";
+"SignUpView.PasswordPlaceholder" = "Írja be a jelszavát";
+"SignUpView.ConfirmPasswordPlaceholder" = "Erősítse meg a jelszavát";
+"SignUpView.SignUpButton" = "Regisztráció";
+"SignUpView.Cancel" = "Mégsem";
+
+// SignUpViewModel
+"SignUpViewModel.ShortPassword" = "A jelszónak legalább 6 karakter hosszúnak kell lennie";
+"SignUpViewModel.EmptyFieldsWarning" = "A mezők nem lehetnek üresek";
+"SignUpViewModel.PasswordsDoNotMatch" = "A jelszavak nem egyeznek";
+
+// MainTabView
+"MainTabView.ExploreTabItem" = "Felfedezés";
+"MainTabView.ReservationsTabItem" = "Foglalások";
+"MainTabView.InboxTabItem" = "Üzenetek";
+"MainTabView.ProfileTabItem" = "Profil";
+
+// ProfileView
+"ProfileView.AccountSettings" = "Fiók beállítások";
+"ProfileView.PersonalInformation" = "Személyes adatok";
+"ProfileView.Notifications" = "Értesítések";
+"ProfileView.Hosting" = "Megosztás";
+"ProfileView.ListYourCouch" = "Kanapé megosztása";
+"ProfileView.Profile" = "Profil";
+"ProfileView.LogOut" = "Kijelentkezés";
+
+// PersonalInformationView
+"PersonalInformationView.Image" = "Kép";
+"PersonalInformationView.Name" = "Név";
+"PersonalInformationView.FullName" = "Teljes név";
+"PersonalInformationView.Contact" = "Kapcsolat";
+"PersonalInformationView.PhoneNumber" = "Telefonszám";
+"PersonalInformationView.Save" = "Mentés";
+"PersonalInformationView.PersonalInformation" = "Személyes adatok";
+
+// MyCouchView
+"MyCouchView.NoImage" = "Kép nem található";
+"MyCouchView.Description" = "Leírás";
+"MyCouchView.Hide" = "Kanapé elrejtése";
+"MyCouchView.Host" = "Kanapé megosztása";
+"MyCouchView.Reservations" = "Foglalások";
+"MyCouchView.ShowAllReservations" = "Mutasd az összes foglalást";
+"MyCouchView.Reviews" = "Értékelések";
+"MyCouchView.ShowAllReviews" = "Mutasd az összes értékelést";
+"MyCouchView.NoSavedCouch" = "Nincs találat";
+"MyCouchView.MyCouch" = "Az én kanapém";
+
+// MyCouchDetailsView
+"MyCouchDetailsView.Pictures" = "Képek";
+"MyCouchDetailsView.Address" = "Cím";
+"MyCouchDetailsView.ZipCode" = "Irányítószám";
+"MyCouchDetailsView.Street" = "Utca";
+"MyCouchDetailsView.BuildingNumber" = "Házszám";
+"MyCouchDetailsView.Details" = "Részletek";
+"MyCouchDetailsView.AccomodationName" = "Szállás neve";
+"MyCouchDetailsView.NumberOfGuests" = "Vendégek száma";
+"MyCouchDetailsView.NumberOfRooms" = "Szobák száma";
+"MyCouchDetailsView.Amenities" = "Felszereltség";
+"MyCouchDetailsView.Price" = "Ár";
+"MyCouchDetailsView.About" = "Leírás";
+"MyCouchDetailsView.CouchDetails" = "Részletek a kanapéról";
+"MyCouchDetailsView.Save" = "Mentés";
+
+// UserReservationListView
+"UserReservationListView.NoReservations" = "Nincs találat";
+
+// UserReservationPreviewView
+"UserReservationPreviewView.Guest" = "vendég";
+
+// ReservationView
+"ReservationView.Active" = "Aktív";
+"ReservationView.Inactive" = "Inaktív";
+"ReservationView.NoReservations" = "Nincs találat";
+"ReservationView.Reservations" = "Foglalások";
+
+// ReservationPreviewView
+"ReservationPreviewView.Guest" = "vendég";
+"ReservationPreviewView.NightGuest" = "/ éjszaka / vendég";
+
+// ReviewList
+"ReviewList.NoReservations" = "Nincs találat";
+"ReviewList.Reviews" = "Értékelések";
+
+// ChatRoomListView
+"ChatRoomListView.AddChatRoom" = "Chat szoba hozzáadása";
+"ChatRoomListView.RoomName" = "Szoba neve";
+"ChatRoomListView.Recipient" = "Címzett";
+"ChatRoomListView.Add" = "Hozzáadás";
+"ChatRoomListView.Cancel" = "Mégsem";
+"ChatRoomListView.ChatRooms" = "Chatszobák";
+
+// ChatView
+"ChatView.Send" = "Küldés";
+"ChatView.Messages" = "Üzenetek";
+
+// ExplorationView
+"ExplorationView.ExploreNewPlaces" = "Új helyek felfedezése";
+"ExplorationView.Explore" = "Felfedezés";
+
+// CouchPreviewView
+"CouchPreviewView.Night" = "/ éjszaka";
+
+// ExplorationListView
+"ExplorationListView.EmptyList" = "Nincs találat";
+"ExplorationListView.Couches" = "Kanapék";
+
+// ExplorationFormView
+"ExplorationFormView.Address" = "Cím";
+"ExplorationFormView.Details" = "Részletek";
+"ExplorationFormView.NumberOfGuests" = "Vendégek száma";
+"ExplorationFormView.Date" = "Dátum";
+"ExplorationFormView.Checkin" = "Bejelentkezés";
+"ExplorationFormView.Checkout" = "Kijelentkezés";
+"ExplorationFormView.Search" = "Keresés";
+
+// AutocompleteFieldWithResultsView
+"AutocompleteFieldWithResultsView.City" = "Város neve";
+
+// CouchDetailsView
+"CouchDetailsView.ImageNotFound" = "A kép nem található";
+"CouchDetailsView.Highlights" = "Fontos információk";
+"CouchDetailsView.Guests" = "vendég";
+"CouchDetailsView.Rooms" = "szoba";
+"CouchDetailsView.NightGuest" = "/ éjszaka / vendég";
+"CouchDetailsView.WhatOffers" = "Mit kínál a hely";
+"CouchDetailsView.About" = "Erről a helyről";
+"CouchDetailsView.Reserve" = "Foglalás";
+"CouchDetailsView.Reviews" = "Értékelések";
+"CouchDetailsView.ShowAllReviews" = "Mutasd az összes értékelést";
+"CouchDetailsView.Details" = "Részletek";
+"CouchDetailsView.HostedBy" = "Kiadva %@ által";
+
+// ReservationDetailsView
+"ReservationDetailsView.ImageNotFound" = "Kép nem található";
+"ReservationDetailsView.About" = "Erről a foglalásról";
+"ReservationDetailsView.Guests" = "vendég";
+"ReservationDetailsView.NightGuest" = "/ éjszaka / vendég";
+"ReservationDetailsView.WhatOffers" = "Mit kínál a hely";
+"ReservationDetailsView.About" = "Erről a helyről";
+"ReservationDetailsView.CancelReservation" = "Foglalás lemondása";
+"ReservationDetailsView.Reviews" = "Értékelések";
+"ReservationDetailsView.ShowAllReviews" = "Mutasd az összes értékelést";
+"ReservationDetailsView.SendReview" = "Értékelés elküldése";
+"ReservationDetailsView.Details" = "Részletek";
+"ReservationDetailsView.HostedBy" = "Kiadva %@ által";
+
+// ReservationDetailsViewModel
+"ReservationDetailsViewModel.ReviewCreated" = "Értékelés létrejött";
+
+// Autocomplete
+"Autocomplete.PlacesAPIlanguage" = "hu";
+
+// PushNotification
+"PushNotification.Language" = "hu";

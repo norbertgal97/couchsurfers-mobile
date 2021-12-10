@@ -1,0 +1,28 @@
+PODS:
+  - Kingfisher (7.1.1)
+  - PushNotifications (4.0.0)
+  - SocketRocket (0.6.0)
+  - StompClientLib (1.4.1):
+    - SocketRocket
+
+DEPENDENCIES:
+  - Kingfisher (~> 7.0)
+  - PushNotifications
+  - StompClientLib
+
+SPEC REPOS:
+  trunk:
+    - Kingfisher
+    - PushNotifications
+    - SocketRocket
+    - StompClientLib
+
+SPEC CHECKSUMS:
+  Kingfisher: f738f9c4a3415823b8e2985d10aa2d6a9f37bc4d
+  PushNotifications: 2b2174b28bf48b1fe552686d1f95c53d62a4781d
+  SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
+  StompClientLib: ac40390e9660c574675f1c933bec81c8e2811a4f
+
+PODFILE CHECKSUM: 24c110f2669c083779ef8efbe1c11d169153f8af
+
+COCOAPODS: 1.9.3
